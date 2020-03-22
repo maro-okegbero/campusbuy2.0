@@ -1,0 +1,76 @@
+{%extends 'campusbuy2_0/base.html' %}
+{% load static %}
+{%block content %}
+
+
+    <div class="ht__bradcaump__area"
+                    style="background: rgba(0, 0, 0, 0) url({% static 'images/bg/2.jpg' %}}) no-repeat scroll center center / cover ;">
+                    <div class="ht__bradcaump__wrap">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="bradcaump__inner text-center">
+                                        <h2 class="bradcaump-title">Product Details</h2>
+                                        <nav class="bradcaump-inner">
+                                            <a class="breadcrumb-item" href="index.html">Home</a>
+                                            <span class="brd-separetor">/</span>
+                                            <a class="breadcrumb-item" href="merchant.html">Merchant Account</a>
+                                            <span class="brd-separetor">/</span>
+                                            <span class="breadcrumb-item active">Product Stat</span>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Bradcaump area -->
+                <!-- Start Product Details -->
+                <section class="htc__product__details pt--120 pb--100 bg__white">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-6 col-sm-12">
+                                <div class="product__details__container">
+                                    <div class="product__big__images">
+                                        <div class="portfolio-full-image tab-content">
+                                            <div role="tabpanel" class="tab-pane active" id="img-tab-1">
+                                                <img src="images/product-details/big-img/1.png" alt="full-image">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-6 col-sm-12 smt-30 xmt-30">
+                                <div class="htc__product__details__inner">
+                                    <div class="pro__detl__title">
+                                        <h2>Tecno Spark 3 Pro</h2>
+                                        <p><span class="zmdi zmdi-eye"></span> {{ product.views }}</p>
+                                    </div>
+                                    <div class="pro__details">
+                                        <p>{{ product.description }} </p>
+                                    </div>
+                                    <ul class="pro__dtl__prize">
+                                        <li>&#x20A6;{{ product.price }}</li>
+                                    </ul>
+                                    <div class="product-action-wrap">
+                                        <div class="prodict-statas"><span>Location : {{ product.merchant.address }}</span></div>
+                                    </div>
+                                    <ul class="pro__dtl__btn row">
+                                        <li class="buy__now__btn"><a href="product-edit.html">Edit</a></li>
+                                        <li class="buy__now__btn delete__pro"><a href="javascript:void(0);">Delete</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- End Product Details -->
+
+                <div class="delete--product" aria-hidden="true">
+                    Product has been deleted successfully.
+                    <br />
+                    You'll be redirect in 2 seconds.
+                </div>
+
+{% endblock %}
