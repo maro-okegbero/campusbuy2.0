@@ -1,0 +1,159 @@
+{%extends 'campusbuy2_0/base.html' %}
+{% load static %}
+{%block content %}
+
+    <!-- Start Slider Area -->
+            <div class="slider__container slider--six">
+                <div class="slider__activation__wrap owl-carousel owl-theme">
+                    <!-- Start Single Slide -->
+                    <div class="slide slider__fixed--height--2 bg__white">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="slider__content">
+                                        <div class="slider__inner">
+                                            <h4>Welcome To {{ business_name }}'s Online Store</h4>
+                                            <h1>Awesome Product <span class="text--theme">Collection</span></h1>
+                                            <h3>Made For You.</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Single Slide -->
+                </div>
+            </div>
+
+            <!-- Start Our Store Area -->
+            <section class="htc__store__area ptb--120 bg__white" style="background: url({% static 'images/bg/5.jpg' %});">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="section__title section__title--2 text-center">
+                                <h2 class="title__line">{{ business_name }}</h2>
+                                <p>{{ merchant.business_description }}
+                                </p>
+                            </div>
+                            <div class="store__btn">
+                                <a href="#contact-us">contact us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Our Store Area -->
+
+
+         <!-- Start Our Product Area -->
+            <section class="htc__product__area shop__page ptb--130 ptb--210 bg__white">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="section__title section__title--2 text-center">
+                                <h2 class="title__line">Selling Now</h2>
+                                <p>Discover all products from {{ business_name }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="htc__product__container">
+                        <div class="row product__list">
+
+                            {% for product in products %}
+                            <!-- Start Single Product -->
+                            <div class="col-md-4 single__pro col-lg-3 col-sm-6">
+                                <div class="product foo">
+                                    <div class="product__inner">
+                                        <div class="pro__thumb">
+                                             {% if school_name %}
+                                                <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=product.category.name pk=product.pk %}>
+                                                <img alt="product images" src={%static "images/product/1.png" %} >
+                                            </a>
+                                            {% else %}
+                                                <a href={% url 'product_detail'  category_name=product.category.name pk=product.pk %}>
+                                                <img alt="product images" src={%static "images/product/1.png" %} >
+                                            </a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="product__details">
+                                        <h2>
+                                             {% if school_name %}
+                                                <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=product.category.name pk=product.pk %}>{{ product.name }}</a>
+                                            {% else %}
+                                                <a href={% url 'product_detail' category_name=product.category.name pk=product.pk %}>{{ product.name }}</a>
+                                            {% endif %}
+                                        </h2>
+                                        <ul class="product__price">
+                                            <li class="new__price">&#x20A6;{{ product.price}}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        <!--End no products founds-->
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+                            <!-- End Single Product -->
+
+
+          <!-- Start Contact Area -->
+            <section class="htc__contact__area ptb--120 bg__white" id="contact-us" style="background: url({% static 'images/bg/5.jpg' %});">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-8 col-sm-12">
+                            <div class="htc__contact__container">
+                                <div class="htc__contact__address">
+                                    <h2 class="contact__title text">{{ business_name }} contact info</h2>
+                                    <div class="contact__address__inner">
+                                        <!-- Start Single Adress -->
+                                        <div class="single__contact__address">
+                                            <div class="contact__icon">
+                                                <span class="ti-location-pin"></span>
+                                            </div>
+                                            <div class="contact__details">
+                                                <p>Location : <br> {{ merchant.address }}</p>
+                                            </div>
+                                        </div>
+                                        <!-- End Single Adress -->
+                                    </div>
+                                    <div class="contact__address__inner">
+                                        <!-- Start Single Adress -->
+                                        <div class="single__contact__address">
+                                            <div class="contact__icon">
+                                                <span class="ti-mobile"></span>
+                                            </div>
+                                            <div class="contact__details">
+                                                <p> Phone : <br><a href="tel:+2348138931117">{{ merchant.phone_number }}</a></p>
+                                            </div>
+                                        </div>
+                                        <!-- End Single Adress -->
+                                        <!-- Start Single Adress -->
+                                        <div class="single__contact__address">
+                                            <div class="contact__icon">
+                                                <span class="zmdi zmdi-whatsapp"></span>
+                                            </div>
+                                            <div class="contact__details">
+                                                <p> Whatsapp :<br><a href="tel:+2348138931117">{{ merchant.whatsapp_number }}</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <!-- End Single Address -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Contact Area -->
+
+{% endblock %}
+
+
+
+

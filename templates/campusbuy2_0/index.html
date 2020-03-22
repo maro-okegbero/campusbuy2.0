@@ -1,0 +1,285 @@
+{%extends 'campusbuy2_0/base.html' %}
+{% load static %}
+
+{% block notification %}
+    {% if not school_name_for_url %}
+    <div class="notification--wrapper hide" id="openToast">
+        <div class="notification--reminder ptb--20 text-center col-12">
+            <h3>To ensure a good experience, please select a CAMPUS near you. <a class="exit--toast" href="#chooseLocation" data-toggle="modal" data-target="#chooseLocation">Got it.</a></h3>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}
+{% block content%}
+
+    <!-- Modal -->
+            <div class="modal fade bd-example-modal-sm" id="chooseLocation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h3>To improve your experience on our site, please select your location.</h3>
+                            <div class="single-checkout-box select-option mt--20">
+                                  <form action="#" method="GET" enctype="multipart/form-data">
+                                    {{ form.as_p }}
+{#                                <label>#}
+{#                                    <select>#}
+{#                                        <option>Select Your Location</option>#}
+{#                                        <a href={% url "school_specific" school_name="uniben"%}>UNIBEN</a>#}
+{#                                        <option href={% url "school_specific" school_name="unilag"%}>UNILAG</option>#}
+{#                                        <option href={% url "school_specific" school_name="unical"%}>UNICAL</option>#}
+{#                                        <option href={% url "school_specific" school_name="uniport"%}>UNIPORT</option>#}
+{#                                        <option href={% url "school_specific" school_name="uniabuja"%}>UNIABUJA</option>#}
+{#                                    </select>#}
+{#                                </label>#}
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="uniq__btn">
+                                <a href="" class="htc__btn" data-dismiss="modal">close</a>
+                            </div>
+                            <div class="uniq__btn">
+                                <input class="htc__btn" type="submit" value="Confirm">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End Modal-->
+            <!-- End Offset Wrapper -->
+
+                <!-- Start Slider Area -->
+                <div class="slider__container slider--one slider__new">
+                    <div class="slider__activation__wrap owl-carousel owl-theme">
+                        <!-- Start Single Slide -->
+                        <div class="animation__style01 slide slider__full--screen bg--image">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-8 col-lg-8 col-sm-12 col-xs-12">
+                                        <div class="slider__content">
+                                            <h1>Welcome to <span class="text--theme">CampusBuy.</span></h1>
+                                            <p>We seek to improve business amongst students with a very simplistic
+                                                approach; Connecting BUYERS to SELLERS.</p>
+                                            <div class="uniq__btn">
+                                                <a class="htc__btn" href="#chooseLocation" data-toggle="modal"
+                                                    data-target="#chooseLocation">select location</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Slider Area -->
+
+
+                <section class="ptb--140 htc__popular__product bg__gray">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="section__title section__title--2 text-center">
+                                    <h2 class="title__line">Become A <span class="text--theme">Merchant</span> on
+                                        CampusBuy</h2>
+                                    <p>By connecting BUYERS to SELLERS, we provide you the opportunity to showcase your
+                                        products before potential
+                                        customers. You can visit our {% if school_name_for_url %}
+                                             <a href={% url 'school_specific_faq' school_name=school_name_for_url%}>FAQ</a>
+                                           {% else %}
+                                             <a href={% url 'faq' %}> FAQ </a>
+                                           {% endif %} page for more details.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Start Load More BTn -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="htc__loadmore__btn">
+                                    <a href={% url 'profile' %}>Become A Merchant</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Load More BTn -->
+                    </div>
+                </section>
+
+
+
+            <!-- Start Banner Area -->
+            <!-- Start Our Product Area -->
+            <section class="htc__product__area ptb--130 bg__white" id="view-ad">
+                <div class="pro__detl__title text-center">
+                    <h2>Product Categories</h2>
+                    <p>Please select a category to start shopping.</p>
+                </div>
+                <div class="container view--add">
+                    <div class="htc__product__container">
+                        <div class="row product__list">
+                            <!-- All products in a loop -->
+                    {% for category in categories %}
+                            <div class="col-md-4 single__pro col-lg-4 col-sm-6">
+                                <div class="product foo">
+                                    <div class="product__inner">
+                                        <div class="pro__thumb">
+                                            {% if school_name_for_url %}
+                                                <a href={% url 'view_products_school_specific' category_name=category.name school_name=school_name_for_url %} >
+                                                <img alt="product images" src={% static "images/product/gadgets.png" %} >
+                                                </a>
+                                            {% else %}
+                                                <a href={% url 'view_products' category_name=category.name  %}>
+                                                <img alt="product images" src={% static "images/product/gadgets.png" %} >
+                                                </a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="product__details text-center">
+                                        {% if school_name_for_url %}
+                                            <h2><a href={% url 'view_products_school_specific' category_name=category.name school_name=school_name_for_url %} >{{ category.name }}</a></h2>
+                                        {% else %}
+                                            <h2><a href={% url 'view_products' category_name=category.name  %} >{{ category.name }}</a></h2>
+                                        {% endif %}
+                                        <ul class="product__price">
+                                            <li>{{ category.details }}.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <!-- End loop -->
+                        </div>
+                    </div>
+                    </div>
+            </section>
+
+
+            <!-- Start Merchant Product -->
+                <section class="ptb--140 htc__popular__product bg__gray">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="section__title section__title--2 text-center">
+                                    <h2 class="title__line">Recently Added Products</h2>
+                                    <p>Swipe left or right to view newly added products.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="popular__product__wrap clearfix owl-carousel owl-theme">
+
+                                 {% for product in products %}
+                                <!-- Start Single Merchant Product -->
+                                <div class="col-lg-12">
+                                    <div class="product">
+                                        <div class="product__inner">
+                                            <div class="pro__thumb">
+                                                {% if school_name %}
+                                                <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=product.category.name pk=product.pk %}>
+                                                <img src="images/product/1.png" alt="product images">
+                                            </a>
+                                            {% else %}
+                                                <a href={% url 'product_detail'  category_name=product.category.name pk=product.pk %}>
+                                                <img src="images/product/1.png" alt="product images">
+                                            </a>
+                                            {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="product__details">
+                                            <h2>
+                                                  {% if school_name %}
+                                                <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=product.category.name pk=product.pk %}>{{ product.name }}</a>
+                                            {% else %}
+                                                <a href={% url 'product_detail' category_name=product.category.name pk=product.pk %}>{{ product.name }}</a>
+                                            {% endif %}
+
+                                            </h2>
+                                            <ul class="product__price">
+                                                <li class="new__price">&#x20A6;{{ product.price }}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Single Merchant Product -->
+                            {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- End Merchant Product -->
+
+
+                <section class="ptb--140">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="section__title section__title--2 text-center">
+                                    <h2 class="title__line">Frequently Asked Questions</h2>
+                                    <p>Having trouble? Visit our FAQ page to find solution to problems similar to yours.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pt--40">
+                            <div class="col-md-12">
+                                <div class="flat-accordion">
+                                    <div class="flat-toggle">
+                                        <div class="toggle-title active">
+                                            How do I change or cancel my order?
+                                        </div>
+                                        <div class="toggle-content">
+                                            <p>
+                                                We’re super quick at processing orders to make sure that you receive
+                                                them as soon as possible. You can change your order as much as you like
+                                                before you click “Check- out” but after this point you will be unable to
+                                                make changes to your order. Keep in mind our system is designed to
+                                                fulfill orders as quickly as possible. We cannot cancel or change an
+                                                order once it has been placed. In such case you can however, return the
+                                                item to us in accordance with our Returns Policy. If we sent out your
+                                                package and your items are returned to us (Packages marked "Return to
+                                                Sender") due to an incorrect/undeliverable address, we will issue a
+                                                store credit for the net total minus the shipping fee. You will be held
+                                                responsible for the initial cost of shipping the package.
+                                            </p>
+                                        </div>
+                                    </div><!-- /.flat-toggle -->
+
+                                    <div class="flat-toggle">
+                                        <div class="toggle-title">
+                                            I am an international customer and I am not sure how much I'll be charged
+                                            for a purchase
+                                        </div>
+                                        <div class="toggle-content">
+                                            <p>
+                                                We’re super quick at processing orders to make sure that you receive
+                                                them as soon as possible. You can change your order as much as you like
+                                                before you click “Check- out” but after this point you will be unable to
+                                                make changes to your order. Keep in mind our system is designed to
+                                                fulfill orders as quickly as possible. We cannot cancel or change an
+                                                order once it has been placed. In such case you can however, return the
+                                                item to us in accordance with our Returns Policy. If we sent out your
+                                                package and your items are returned to us (Packages marked "Return to
+                                                Sender") due to an incorrect/undeliverable address, we will issue a
+                                                store credit for the net total minus the shipping fee. You will be held
+                                                responsible for the initial cost of shipping the package.
+                                            </p>
+                                        </div>
+                                    </div><!-- /.flat-toggle -->
+                                </div><!-- /.flat-accordion -->
+                                <!-- Start Load More BTn -->
+                                <div class="row mt--60">
+                                    <div class="col-md-12">
+                                        <div class="htc__loadmore__btn">
+                                            {% if school_name_for_url %}
+                                             <a href={% url 'school_specific_faq' school_name=school_name_for_url%}>More</a>
+                                           {% else %}
+                                             <a href={% url 'faq' %}> More </a>
+                                           {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Load More BTn -->
+                            </div><!-- /.col-md-12 -->
+                        </div><!-- /.row -->
+                    </div><!-- /.container -->
+                </section><!-- /.flat-row -->
+
+{% endblock %}

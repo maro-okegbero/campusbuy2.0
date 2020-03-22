@@ -1,0 +1,71 @@
+{%extends 'campusbuy2_0/base.html' %}
+{% load static %}
+
+
+    {% block content %}
+      <div class="ht__bradcaump__area"
+                style="background: rgba(0, 0, 0, 0) url({% static 'images/bg/2.jpg' %}) no-repeat scroll center center / cover ;">
+                <div class="ht__bradcaump__wrap">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="bradcaump__inner text-center">
+                                    <h2 class="bradcaump-title">Post Ad</h2>
+                                    <nav class="bradcaump-inner">
+                                        <a class="breadcrumb-item" href={% url 'profile' %}>Merchant Account</a>
+                                        <span class="brd-separetor">/</span>
+                                        <span class="breadcrumb-item active">Post Ad</span>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Bradcaump area -->
+            <section class="ptb--90">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 ml-auto mr-auto">
+                            <form class="login login--account" method="post">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12 col-lg-6 form--group">
+                                        <label for="product-name" class="form--label">Product Name</label>
+                                        <input class="form--input" id="product-name" type="text" aria-required="true" required>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-lg-6 form--group">
+                                        <label for="price" class="form--label">Price <small><em>(Subject to negotiation with buyer.)</em></small></label>
+                                        <input class="form--input" type="text" id="price" aria-required="true" required>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-lg-6 form--group">
+                                        <input class="form--input form--input__file" type="file" aria-required="true" required>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-lg-6 form--group product--select">
+                                        <select class="product--select__cat">
+                                            <option value="0">Select Category</option>
+                                            <option value="1">Gadgets</option>
+                                            <option value="2">Accommodation</option>
+                                            <option value="3">Events & Shows</option>
+                                            <option value="4">Clothing & Accessories</option>
+                                            <option value="5">Services</option>
+                                            <option value="6">Others</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 form--group">
+                                        <label for="product-desc" class="form--label">Product Description</label>
+                                        <textarea class="form--input" id="product-desc" cols="30" rows="3" maxlength="3000" aria-required="true" required></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="htc__login__btn">
+                                <a href="merchant.html">submit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+    {% endblock %}
+
+

@@ -1,0 +1,76 @@
+{% extends 'campusbuy2_0/base.html' %}
+{% block content %}
+   {% load static %}
+{#{% load cloudinary %}#}
+
+
+<!-- Start Bradcaump area -->
+            <div class="ht__bradcaump__area"
+                style="background: rgba(0, 0, 0, 0) url({% static "images/bg/2.jpg" %}) no-repeat scroll center center / cover ;">
+                <div class="ht__bradcaump__wrap">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="bradcaump__inner text-center">
+                                    <h2 class="bradcaump-title">{{ category }}</h2>
+                                    <nav class="bradcaump-inner">
+                                        {% if school_name %}
+                                    <a href={% url 'school_specific' school_name=school_name_for_url%}>Home</a>
+                                 {% else %}
+                                    <a href={% url 'homepage' %}> Home </a>
+                                 {% endif %}
+                                        <span class="brd-separetor">/</span>
+                                        <span class="breadcrumb-item active">{{ category }} Ads</span>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Bradcaump area -->
+
+            <!-- Start Our Product Area -->
+            <section class="htc__product__area shop__page ptb--130 ptb--210 bg__white">
+                <div class="container">
+                    <div class="htc__product__container">
+                        <div class="row product__list">
+                            {% for product in products %}
+                            <!-- Start Single Product -->
+                            <div class="col-md-4 single__pro col-lg-3 cat--1 col-sm-6">
+                                <div class="product foo">
+                                    <div class="product__inner">
+                                        <div class="pro__thumb">
+                                            {% if school_name %}
+                                                <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=category pk=product.pk %}>
+                                                <img src="images/product/1.png" alt="product images">
+                                            </a>
+                                            {% else %}
+                                                <a href={% url 'product_detail'  category_name=category pk=product.pk %}>
+                                                <img src="images/product/1.png" alt="product images">
+                                            </a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="product__details">
+                                        <h2>
+                                            {% if school_name %}
+                                                <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=category pk=product.pk %}>{{ product.name }}</a>
+                                            {% else %}
+                                                <a href={% url 'product_detail' category_name=category pk=product.pk %}>{{ product.name }}</a>
+                                            {% endif %}
+                                        </h2>
+                                        <ul class="product__price">
+                                            <li class="new__price">&#x20A6;{{ product.price }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Single Product -->
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+{% endblock %}

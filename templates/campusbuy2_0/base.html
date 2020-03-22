@@ -1,0 +1,255 @@
+{%load static%}
+
+<!doctype html>
+<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>CampusBuy :: The Marketplace for students created by students.</title>
+    <meta name="description" content="CampusBuy is a platform made for students by students. It seeks to improve business amongst students with a very simplistic approach; Connecting BUYERS to SELLERS.">
+    <meta name="keywords" content="Ecommerce, University of Benin, UniBen, uniben, schools, school, university, shop, catering services, services, gadgets, Phones, Laptops, Smartwatches, hostel, Accommodation, Student Hostels, Self Con., Flats, Events & Shows, Church Programs, Shows, Similar shows and events Events, Clothing & Accessories, Clothes, Shoes, Bags, Services, Catering Services, Photography Shoots, Data Vendor, buy, sell, buy and sell, become a merchant, how to sell in university, make money online, Others, Books, School Materials, Generic Items">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Place favicon.ico in the root directory
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">-->
+
+    <!-- Bootstrap Framework Main Css -->
+    <link rel="stylesheet" href={% static "css_/bootstrap.min.css" %}>
+    <!-- All Plugins css -->
+    <link rel="stylesheet" href={% static "css_/cb_plugins.css" %}>
+    <!-- Theme shortcodes/elements style -->
+    <link rel="stylesheet" href={% static "css_/shortcode/shortcodes.css" %}>
+    <!-- Theme main style -->
+    <link rel="stylesheet" href={% static "css_/cb_style.css" %}>
+    <!-- Responsive css -->
+    <link rel="stylesheet" href={% static "css_/cb_responsive.css" %}>
+    <!-- User style -->
+    <link rel="stylesheet" href={%static "css_/cb_custom.css" %}>
+
+
+
+<!-- jquery latest version -->
+    <script src={%static "cb_js/vendor/jquery-1.12.4.min.js" %}></script>
+            <!-- Main js file that contents all jQuery plugins activation. -->
+        <script src={%static "cb_js/vendor/modernizr-2.8.3.min.js" %}></script>
+
+
+
+
+</head>
+
+<body>
+ <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+
+     <!--Start Select Location Notification-->
+
+
+           {% block notification %}
+
+
+            {% endblock %}
+
+    <!--End Select Location Notification-->
+
+    <!-- Body main wrapper start -->
+    <div class="wrapper  home-v5">
+    <!-- Start Header Style -->
+        <header id="header" class="htc-header header--5">
+            <!-- Start Mainmenu Area -->
+            <div id="sticky-header-with-topbar" class="mainmenu__area sticky__header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-lg-3 d-none d-md-block">
+                            <ul class="select__language">
+                                <li class="drop--lan">Choose Your Location
+                                    <div class="language__option">
+                                        <span><a href={% url "school_specific" school_name="Uniben" %}>Uniben</a> </span>
+                                        <span><a href={% url "school_specific" school_name="Unical" %}>Unical</a></span>
+                                        <span><a href={% url "school_specific" school_name="Unillag" %}>Unilag</a></span>
+                                        <span><a href={% url "school_specific" school_name="Uniport" %}>Uniport</a></span>
+                                        <span><a href={% url "school_specific" school_name="Uniabuja" %}>Uniabuja</a></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Start MAinmenu Ares -->
+                        <div class="col-md-4 col-lg-6 col-6">
+                            <div class="logo hd__title" style="font-family: Dosis,sans-serif;" %}>
+                                {% if school_name %}
+                                    <a href={% url 'school_specific' school_name=school_name_for_url%}>CAMPUS<span style="color: #1a22b8;">BUY</span></a>
+                                 {% else %}
+                                    <a href={% url 'homepage' %}> CAMPUSBUY </a>
+                                 {% endif %}
+
+                            </div>
+                        </div>
+                        <!-- End MAinmenu Ares -->
+                        <div class="col-lg-3 col-md-4 col-6">
+                            <ul class="menu-extra">
+                                <li>
+                                    {% if school_name_for_url %}
+                                            <a href={%url 'school_specific_profile' school_name=school_name_for_url %}><span class="ti-user"></span></a>
+                                        {% else %}
+                                             <a href={%url 'profile' %}><span class="ti-user"></span></a>
+                                        {% endif %}
+                                <li class="toggle__menu"><span class="ti-menu"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Mainmenu Area -->
+        </header>
+        <!-- End Header Style -->
+    <div class="body__overlay"></div>
+        <!-- Start Offset Wrapper -->
+            <div class="offset__wrapper">
+                <!-- Start Offset MEnu -->
+                <div class="offsetmenu home-five">
+                    <div class="offsetmenu__inner sidebar__menu--inner">
+                        <div class="offsetmenu__close__btn">
+                            <a href="#"><i class="zmdi zmdi-close"></i></a>
+                        </div>
+                        <div class="off__contact">
+                            <div class="logo hd__title" style="font-family: Dosis,sans-serif;">
+                                {% if school_name %}
+                                    <a href={% url 'school_specific' school_name=school_name_for_url %}>CAMPUSBUY</a>
+                                 {% else %}
+                                    <a href={% url 'homepage' %}> CAMPUSBUY </a>
+                                 {% endif %}
+
+
+                            </div>
+                        </div>
+                        <nav>
+                            <ul class="sidebar__menu">
+                                {% if school_name %}
+                                        <li><a href={% url "school_specific" school_name=school_name_for_url%}>Home</a></li>
+                                    {% else %}
+                                        <li><a href={% url "homepage" %}>Home</a></li>
+                                    {% endif %}
+                                <li><a href={% url 'about' %}>About Us</a></li>
+                                <li><a href={% url 'contact' %}>Contact Us</a></li>
+                                <li><a href={% url 'post_products' %}>Post Ad</a></li>
+                                {% if school_name %}
+                                    <li><a href={% url 'view_all_products_school_specific' school_name=school_name_for_url %}>View Ads</a></li>
+                                {% else %}
+                                    <li><a href={% url 'view_all_products' %}>View Ads</a></li>
+                                {% endif %}
+                                <li><a href={% url "search" %}>Search</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+            </div>
+            <!-- End Offset MEnu -->
+            <!-- End Offset Wrapper -->
+            {% block content %}
+
+            {% endblock %}
+
+            <!-- Start Footer Area -->
+            <footer class="htc__footer__area bg__cat--3">
+                <div class="container">
+                    <div class="row footer__container clearfix">
+                        <!-- Start Single Footer Widget -->
+                        <div class="col-md-6 col-lg-5 col-sm-12">
+                            <div class="ft__widget">
+                                <h2 class="ft__title">CampusBuy</h2>
+                                <div class="footer__details">
+                                    <p>Campus buy is a platform made for students by students. It seeks to improve
+                                        business amongst students with a very simplistic approach; Connecting BUYERS to
+                                        SELLERS.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Footer Widget -->
+                        <!-- Start Single Footer Widget -->
+                        <div class="col-md-6 col-lg-4 col-sm-12 smt-30 xmt-30">
+                            <div class="ft__widget contact__us">
+                                <h2 class="ft__title">Contact Us</h2>
+                                <div class="footer__inner">
+                                    <p>Hall 3, Hall 4 or any LT with Electricity,<br>University of Benin </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Single Footer Widget -->
+                        <!-- Start Single Footer Widget -->
+                        <div class="col-md-6 col-lg-3 lg-offset-1 col-sm-12 smt-30 xmt-30">
+                            <div class="ft__widget">
+                                <h2 class="ft__title">Quick Links</h2>
+                                <ul class="">
+                                    <li>{% if school_name_for_url %}
+                                             <a href={% url 'school_specific_faq' school_name=school_name_for_url%}>FAQ</a>
+                                           {% else %}
+                                             <a href={% url 'faq' %}>FAQ</a>
+                                           {% endif %}</li>
+                                    <li>
+                                        {% if school_name_for_url %}
+                                            <a href={%url 'school_specific_profile' school_name=school_name_for_url %}>Account</a>
+                                        {% else %}
+                                             <a href={%url 'profile' %}>Account</a>
+                                        {% endif %}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Single Footer Widget -->
+                    </div>
+                    <!-- Start Copyright Area -->
+                    <div class="htc__copyright__area">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                                <div class="copyright__inner">
+                                    <div class="copyright">
+                                        <p>© {{ value|date:"Y" }} CampusBuy | All Right Reserved.</p>
+                                    </div>
+                                    <ul class="footer__menu">
+                                     {% if school_name %}
+                                        <li><a href={% url "school_specific" school_name=school_name_for_url%}>Home</a></li>
+                                    {% else %}
+                                        <li><a href={% url "homepage" %}>Home</a></li>
+                                    {% endif %}
+
+                                         {% if school_name %}
+                                    <li><a href={% url 'view_all_products_school_specific' school_name=school_name_for_url %}>Products</a></li>
+                                {% else %}
+                                    <li><a href={% url 'view_all_products' %}>Product</a></li>
+                                {% endif %}
+
+                                        <li><a href={% url "contact" %}>Contact Us</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Copyright Area -->
+                </div>
+            </footer>
+            <!-- End Footer Area -->
+        <!-- Body main wrapper end -->
+        <!-- Placed js at the end of the document so the pages load faster -->
+
+             <!-- All js plugins included in this file. -->
+            <script src={%static "cb_js/plugins.js" %}></script>
+            <!-- Bootstrap Framework js -->
+            <script src={%static "cb_js/bootstrap.min.js" %}></script>
+                 <!-- Main js file that contents all jQuery plugins activation. -->
+            <script src={%static "cb_js/main.js" %}></script>
+            <script src={%static "cb_js/popper.min.js" %}></script>
+            {% block javascript%}
+            {% endblock %}
+
+
+
+
+
+    </div>
+    </div>
+</body>
+</html>
+

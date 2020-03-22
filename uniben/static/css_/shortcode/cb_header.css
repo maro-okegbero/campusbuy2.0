@@ -1,0 +1,588 @@
+/*----------------------------------------
+  Menu basic style
+------------------------------------------*/
+.header{
+  z-index: 10;
+  position: relative;
+}
+.main__menu {
+  display: flex;
+  justify-content: center;
+}
+.main__menu > li > a {
+  color: #666666;
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 70px;
+  position: relative;
+  text-transform: capitalize;
+}
+.main__menu > li {
+  padding: 0 20px;
+  position: relative;
+}
+.logo a{
+  display: block;
+}
+.mainmenu__area {
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 32px;
+    width: 100%;
+    padding-top: 3px;
+}
+.mainmenu__area .container .row, .mainmenu__area .container-fluid .row {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    -ms-align-items: center;
+    align-items: center;
+}
+
+.htc-header {
+  position: relative;
+  z-index: 99;
+}
+
+.main__menu > li:hover > a{
+  color: #1a22b8;
+}
+.sidebar--content .htc__news__inner {
+  margin: 0 auto;
+  width: 68%;
+}
+
+.header--2 .mean-container a.meanmenu-reveal {
+  border: 2px solid #fff;
+  color: #fff;
+}
+.header--2 .mean-container a.meanmenu-reveal span {
+  background: #fff none repeat scroll 0 0;
+}
+
+
+
+
+
+
+
+/*---------------------------
+  Sidebar Menu
+----------------------------*/
+
+
+.sidebar__menu {
+    text-align: left;
+}
+
+.sidebar__menu li.active{
+  background: #fff;
+}
+.sidebar__menu li.active a{
+    color: #1a22b8;
+}
+.sidebar__menu li a {
+  display: block;
+  font-size: 14px;
+  line-height: 40px;
+  padding: 0;
+  text-align: center;
+  text-transform: capitalize;
+}
+.sidebar__menu--inner {
+  padding: 0;
+}
+.offsetmenu__inner.sidebar__menu--inner {
+  height: 100%;
+  padding: 0;
+}
+.sidebar__menu--inner .off__contact .logo {
+  padding-top: 40px;
+}
+
+/*-----------------------------------------
+  Sticky  For  Header
+-------------------------------------------*/
+
+.sticky__header.scroll-header {
+  animation: 300ms ease-in-out 0s normal none 1 running fadeInDown;
+  background-repeat: repeat;
+  background-position: 0 0;
+  background-image: url("/images/bg/2.jpg");
+  background-color: rgba(246, 246, 248, 0.9);
+  background-attachment: scroll;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  left: 0;
+  margin: 0 auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+}
+.sticky__header.scroll-header .logo a {
+  height: 70px;
+  line-height: 70px;
+}
+.sticky__header.scroll-header .main__menu > li > a {
+  height: 70px;
+  line-height: 70px;
+}
+.sticky__header.scroll-header .menu-extra li a span {
+  height: 60px;
+  line-height: 62px;
+}
+.sticky__header.scroll-header .menu-extra li span {
+  height: 60px;
+  line-height: 62px;
+}
+.fluid-container.mobile-menu-container {
+  position: relative;
+}
+.mobile-logo {
+  align-items: center;
+  display: flex;
+  height: 52px;
+  left: 0;
+  padding-left: 15px;
+  position: absolute;
+  top: 0;
+  z-index: 2147483647;
+}
+.mobile-logo img {
+  max-height: 25px;
+}
+
+/*-----------------------------
+  Dropdown Menu
+--------------------------------*/
+.main__menu li.drop{
+    position: relative;
+}
+.main__menu li.drop a{
+  position: relative;
+}
+.main__menu li.drop ul.dropdown {
+  background: #ffffff none repeat scroll 0 0;
+  box-shadow: 0 0 0px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);
+  left: 0;
+  margin: 0;
+  opacity: 0;
+  padding: 0;
+  position: absolute;
+  top: 120%;
+  transition: all 0.2s ease-in-out 0s;
+  visibility: hidden;
+  width: 189px;
+  z-index: 99;
+}
+.main__menu li.drop:hover ul.dropdown {
+  opacity: 1;
+  top: 100%;
+  visibility: visible;
+}
+.header--3 .main__menu li.drop:hover ul.dropdown {
+    top: 100%;
+}
+.main__menu ul.dropdown li {
+    border-bottom: 1px solid #f4f4f4;
+    display: block;
+}
+.main__menu ul.dropdown li a {
+  background: #ffffff none repeat scroll 0 0;
+  color: #333;
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 10px 18px;
+  text-align: left;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.3s ease 0s;
+}
+.main__menu li.drop ul.dropdown li:hover > a {
+  background: #fafafa none repeat scroll 0 0;
+  color: #1a22b8;
+}
+.scroll-header .main__menu li.drop ul.dropdown {
+  top: 100%;
+}
+.scroll-header .main__menu li.drop a:hover ul.dropdown {
+  top: 100%;
+}
+
+
+
+/*----------------------------
+  Sub Menu
+---------------------------*/
+
+.main__menu li.drop ul.dropdown li.drop::after {
+  color: #999;
+  content: "";
+  font-family: "Material-Design-Iconic-Font";
+  font-size: 13px;
+  position: absolute;
+  right: 20px;
+  top: 12px;
+  transition: all 0.2s ease-in-out 0s;
+}
+.main__menu li.drop ul.dropdown li.drop{
+  position: relative;
+}
+.main__menu li.drop ul.dropdown li.drop ul.dropdown.smright {
+  border: medium none;
+  right: 100%;
+  top: 0;
+  transition: all 0.3s ease 0s;
+}
+.main__menu li.drop ul.dropdown li.drop ul.dropdown.level2 {
+  border: medium none;
+  left: 100%;
+  top: 20%;
+  transition: all 0.3s ease 0s;
+}
+.main__menu li.drop ul.dropdown li.drop ul.dropdown.level2 {
+    opacity: 0;
+    visibility: hidden;
+}
+.main__menu li.drop ul.dropdown li.drop:hover ul.dropdown.level2 {
+    opacity: 1;
+    visibility: visible;
+    top: 0;
+}
+.main__menu li.drop ul.dropdown li.drop ul.dropdown.smright {
+    opacity: 0;
+    visibility: hidden;
+}
+.main__menu li.drop ul.dropdown li.drop ul.dropdown.smright {
+  background: #ffffff none repeat scroll 0 0;
+  left: -100%;
+  margin: 0;
+  opacity: 0;
+  padding: 0;
+  position: absolute;
+  top: 20%;
+  transition: all 0.3s ease-in-out 0s;
+  visibility: hidden;
+  width: 220px;
+  z-index: 999;
+}
+.main__menu li.drop ul.dropdown li.drop:hover ul.dropdown.smright {
+  left: -100%;
+  opacity: 1;
+  visibility: visible;
+  top: 0;
+}
+
+/*-----------------------------
+  Menu Right Side
+------------------------------*/
+
+
+.menu-extra {
+    display: flex;
+    justify-content: flex-end;
+}
+.menu-extra li {
+    padding: 0 15px;
+}
+.menu-extra li:last-child {
+    padding-right: 0;
+}
+.menu-extra li:first-child {
+    padding-left: 0;
+}
+.menu-extra li span {
+    color: #000;
+    font-size: 19px;
+    line-height: 30px;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+}
+.menu-extra li span:hover {
+    color: #1a22b8;
+}
+.header--5 .logo {
+  text-align: center;
+}
+
+.select__language {
+    display: flex;
+}
+.select__language li {
+  cursor: pointer;
+  padding-bottom: 10px;
+  padding-right: 22px;
+  position: relative;
+  transition: all 0.3s ease 0s;
+}
+.select__language > li::after {
+  color: #000000;
+  content: "";
+  font-family: Themify;
+  font-size: 12px;
+  position: absolute;
+  right: 0;
+  top: 38%;
+  transform: translateY(-50%);
+}
+.select__language li + li {
+  margin-left: 40px;
+}
+.select__language > li:hover {
+    color: #1a22b8;
+}
+.select__language > li + li::before {
+  background: #444444 none repeat scroll 0 0;
+  content: "";
+  height: 20px;
+  left: -20px;
+  position: absolute;
+  top: 2px;
+  width: 1px;
+}
+
+.select__language li.drop--lan .language__option {
+  background: #fff none repeat scroll 0 0;
+  left: 0;
+  opacity: 0;
+  padding: 10px 20px;
+  position: absolute;
+  top: 100%;
+  transition: all 0.4s ease 0s;
+  visibility: hidden;
+  width: 150px;
+}
+.select__language li.drop--lan .language__option span {
+  color: #000;
+  display: block;
+  font-size: 14px;
+  line-height: 29px;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  transition: all 0.3s ease 0s;
+}
+.select__language li.drop--lan:hover .language__option {
+    opacity: 1;
+    visibility: visible;
+}
+.select__language li.drop--lan .language__option span:hover {
+    color: #1a22b8;
+}
+
+.sticky__header.scroll-header .select__language li {
+  height: 70px;
+  line-height: 70px;
+  padding-bottom: 0;
+}
+.sticky__header.scroll-header .select__language > li::after {
+  height: 70px;
+  line-height: 84px;
+}
+.sticky__header.scroll-header .select__language > li + li::before {
+  height: 22px;
+  top: 24px;
+}
+
+
+/*--------------------------
+  Toggle menu
+-----------------------*/
+
+
+
+.body__overlay {
+  backface-visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.8);
+  cursor: url("../../images/icons/close-20.png") 25 25, pointer;
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  transition: opacity 0.3s ease 0s, visibility 0s ease 0.3s, transform 0.3s ease 0s;
+  visibility: hidden;
+  width: 100%;
+  z-index: 99999;
+}
+.body__overlay.is-visible {
+  opacity: 1;
+  transition: opacity 0.3s ease 0s, visibility 0s ease 0s, transform 0.3s ease 0s;
+  visibility: visible;
+}
+
+
+.offsetmenu,
+.shopping__cart,
+.user__meta  {
+  background: #eeeeee none repeat scroll 0 0;
+  box-shadow: 0 0 85px rgba(0, 0, 0, 0.2);
+  display: block;
+  height: 100vh;
+  opacity: 0;
+  overflow-y: scroll;
+  position: fixed;
+  right: -100%;
+  top: 0;
+  transition: all 0.25s ease 0s;
+  width: 100%;
+  z-index: 99999;
+  width: 475px;
+
+}
+.user__meta .htc__login__register {
+  padding-top: 30px;
+}
+.offsetmenu.offsetmenu__on,
+.shopping__cart.shopping__cart__on,
+.user__meta.user__meta__on {
+  opacity: 1;
+  padding-bottom: 50px;
+  right: calc(0px - 16px);
+}
+.offsetmenu__inner,
+.shopping__cart__inner,
+.user__meta__inner {
+  height: 100%;
+  padding: 60px 50px 60px;
+}
+.offsetmenu__close__btn {
+  background-color: #eee;
+  padding: 29px 50px 24px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 10;
+}
+.offsetmenu__close__btn a i {
+  color: #666666;
+  font-size: 36px;
+  transition: all 0.3s ease 0s;
+}
+.offsetmenu__close__btn a:hover i{
+  color: #1a22b8;
+}
+.offset__widget {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 19px;
+  margin-top: 7px;
+}
+h4.offset__title {
+  color: #444444;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 15px;
+  text-transform: capitalize;
+}
+.offset__single ul li a {
+  color: #303030;
+  font-size: 14px;
+  text-transform: capitalize;
+  transition: all 0.4s ease 0s;
+}
+.offset__single ul li + li {
+  padding: 2px 0 0;
+}
+
+.offset__single ul li a:hover {
+    color: #1a22b8;
+}
+.off__contact p {
+  color: #303030;
+  font-size: 16px;
+  line-height: 28px;
+  width: 98%;
+  text-align: center;
+}
+.offset__sosial__share {
+  margin-top: 21px;
+  text-align: center;
+}
+.off__soaial__link {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+.off__soaial__link li + li {
+  padding-left: 15px;
+}
+.off__soaial__link li a{
+  height: 35px;
+  line-height: 35px;
+  width: 35px;
+  text-align: center;
+  transition: all 0.3s ease 0s;
+  display: block;
+}
+.off__soaial__link li a i {
+  color: #fff;
+  font-size: 16px;
+}
+.off__soaial__link li a:hover i {
+    color: #fff;
+}
+.off__contact {
+    margin-bottom: 25px;
+}
+.off__contact .logo {
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.sidebar__thumd {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 32px -7px 30px;
+}
+.sidebar__thumd li {
+    margin: 0 7px 15px;
+    position: relative;
+}
+.sidebar__thumd a img {
+    width: 100%;
+}
+.sidebar__thumd > li a::before {
+    background: #1a22b8 none repeat scroll 0 0;
+    content: "";
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    transition: all 0.5s ease 0s;
+    width: 100%;
+}
+.sidebar__thumd li a::after {
+    color: #fff;
+    content: "";
+    font-family: themify;
+    left: 40%;
+    opacity: 0;
+    position: absolute;
+    top: 33%;
+    transition: all 0.5s ease 0s;
+}
+.sidebar__thumd li a {
+    position: relative;
+}
+.sidebar__thumd > li a {
+    display: block;
+}
+.sidebar__thumd li a:hover::after {
+    opacity: 1;
+}
+.sidebar__thumd li a:hover::before {
+    opacity: 0.7;
+}
+.shopping__cart__inner {
+  padding: 102px 50px;
+}
+.shopping__cart__inner .offsetmenu__close__btn {
+  padding: 21px 50px 24px;
+}
