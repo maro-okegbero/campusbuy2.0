@@ -192,7 +192,7 @@ label{
 .update--merchant__details-btn{
   margin-top: 15px;
 }
-.update--merchant__details-btn a{
+.update--merchant__details-btn input[type="submit"]{
   display: inline-block;
   font-size: 15px;
   height: 40px;
@@ -204,7 +204,7 @@ label{
   text-align: center;
   line-height: 40px;
 }
-.update--merchant__details-btn a:hover{
+.update--merchant__details-btn input[type="submit"]:hover{
   background-color: transparent;
   border: 1px solid #d5d5d5;
   color: #4b4b4b;

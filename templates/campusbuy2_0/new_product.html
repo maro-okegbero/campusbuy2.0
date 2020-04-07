@@ -27,39 +27,38 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 ml-auto mr-auto">
-                            <form class="login login--account" method="post">
+                             <form class="login login--account" action="#" method="POST" enctype="multipart/form-data">
+                               {% csrf_token %}
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12 col-lg-6 form--group">
-                                        <label for="product-name" class="form--label">Product Name</label>
-                                        <input class="form--input" id="product-name" type="text" aria-required="true" required>
+                                        <label for={{ form.name.id_for_label }} class="form--label">Product Name</label>
+                                        {{ form.name }}
                                     </div>
                                     <div class="col-md-6 col-sm-12 col-lg-6 form--group">
-                                        <label for="price" class="form--label">Price <small><em>(Subject to negotiation with buyer.)</em></small></label>
-                                        <input class="form--input" type="text" id="price" aria-required="true" required>
+                                        <label for={{ form.price.id_for_label }}class="form--label">Price <small><em>(Subject to negotiation with buyer.)</em></small></label>
+                                        {{ form.price }}
                                     </div>
-                                    <div class="col-md-6 col-sm-12 col-lg-6 form--group">
-                                        <input class="form--input form--input__file" type="file" aria-required="true" required>
-                                    </div>
+{#                                    <div class="col-md-6 col-sm-12 col-lg-6 form--group">#}
+{#                                        <label for={{ form.image.id_for_label }}class="form--label">Price <small><em>(Subject to negotiation with buyer.)</em></small></label>#}
+{#                                        {{ form.image }}#}
+{#                                    </div>#}
                                     <div class="col-md-6 col-sm-12 col-lg-6 form--group product--select">
-                                        <select class="product--select__cat">
-                                            <option value="0">Select Category</option>
-                                            <option value="1">Gadgets</option>
-                                            <option value="2">Accommodation</option>
-                                            <option value="3">Events & Shows</option>
-                                            <option value="4">Clothing & Accessories</option>
-                                            <option value="5">Services</option>
-                                            <option value="6">Others</option>
-                                        </select>
+                                        <label for={{ form.category.id_for_label }}class="form--label">Choose the category</label>
+                                        {{ form.category }}
                                     </div>
                                     <div class="col-12 form--group">
-                                        <label for="product-desc" class="form--label">Product Description</label>
-                                        <textarea class="form--input" id="product-desc" cols="30" rows="3" maxlength="3000" aria-required="true" required></textarea>
+                                        <label for={{ form.description.id_for_label }}class="form--label">Product Description</label>
+                                        {{ form.description }}
                                     </div>
                                 </div>
+
+                                 <div class="htc__login__btn">
+                                <input type="submit"  value="POST">
+                                </div>
+
+
                             </form>
-                            <div class="htc__login__btn">
-                                <a href="merchant.html">submit</a>
-                            </div>
+
                         </div>
                     </div>
                 </div>

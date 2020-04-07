@@ -48,25 +48,41 @@
                                         <div class="product foo">
                                             <div class="product__inner">
                                                 <div class="pro__thumb">
-                                                    <a href="product-details.html">
-                                                        <img src="images/product/1.png" alt="product images">
-                                                    </a>
+                                                     {% if school_name %}
+                                                <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=item.category.name pk=item.pk %}>
+                                                <img src="images/product/1.png" alt="product images">
+                                            </a>
+                                            {% else %}
+                                                <a href={% url 'product_detail'  category_name=item.category.name pk=item.pk %}>
+                                                <img src="images/product/1.png" alt="product images">
+                                            </a>
+                                            {% endif %}
                                                 </div>
                                             </div>
                                             <div class="product__details">
-                                                <h2><a href="product-details.html">Tecno Spark 3 Pro</a></h2>
+                                                {% if school_name %}
+                                                <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=item.category.name pk=item.pk %}>{{ product.name }}</a>
+                                            {% else %}
+                                                <a href={% url 'product_detail' category_name=item.category.name pk=item.pk %}>{{ item.name }}</a>
+                                            {% endif %}
+
                                                 <ul class="product__price">
-                                                    <li class="new__price">&#x20A6;45,000</li>
+                                                    <li class="new__price">&#x20A6;{{ item.price }}</li>
                                                 </ul>
+
+
                                             </div>
                                         </div>
                                     </div>
                                          {% empty %}
-                                            <p>Oops, We couldn't find any ad that matched your search</p>
+                                            <div class="search--status">
+                                                <img alt="No products found" class="search--status__img" src={% static "images/bg/not-found.png" %} >
+                                                <p class="search--status__message">No products found.</p>
+                                            </div>
                                     {% endfor %}
                                     {% else %}
                                         <div class="search--status">
-                                <img alt="Waiting to search!" src={% static "images/bg/waiting-to-search.png"%}  class="search--status__img">
+                                <img alt="Waiting to search!" class="search--status__img" src={% static "images/bg/waiting-to-search.png"%}  >
                                 <p class="search--status__message">Waiting to search!</p>
                             </div>
                                 {% endif %}

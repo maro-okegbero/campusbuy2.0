@@ -73,27 +73,37 @@
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 col-md-8 col-lg-8">
-                                                <form class="row login login--account" method="post">
+                                                <form class="row login login--account" action="#" method="POST" enctype="multipart/form-data">
+                                                    {% csrf_token %}
+
                                                     <div class="col-sm-12 col-md-6 col-lg-6 form--group">
-                                                        <label for="first-name" class="form--label">First Name</label>
-                                                        <input class="form--input" id="first-name" type="text" autocomplete="cc-given-name" aria-required="false">
+                                                        <label for={{ personal_information_form.email.id_for_label }} >Email</label>
+                                                        {{ personal_information_form.email }}
+                                                        </div>
+
+                                                    <div class="col-sm-12 col-md-6 col-lg-6 form--group">
+                                                        <label for={{ personal_information_form.first_name.id_for_label }} >First Name</label>
+                                                        {{ personal_information_form.first_name }}
+                                                    </div>
+
+                                                    <div class="col-sm-12 col-md-6 col-lg-6 form--group">
+                                                        <label for={{ personal_information_form.last_name.id_for_label }} >Last Name</label>
+                                                       {{ personal_information_form.last_name }}
                                                     </div>
                                                     <div class="col-sm-12 col-md-6 col-lg-6 form--group">
-                                                        <label for="last-name" class="form--label">Last Name</label>
-                                                        <input class="form--input" type="text" id="last-name" autocomplete="cc-family-name" aria-required="false">
+                                                        <label  for={{ personal_information_form.phone_number.id_for_label }} >Phone Number</label>
+                                                        {{ personal_information_form.phone_number }}
                                                     </div>
                                                     <div class="col-sm-12 col-md-6 col-lg-6 form--group">
-                                                        <label for="tel" class="form--label">Phone Number</label>
-                                                        <input class="form--input" id="tel" type="tel" autocomplete="tel" aria-required="false">
+                                                        <label for={{ personal_information_form.whatsapp_number.id_for_label }} >WhatsApp Number</label>
+                                                        {{ personal_information_form.whatsapp_number }}
                                                     </div>
-                                                    <div class="col-sm-12 col-md-6 col-lg-6 form--group">
-                                                        <label for="whatsapp-tel" class="form--label">WhatsApp Number</label>
-                                                        <input class="form--input" id="whatsapp-tel" type="tel" autocomplete="tel" aria-required="false">
-                                                    </div>
-                                                </form>
-                                                <div class="update--merchant__details-btn">
-                                                    <a href="javascript:void(0)" class="commit--changes__personal" data-toggle="change--effected" toggle="#change--effected__account">Update</a>
+
+                                                     <div class="update--merchant__details-btn">
+                                                    <input  type="Submit" value="Update" class="commit--changes__personal" data-toggle="change--effected" toggle="#change--effected__account">
                                                 </div>
+                                                </form>
+
                                             </div>
                                         </div>
                                     </div>
@@ -115,8 +125,8 @@
                                             <div class="col-sm-12 col-md-8 col-lg-8">
                                                 <form class="login login--account w--50" method="post">
                                                     <div class="form--group">
-                                                        <label for="business-name" class="form--label">{{ user.business_name }}</label>
-                                                        <input class="form--input" id="business-name" type="text" autocomplete="organization" aria-required="false">
+                                                        <label for="business-name" class="form--label">Business Name</label>
+                                                        <input class="form--input" id="business-name" type="text" autocomplete="organization" placeholder="{{ user.business_name }}" aria-required="false">
                                                     </div>
                                                     <div class="form--group">
                                                         <label for="business-desc" class="form--label">Business Description</label>

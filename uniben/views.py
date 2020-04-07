@@ -7,7 +7,7 @@ from datetime import datetime
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import *
-from .forms import PostAdForm, RegisterMerchant, LoginMerchant, SelectSchool
+from .forms import *
 from django.contrib.postgres.search import SearchVector
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -81,13 +81,13 @@ def homepage(request, school_name=None):
                    :5] if school_name else Product.objects.all()[:5]
         print(products.all(), "all Products")
         if request.method == "GET":
-            form = SelectSchool(request.GET)
+            form = SelectschoolForm(request.GET)
             if form.is_valid():
                 print(form.cleaned_data.get("school"), "SCHOOOLLLL")
                 form_school_name = form.cleaned_data.get("school")
                 return redirect(reverse('school_specific', args=[form_school_name]))
         else:
-            form = SelectSchool()
+            form = SelectschoolForm()
         context = {'categories': categories,
                    'school_name_for_url': school_name,
                    'products': products,
@@ -163,12 +163,17 @@ def post_products(request):
     This view handles the posting of products. It requires that the user be logged in
     """
     if request.method == "POST":
-        form = PostAdForm(request.POST, request.FILES)
+        form = PostAdForm(request.POST, request.FILES, auto_id=True)
         if form.is_valid():
             post = form.save()
             post.published_date = timezone.now()
+            post.merchant = request.user
+            post.school = request.user.school
+            school = request.user.school
+            print(request.user.school, "SCHOOL ++++++++++++++++++HURRAY")
             post.save()
-            return redirect(view_products(request, category_name=post.category))
+            return redirect(reverse('view_products_school_specific', kwargs={'school_name': request.user.school.alias,
+                                                                             'category_name': post.category.name}))
 
     else:
 
@@ -215,8 +220,71 @@ def merchant_profile(request, school_name=None):
     print(merchant.business_name)
     products_set = merchant.product_set.all().defer('school', 'merchant', 'description')
     products = paginator(products_set, 5, request)
-    context = {'products': products,
-               'school_name_for_url': school_name}
+
+    if request.method == "GET":
+        # the bounded forms
+        personal_information_form = PersonalInformationForm(request.GET)
+        business_detail_form = BusinessDetailsForm(request.GET)
+        login_details_form = LoginDetailsForm(request.GET)
+        check = lambda form_value, normal_value: form_value == normal_value and len(
+            form_value) != 0  # lambda function to validate the new value
+
+        if personal_information_form.is_valid():
+
+            first_name = personal_information_form.cleaned_data.get("first_name")
+            merchant.first_name = first_name if check(first_name, user.first_name) else user.first_name
+
+            last_name = personal_information_form.cleaned_data.get("last_name")
+            merchant.last_name = last_name if check(last_name, user.last_name) else user.last_name
+
+            phone_number = personal_information_form.cleaned_data.get("phone_number")
+            merchant.phone_number = phone_number if check(phone_number, user.phone_number) else user.phone_number
+
+            whatsapp_number = personal_information_form.cleaned_data.get("whatsapp_number")
+            merchant.whatsapp_number = whatsapp_number if check(whatsapp_number,
+                                                                user.whatsapp_number) else user.whatsapp_number
+            merchant.save()
+
+        elif business_detail_form.is_valid():
+
+            business_name = business_detail_form.cleaned_data.get("business_name")
+            merchant.business_name = business_name if check(business_name, user.business_name) else user.business_name
+
+            business_description = business_detail_form.cleaned_data.get("business_description")
+            merchant.business_description = business_description if check(business_description,
+                                                                          user.business_description) else user.business_description
+
+        elif login_details_form.is_valid():
+
+            username = login_details_form.cleaned_data.get("username")
+            merchant.username = username if check(username, user.username) else user.username
+
+            password1 = login_details_form.cleaned_data.get("password1")
+            password2 = login_details_form.cleaned_data.get("password2")
+            if password1 == password2:
+                merchant.set_password(password1)
+
+        merchant.save()
+    else:
+        personal_info_data = dict(email=user.email, first_name=user.first_name, last_name=user.last_name,
+                                  phone_number=user.phone_number, whatsapp_number=user.whatsapp)
+
+        business_detail_data = dict(business_name=user.business_name, business_description=user.business_description)
+
+        login_details_data = dict()
+
+        # the bounded forms
+        personal_information_form = PersonalInformationForm(data=personal_info_data)
+        business_detail_form = BusinessDetailsForm(data=business_detail_data)
+        login_details_form = LoginDetailsForm(data=login_details_data)
+
+    context = {"products": products,
+               "school_name_for_url": school_name,
+               "personal_information_form": personal_information_form,
+               "business_detail_form": business_detail_form,
+               "login_details_form": login_details_form
+               }
+
     return render(request, 'campusbuy2_0/profile.html', context)
 
 
@@ -247,18 +315,28 @@ def login_register(request):
     if request.user.is_authenticated:
         return redirect(merchant_profile)
     if request.method == "POST":
-        registration_form = RegisterMerchant(request.POST, request.FILES, auto_id=True)
-        login_form = LoginMerchant(request.POST, auto_id=True)
+        registration_form = RegisterMerchantForm(request.POST, request.FILES, auto_id=True)
+        login_form = LoginMerchantForm(request.POST, auto_id=True)
+
         if registration_form.is_valid():
+
             registration_form.save()
+
             username = registration_form.cleaned_data.get('username')
+
             raw_password = registration_form.cleaned_data.get('password1')
+
             merchant = authenticate(username=username, password=raw_password)
+
             login(request, merchant)
             return redirect(merchant_profile)
+
         elif login_form.is_valid():
+
             username = request.POST.get("username", "")
+
             password = request.POST.get("password", "")
+
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
@@ -270,8 +348,8 @@ def login_register(request):
                 return render(request, 'campusbuy2_0/login_register.html', context)
 
     else:
-        registration_form = RegisterMerchant(auto_id=True)
-        login_form = LoginMerchant(auto_id=False)
+        registration_form = RegisterMerchantForm(auto_id=True)
+        login_form = LoginMerchantForm(auto_id=False)
 
     context = {
         'login_form': login_form,
@@ -303,18 +381,21 @@ def login_register(request):
 #     return render(request, 'campusbuy2_0/login_register.html', {'form': form})
 #
 
-def search(request, school_name):
+def search(request, school_name=None):
     """
     This view is responsible for handling search
     """
     query = request.GET.get('q')
+    results = []
+    print(query, "Ze Querrryyyyyy")
+    no_school_query = Product.objects.annotate(search=SearchVector('name', 'description', )).filter(
+        search=query).defer('school', 'merchant', 'description')
+    school_exists_query = Product.objects.annotate(search=SearchVector('name', 'description', )).filter(
+        search=query).defer('school', 'merchant', 'description').filter(school__alias=school_name)
     if query:
-        results_set = Product.objects.annotate(search=SearchVector('name', 'description', 'merchant__name')).filter(
-            search=query).defer('school', 'merchant', 'description')
+        results_set = school_exists_query if school_name else no_school_query
         results = paginator(results_set, 5, request)
         print(results.object_list, "RESULTS HALLELUYA")
-    else:
-        results = Product.objects.filter(name__startswith="/")
 
     return render(request, 'campusbuy2_0/search.html', {'results': results})
 

@@ -22,7 +22,7 @@
     <!-- Theme shortcodes/elements style -->
     <link rel="stylesheet" href={% static "css_/shortcode/shortcodes.css" %}>
     <!-- Theme main style -->
-    <link rel="stylesheet" href={% static "css_/cb_style.css" %}>
+    <link rel="stylesheet" href={% static "css_/cb__style.css" %}>
     <!-- Responsive css -->
     <link rel="stylesheet" href={% static "css_/cb_responsive.css" %}>
     <!-- User style -->
@@ -83,7 +83,7 @@
                                 {% if school_name %}
                                     <a href={% url 'school_specific' school_name=school_name_for_url%}>CAMPUS<span style="color: #1a22b8;">BUY</span></a>
                                  {% else %}
-                                    <a href={% url 'homepage' %}> CAMPUSBUY </a>
+                                    <a href={% url 'homepage' %}>CAMPUS<span style="color: #1a22b8;">BUY</span> </a>
                                  {% endif %}
 
                             </div>

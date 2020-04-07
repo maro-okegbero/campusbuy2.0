@@ -52,7 +52,7 @@ class Product(models.Model):
 
     name = models.CharField(max_length=70, blank=False, null=False)  # product name
     description = models.TextField(max_length=250)
-    price = models.IntegerField()
+    price = models.FloatField()
     views = models.IntegerField(default=0)
     published_date = models.DateTimeField(blank=False, default=timezone.now)
 
