@@ -97,7 +97,7 @@ def homepage(request, school_name=None):
 
         return render(request, 'campusbuy2_0/index.html', context)
     else:
-        return render(request, 'campusbuy2_0/no _support.html', {'school_name': school_name})
+        return render(request, 'campusbuy2_0/no _support.html', {'school_name_for_url': school_name})
 
 
 def view_products(request, category_name, school_name=None):
