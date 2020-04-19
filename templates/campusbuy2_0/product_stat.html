@@ -12,9 +12,9 @@
                                     <div class="bradcaump__inner text-center">
                                         <h2 class="bradcaump-title">Product Details</h2>
                                         <nav class="bradcaump-inner">
-                                            <a class="breadcrumb-item" href="index.html">Home</a>
+                                            <a class="breadcrumb-item" href={% url 'school_specific' school_name_for_url %}>Home</a>
                                             <span class="brd-separetor">/</span>
-                                            <a class="breadcrumb-item" href="merchant.html">Merchant Account</a>
+                                            <a class="breadcrumb-item"  href={% url 'profile' %}>Merchant Account</a>
                                             <span class="brd-separetor">/</span>
                                             <span class="breadcrumb-item active">Product Stat</span>
                                         </nav>
@@ -60,7 +60,7 @@
 <!--                                        <ul class="pro__dtl__btn row">-->
                                         <ul class="htc__login__btn mt--30 row">
                                             <li class="buy__now__btn"  style="margin-right:10px;"><a href="{% url 'product_edit' pk=product.pk %}">Edit</a></li>
-                                            <li><input class = "buy__now__btn delete__pro" onclick="void(0)" type="submit" value="DELETE" style="background-color:#ff0000;color:#fff"></li>
+                                            <li><input class = "buy__now__btn delete__pro" onclick="void(0)" type="submit" value="DELETE"></li>
                                         </ul>
                                      </form>
                                 </div>

@@ -204,7 +204,26 @@ label{
   text-align: center;
   line-height: 40px;
 }
+
 .update--merchant__details-btn input[type="submit"]:hover{
+  background-color: transparent;
+  border: 1px solid #d5d5d5;
+  color: #4b4b4b;
+}
+.goof-section a{
+  display: inline-block;
+  font-size: 15px;
+  height: 40px;
+  width: 100px;
+  -webkit-transition: all 0.5s ease 0s;
+  transition: all 0.5s ease 0s;
+  background-color: #1a22b8;
+  color: #ffffff;
+  text-align: center;
+  line-height: 40px;
+}
+
+.goof-section a:hover{
   background-color: transparent;
   border: 1px solid #d5d5d5;
   color: #4b4b4b;

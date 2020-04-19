@@ -79,12 +79,12 @@ WSGI_APPLICATION = 'campusbuy2_0.wsgi.application'
 DATABASES = {
     'default': {
 
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',#'django.db.backends.sqlite3',#
-        'NAME':'campusbuy2_0', #os.path.join(BASE_DIR,'db.sqlite3'),#
-        'USER': 'baggins',
-        'PASSWORD': 'abodunshola',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'campusbuy',
+        'USER': 'maro',
+        'PASSWORD': 'guido van rossum',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '',
     }
 }
 
