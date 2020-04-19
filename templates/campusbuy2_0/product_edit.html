@@ -1,0 +1,70 @@
+{%extends 'campusbuy2_0/base.html' %}
+{% load static %}
+
+
+    {% block content %}
+      <div class="ht__bradcaump__area"
+                style="background: rgba(0, 0, 0, 0) url({% static 'images/bg/2.jpg' %}) no-repeat scroll center center / cover ;">
+                <div class="ht__bradcaump__wrap">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="bradcaump__inner text-center">
+                                    <h2 class="bradcaump-title">Product Edit</h2>
+                                    <nav class="bradcaump-inner">
+                                        <a class="breadcrumb-item" href={% url 'profile' %}>Merchant Account</a>
+                                        <span class="brd-separetor">/</span>
+                                        <span class="breadcrumb-item active">Product Edit</span>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Bradcaump area -->
+            <section class="ptb--90">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 ml-auto mr-auto">
+                             <form class="login login--account" action="#" method="POST" enctype="multipart/form-data">
+                               {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12 col-lg-6 form--group">
+                                        <label for={{ product_name }} class="form--label">Product Name</label>
+                                        {{ form.name }}
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-lg-6 form--group">
+                                        <label for={{ form.price.id_for_label }}class="form--label">Price <small><em>(Subject to negotiation with buyer.)</em></small></label>
+                                        {{ form.price }}
+                                    </div>
+{#                                    <div class="col-md-6 col-sm-12 col-lg-6 form--group">#}
+{#                                        <label for={{ form.image.id_for_label }}class="form--label">Image<small><em>(Subject to negotiation with buyer.)</em></small></label>#}
+{#                                        {{ form.image }}#}
+{#                                    </div>#}
+                                    <div class="col-md-6 col-sm-12 col-lg-6 form--group product--select">
+                                        <label for={{ form.category.id_for_label }}class="form--label">Choose the category</label>
+                                        {{ form.category }}
+                                    </div>
+                                    <div class="col-12 form--group">
+                                        <label for={{ form.description.id_for_label }}class="form--label">Product Description</label>
+                                        {{ form.description }}
+                                    </div>
+                                </div>
+
+                                 <div class="htc__login__btn">
+                                <input type="submit"  value="POST">
+                                </div>
+
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+    {% endblock %}
+
+

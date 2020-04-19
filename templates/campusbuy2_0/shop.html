@@ -1,5 +1,6 @@
 {%extends 'campusbuy2_0/base.html' %}
 {% load static %}
+{%load nigerian%}
 {%block content %}
 
     <!-- Start Slider Area -->
@@ -138,7 +139,7 @@
                                                 <span class="zmdi zmdi-whatsapp"></span>
                                             </div>
                                             <div class="contact__details">
-                                                <p> Whatsapp :<br><a href="tel:+2348138931117">{{ merchant.whatsapp_number }}</a>
+                                                <p> Whatsapp :<br><a href="https://wa.me/{{merchant.whatsapp_number|nigerianalize}}/?text=Hi%20{{merchant.business_name}}%2CI%20saw%20your%20page%20on%20https%3A%2F%2Fcampusbuy%2Eonline%20I'm%20interested%20in%20doing%20business%20with%20you">{{ merchant.whatsapp_number }}</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -153,7 +154,4 @@
             <!-- End Contact Area -->
 
 {% endblock %}
-
-
-
 

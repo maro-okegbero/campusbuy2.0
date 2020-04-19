@@ -2,7 +2,7 @@
 {% block content %}
 {% load static %}
 {#{% load cloudinary %}#}
-
+{%load nigerian%}
 <!-- Start Bradcaump area -->
             <div class="ht__bradcaump__area"
                 style="background: rgba(0, 0, 0, 0) url({% static 'images/bg/2.jpg' %}) no-repeat scroll center center / cover ;">
@@ -80,7 +80,7 @@
                                 </div>
                                 <ul class="pro__dtl__btn">
                                     <li class="buy__now__btn"><a href="tel:{{ product.merchant.phone_number }}">call now</a></li>
-                                    <li><a href="#"><span class="zmdi zmdi-whatsapp"></span></a></li>
+                                    <li><a href="https://wa.me/{{product.merchant.whatsapp_number|nigerianalize}}/?text=Hi%20{{business_name}}%2CI%20saw%20your%20advert%20on%20https%3A%2F%2Fcampusbuy%2Eonline%20I'm%20interested%20in%20the%20{{ product.name }}%20you're%20selling"><span class="zmdi zmdi-whatsapp"></span></a></li>
                                 </ul>
                             </div>
                         </div>

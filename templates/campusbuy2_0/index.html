@@ -178,7 +178,7 @@
                                             </a>
                                             {% else %}
                                                 <a href={% url 'product_detail'  category_name=product.category.name pk=product.pk %}>
-                                                <img src="images/product/1.png" alt="product images">
+                                                <img src="static/images/product/1.png" alt="product images">
                                             </a>
                                             {% endif %}
                                             </div>
@@ -195,6 +195,7 @@
                                             <ul class="product__price">
                                                 <li class="new__price">&#x20A6;{{ product.price }}</li>
                                             </ul>
+                                            <p class="product__price">{{product.published_date|timesince}} ago</p>
                                         </div>
                                     </div>
                                 </div>

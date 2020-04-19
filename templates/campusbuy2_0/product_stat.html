@@ -43,7 +43,7 @@
                             <div class="col-md-12 col-lg-6 col-sm-12 smt-30 xmt-30">
                                 <div class="htc__product__details__inner">
                                     <div class="pro__detl__title">
-                                        <h2>Tecno Spark 3 Pro</h2>
+                                        <h2> {{product.name}} </h2>
                                         <p><span class="zmdi zmdi-eye"></span> {{ product.views }}</p>
                                     </div>
                                     <div class="pro__details">
@@ -55,11 +55,14 @@
                                     <div class="product-action-wrap">
                                         <div class="prodict-statas"><span>Location : {{ product.merchant.address }}</span></div>
                                     </div>
-                                    <ul class="pro__dtl__btn row">
-                                        <li class="buy__now__btn"><a href="product-edit.html">Edit</a></li>
-                                        <li class="buy__now__btn delete__pro"><a href="javascript:void(0);">Delete</a>
-                                        </li>
-                                    </ul>
+                                     <form class="login login--account" action="{%url 'product_delete' product.pk%}"  method="POST" enctype="multipart/form-data">
+                                         {% csrf_token %}
+<!--                                        <ul class="pro__dtl__btn row">-->
+                                        <ul class="htc__login__btn mt--30 row">
+                                            <li class="buy__now__btn"  style="margin-right:10px;"><a href="{% url 'product_edit' pk=product.pk %}">Edit</a></li>
+                                            <li><input class = "buy__now__btn delete__pro" onclick="void(0)" type="submit" value="DELETE" style="background-color:#ff0000;color:#fff"></li>
+                                        </ul>
+                                     </form>
                                 </div>
                             </div>
                         </div>
@@ -68,9 +71,9 @@
                 <!-- End Product Details -->
 
                 <div class="delete--product" aria-hidden="true">
-                    Product has been deleted successfully.
-                    <br />
-                    You'll be redirect in 2 seconds.
+                    {{product.name}} has just been deleted
+                    <br>
+                    You'll be redirected to your profile in 2 seconds.
                 </div>
 
 {% endblock %}

@@ -1,9 +1,20 @@
 {% extends 'campusbuy2_0/base.html' %}
-{% load static %}
+
 {% block content %}
-    <h1>Support for {{school_name}} is coming soon...</h1>
 
+<div class="not-found-body">
+
+	<div id="notfound">
+		<div class="notfound">
+			<div class="notfound-404">
+				<h1>{{school_name_for_url}}</h1>
+			</div>
+                    <h2>&#128586;Coming Soon</h2>
+                    <p>Support for {{school_name_for_url}} is coming soon...</p>
+                    <a href="{% url 'homepage'%}">Go To Homepage</a>
+		</div>
+	</div>
+
+</div>
 {% endblock %}
-
-
 
