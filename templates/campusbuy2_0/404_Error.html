@@ -1,12 +1,57 @@
 {% extends 'campusbuy2_0/base.html' %}
 {% block content %}
 
-    <div class="Error404">
-        <h4 style="align-self: center">Page 404  &#128586;</h4>
-        <br>
-        <p>Opps, just like a fresh tasty UNIBEN bread, this page does not exist &#129301;</p>
+
+<div class="not-found-body">
+
+	<div id="notfound">
+		<div class="notfound">
+			<div class="notfound-404">
+				<h1>Oops!</h1>
+			</div>
+			<h2>&#129301;404 - Page not found</h2>
+			<p>Just like a fresh tasty UNIBEN bread, this page does not exist.</p>
+			<a href="{% url 'homepage'%}">Go To Homepage</a>
+		</div>
+	</div>
+
+</div>
 
 
-    </div>
+
+<!--    <div style="align-self: center; padding-top:100px; padding-bottom:200px;padding-left:20px;padding-right:20px" class="Error404">-->
+<!--        <h3">Page 404  &#128586;</h4>-->
+<!--        <h2>Opps, just like a fresh tasty UNIBEN bread, this page does not exist &#129301;</h2>-->
+
+
+<!--    </div>-->
+
+{% endblock %}{% extends 'campusbuy2_0/base.html' %}
+{% block content %}
+
+
+<div class="not-found-body">
+
+	<div id="notfound">
+		<div class="notfound">
+			<div class="notfound-404">
+				<h1>Oops!</h1>
+			</div>
+			<h2>&#129301;404 - Page not found</h2>
+			<p>Just like a fresh tasty UNIBEN bread, this page does not exist.</p>
+			<a href="{% url 'homepage'%}">Go To Homepage</a>
+		</div>
+	</div>
+
+</div>
+
+
+
+<!--    <div style="align-self: center; padding-top:100px; padding-bottom:200px;padding-left:20px;padding-right:20px" class="Error404">-->
+<!--        <h3">Page 404  &#128586;</h4>-->
+<!--        <h2>Opps, just like a fresh tasty UNIBEN bread, this page does not exist &#129301;</h2>-->
+
+
+<!--    </div>-->
 
 {% endblock %}

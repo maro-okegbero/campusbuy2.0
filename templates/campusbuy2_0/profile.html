@@ -118,6 +118,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 col-md-8 col-lg-8">
+
                                                 <form class="row login login--account" action="#" method="POST" enctype="multipart/form-data">
                                                     {% csrf_token %}
                                                     <div class="form--group">
@@ -127,6 +128,7 @@
                                                     <div class="form--group">
                                                         <label for={{ business_detail_form.business_description.id_for_label }} >Business Description</label>
                                                         {{ business_detail_form.business_description }}
+
                                                     </div>
                                                     <div class="update--merchant__details-btn">
                                                     <input  type="Submit" value="Update" class="commit--changes__personal" data-toggle="change--effected" toggle="#change--effected__account">
@@ -140,15 +142,21 @@
                                 <div class="tab-pane fade infomation" id="list-business" role="tabpanel" aria-labelledby="list-business-list">
                                     <h1>Business Information</h1>
                                     <div class="merchant__information">
-                                        <h2 class="merchant--details__head">Your Ads</h2>
-                                        <div class="update--merchant__details-btn">
+                                    <div class="update--merchant__details-btn">
+                                        <div class="goof-section" style="padding-bottom: 45px;">
                                             <a href={% url 'post_products' %}>Post Ad</a>
+
                                             <a class="merchant-_business" href={% url 'shop' user.business_name %} >View Business Page</a>
                                         </div>
-                                        <p>Select any ad to see how it's doing.</p>
-                                        <div class="row ads--you__sell">
+                                        </div>
+                                        <h2 class="merchant--details__head">Your Ads</h2>
+
                                         {% if products %}
-                                            {% for product in products %}
+                                        <p>Select any ad to see how it's doing.</p>
+                                        {% endif %}
+                                        <div class="row ads--you__sell">
+                                            {% if products %}
+                                                 {% for product in products %}
                                                    <div class="col-md-4 single__pro col-lg-3 col-sm-6">
                                                 <div class="product foo">
                                                     <div class="product__inner">

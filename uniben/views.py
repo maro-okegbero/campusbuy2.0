@@ -51,6 +51,10 @@ def landing_page_redirect(request):
     return redirect(homepage)
 
 
+def merchant_profile_redirect(request):
+    return redirect(merchant_profile)
+
+
 def about_us(request):
     """Renders the about us page"""
     return render(request, 'campusbuy2_0/about.html')
@@ -96,7 +100,10 @@ def homepage(request, school_name=None):
 
         return render(request, 'campusbuy2_0/index.html', context)
     else:
-        return render(request, 'campusbuy2_0/no _support.html', {'school_name_for_url': school_name})
+        context = {
+            'school_name_for_url': school_name
+        }
+        return render(request, 'campusbuy2_0/no _support.html', context)
 
 
 def view_products(request, category_name, school_name=None):
@@ -142,15 +149,16 @@ def view_all_products(request, school_name=None):
 @login_required(login_url='/login&register')
 def product_stat(request, business_name, pk):
     """handles rendering of the products statistics"""
+    user = request.user
+    school_name = user.school.alias
     product = Product.objects.get(pk=pk)
     if request.user.username == product.merchant.username:
-        context = {'product': product, 'business_name': business_name}
+        context = {'product': product,
+                   'business_name': business_name,
+                   'school_name_for_url': school_name}
         return render(request, 'campusbuy2_0/product_stat.html', context)
     else:
         return render(request, 'campusbuy2_0/unauthorized.html')
-
-
-# def delete_product(request, pk)
 
 
 @login_required(login_url='/login&register')
@@ -187,6 +195,7 @@ def single_product(request, pk, category_name=None, school_name=None):
         name = product.name
         category_name = product.category.name
         merchant = product.merchant
+        business_name = product.merchant.business_name
         similar_products = Product.objects.filter(Q(category=product.category.pk)
                                                   & Q(name__contains=name)).defer('school', 'merchant', 'description')[
                            :5]  # combined queryset
@@ -196,6 +205,7 @@ def single_product(request, pk, category_name=None, school_name=None):
                    'category_name': category_name,
                    'school_name': school_name,
                    'school_name_for_url': school_name,
+                   'business_name': business_name,
                    'value': datetime.now(),
                    'similar_products': similar_products,
                    'other_products_from_merchant': other_products_from_merchant
@@ -203,6 +213,38 @@ def single_product(request, pk, category_name=None, school_name=None):
         return render(request, 'campusbuy2_0/product_detail.html', context)
     except Exception as e:
         return handler404(request, e)
+
+
+# def delete_product(request, pk)
+@login_required(login_url='/login&register')
+def product_edit(request, pk):
+    """Handles rendering of the product-edit page"""
+    user = request.user
+    business_name = user.business_name
+    product = Product.objects.get(pk=pk)
+    form = PostAdForm(instance=product)
+    if request.method == "POST":
+        form = PostAdForm(request.POST, request.FILES, auto_id=True, instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse(product_stat))
+    context = {'form': form,
+               'business_name': business_name,
+               'pk': pk}
+    return render(request, 'campusbuy2_0/product_edit.html',context)
+
+
+@login_required(login_url='/login&register')
+def product_delete(request, pk):
+    """Handles the deleting of a product"""
+    product = Product.objects.get(pk=pk)
+    form = PostAdForm(instance=product)
+    if request.method == "POST":
+        product.delete()
+        return redirect(reverse(merchant_profile))
+    context = {'form': form,
+               'product': product}
+    return render(request, 'campusbuy2_0/product_stat.html', context)
 
 
 @login_required(login_url='/login&register')

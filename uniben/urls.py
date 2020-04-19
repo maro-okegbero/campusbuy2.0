@@ -1,7 +1,6 @@
 from django.urls import path
 from uniben.views import *
 
-
 urlpatterns = [
     path('', homepage, name='homepage'),
 
@@ -32,6 +31,10 @@ urlpatterns = [
     path('ajax/validate_username/', validate_username, name='validate_username'),
 
     path('<business_name>/product_stats/<pk>', product_stat, name="product_stat"),
+
+    path('product_edit/<pk>', product_edit, name="product_edit"),
+
+    path('product_delete/<pk>', product_delete, name="product_delete"),
 
     path('all_products', view_all_products, name='view_all_products'),
 
