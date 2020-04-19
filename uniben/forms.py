@@ -1,12 +1,12 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-
-from .models import Product, School
+from django.forms import ModelForm
+from .models import Product, School, User
 from django.contrib.auth import get_user_model
 from campusbuy2_0 import settings
 
 
-class PostAdForm(forms.ModelForm):
+class PostAdForm(ModelForm):
     class Meta:
         model = Product
         fields = ['category', 'name', 'price',
@@ -61,11 +61,7 @@ class SelectschoolForm(forms.Form):
     school = forms.ModelChoiceField(empty_label="Select School", queryset=School.objects.all())
 
 
-class PersonalInformationForm(forms.Form):
-    email = forms.CharField(max_length=30, required=False,
-                            widget=forms.EmailInput(
-                                attrs={'class': "form--input", "id": "reg-email", "placeholder": "{{user.email}}"}),
-                            label="Email")
+class MerchantPersonalInformationForm(forms.Form):
 
     first_name = forms.CharField(max_length=30, required=False,
                                  widget=forms.TextInput(attrs={'class': "form--input", "id": "first-name"}),
@@ -73,36 +69,42 @@ class PersonalInformationForm(forms.Form):
     last_name = forms.CharField(max_length=30, required=False,
                                 widget=forms.TextInput(attrs={'class': "form--input", "id": "last-name"}),
                                 label="Last Name")
-    phone_number = forms.CharField(max_length=30, required=False,
+    phone_number = forms.CharField(max_length=12, required=False,
                                    widget=forms.TextInput(attrs={'class': "form--input", "id": "tel"}),
                                    label="Phone Number")
-    whatsapp_number = forms.CharField(max_length=30, required=False,
+    whatsapp_number = forms.CharField(max_length=12, required=False,
                                       widget=forms.TextInput(attrs={'class': "form--input", "id": "whatsapp-tel"}),
                                       label="Whatsapp Number")
 
 
-class BusinessDetailsForm(forms.Form):
-    business_name = forms.CharField(max_length=30, required=False,
+class MerchantBusinessDetailsForm(forms.Form):
+    business_name = forms.CharField(max_length=300, required=False,
                                     widget=forms.TextInput(attrs={'class': "form--input", "id": "business-name"}),
                                     label="Business Name")
-    business_description = forms.CharField(max_length=30, required=False,
-                                           widget=forms.TextInput(
-                                               attrs={'class': "form--input", "id": "business-desc"}),
+    business_description = forms.CharField(max_length=300, required=False,
+                                           widget=forms.Textarea(
+                                               attrs={'class': "form--input", "id": "business-desc", "rows": "5"}),
                                            label="Business Description")
 
 
-class LoginDetailsForm(forms.Form):
+class MerchantLoginDetailsForm(forms.Form):
+
     username = forms.CharField(max_length=30, required=False,
-                               widget=forms.TextInput(
-                                   attrs={'class': "form--input", "id": "username"}),
-                               label="Email")
+                               widget=forms.TextInput(attrs={'class': "form--input", "id": "login-email"}),
+                               label="Username")
+
+    email = forms.CharField(max_length=30, required=False,
+                            widget=forms.EmailInput(
+                                attrs={'class': "form--input", "id": "reg-email"}),
+                            label="Email")
 
     password1 = forms.CharField(max_length=30, required=False,
                                 widget=forms.PasswordInput(
-                                    attrs={'class': "form--input", "id": "reg-current-password1"}),
+                                    attrs={'class': "form--input eye--password", "id": "reg-current-password1"}),
                                 label="Password1")
 
     password2 = forms.CharField(max_length=30, required=False,
                                 widget=forms.PasswordInput(
-                                    attrs={'class': "form--input", "id": "reg-current-password2"}),
+                                    attrs={'class': "form--input eye--password", "id": "reg-current-password2"}),
                                 label="Password2")
+

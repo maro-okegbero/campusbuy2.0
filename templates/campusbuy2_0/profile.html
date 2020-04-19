@@ -77,11 +77,6 @@
                                                     {% csrf_token %}
 
                                                     <div class="col-sm-12 col-md-6 col-lg-6 form--group">
-                                                        <label for={{ personal_information_form.email.id_for_label }} >Email</label>
-                                                        {{ personal_information_form.email }}
-                                                        </div>
-
-                                                    <div class="col-sm-12 col-md-6 col-lg-6 form--group">
                                                         <label for={{ personal_information_form.first_name.id_for_label }} >First Name</label>
                                                         {{ personal_information_form.first_name }}
                                                     </div>
@@ -123,19 +118,21 @@
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 col-md-8 col-lg-8">
-                                                <form class="login login--account w--50" method="post">
+                                                <form class="row login login--account" action="#" method="POST" enctype="multipart/form-data">
+                                                    {% csrf_token %}
                                                     <div class="form--group">
-                                                        <label for="business-name" class="form--label">Business Name</label>
-                                                        <input class="form--input" id="business-name" type="text" autocomplete="organization" placeholder="{{ user.business_name }}" aria-required="false">
+                                                         <label for={{ business_detail_form.business_name.id_for_label }} >Business Name</label>
+                                                        {{ business_detail_form.business_name }}
                                                     </div>
                                                     <div class="form--group">
-                                                        <label for="business-desc" class="form--label">Business Description</label>
-                                                        <textarea class="form--input" id="business-desc" cols="30" rows="3" maxlength="3000" aria-required="false"></textarea>
+                                                        <label for={{ business_detail_form.business_description.id_for_label }} >Business Description</label>
+                                                        {{ business_detail_form.business_description }}
                                                     </div>
-                                                </form>
-                                                <div class="update--merchant__details-btn">
-                                                    <a href="javascript:void(0)" class="commit--changes__business" data-toggle="change--effected" toggle="#change--effected__business">Update</a>
+                                                    <div class="update--merchant__details-btn">
+                                                    <input  type="Submit" value="Update" class="commit--changes__personal" data-toggle="change--effected" toggle="#change--effected__account">
                                                 </div>
+                                                </form>
+
                                             </div>
                                         </div>
                                     </div>
@@ -203,25 +200,34 @@
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 col-md-8 col-lg-8">
-                                                <form class="login login--account w--50" method="post">
+                                                <form class="login login--account w--50" method="POST">
+                                                    {% csrf_token %}
                                                     <div class="form--group">
-                                                        <label for="reg-email" class="form--label">Email</label>
-                                                        <input class="form--input" id="reg-email" type="email" autocomplete="email" aria-required="false">
+                                                         <label for={{ login_details_form.email.id_for_label }} >Email</label>
+                                                        {{ login_details_form.email }}
+                                                    </div>
+
+                                                    <div class="form--group">
+                                                         <label for={{ login_details_form.username.id_for_label }} >Username</label>
+                                                        {{ login_details_form.username }}
+                                                    </div>
+
+                                                    <div class="form--group">
+                                                        <label for={{ login_details_form.password1.id_for_label }} >New Password</label>
+                                                        {{ login_details_form.password1 }}
+                                                        <span toggle="#{{ login_details_form.password1.id_for_label }}" data-toggle="current-password" class="zmdi zmdi-eye field--icon toggle--password"></span>
                                                     </div>
                                                     <div class="form--group">
-                                                        <label for="reg-current-password" class="form--label">Current Password</label>
-                                                        <input class="form--input eye--password" id="reg-current-password" type="password" autocomplete="current-password" aria-required="false">
-                                                        <span toggle="#reg-current-password" data-toggle="current-password" class="zmdi zmdi-eye field--icon toggle--password"></span>
+                                                         <label for={{ login_details_form.password2.id_for_label }} >Type Password Again</label>
+                                                        {{ login_details_form.password2 }}
+                                                        <span toggle="#{{ login_details_form.password2.id_for_label }}" data-toggle="new-password" class="zmdi zmdi-eye field--icon toggle--password"></span>
                                                     </div>
-                                                    <div class="form--group">
-                                                        <label for="reg-new-password" class="form--label">New Password</label>
-                                                        <input class="form--input eye--password" id="reg-new-password" type="password" autocomplete="new-password" aria-required="false">
-                                                        <span toggle="#reg-new-password" data-toggle="new-password" class="zmdi zmdi-eye field--icon toggle--password"></span>
+
+                                                    <div class="update--merchant__details-btn">
+                                                    <input  type="Submit" value="Update" class="commit--changes__personal" data-toggle="change--effected" toggle="#change--effected__account">
                                                     </div>
                                                 </form>
-                                                <div class="update--merchant__details-btn">
-                                                    <a href="javascript:void(0)" class="commit--changes__login" data-toggle="change--effected" toggle="#change--effected__login">Update</a>
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>

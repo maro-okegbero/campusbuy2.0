@@ -83,7 +83,6 @@ def homepage(request, school_name=None):
         if request.method == "GET":
             form = SelectschoolForm(request.GET)
             if form.is_valid():
-                print(form.cleaned_data.get("school"), "SCHOOOLLLL")
                 form_school_name = form.cleaned_data.get("school")
                 return redirect(reverse('school_specific', args=[form_school_name]))
         else:
@@ -110,9 +109,6 @@ def view_products(request, category_name, school_name=None):
     """
     try:
         category = Category.objects.get(name=category_name)
-        # schools = {
-        #     "uniben": "University Of Benin"
-        # }
         my_list = category.product_set.filter(
             school__alias=school_name) if school_name else category.product_set.all()
         product_list = paginator(my_list, 4, request)
@@ -170,7 +166,6 @@ def post_products(request):
             post.merchant = request.user
             post.school = request.user.school
             school = request.user.school
-            print(request.user.school, "SCHOOL ++++++++++++++++++HURRAY")
             post.save()
             return redirect(reverse('view_products_school_specific', kwargs={'school_name': request.user.school.alias,
                                                                              'category_name': post.category.name}))
@@ -197,9 +192,6 @@ def single_product(request, pk, category_name=None, school_name=None):
                            :5]  # combined queryset
         other_products_from_merchant = Product.objects.filter(merchant__id=merchant.id).defer('school', 'merchant',
                                                                                               'description')[:5]
-        # schools = {
-        #     "uniben": "University Of Benin"
-        # }
         context = {'product': product,
                    'category_name': category_name,
                    'school_name': school_name,
@@ -221,62 +213,47 @@ def merchant_profile(request, school_name=None):
     products_set = merchant.product_set.all().defer('school', 'merchant', 'description')
     products = paginator(products_set, 5, request)
 
-    if request.method == "GET":
+    if request.method == "POST":
         # the bounded forms
-        personal_information_form = PersonalInformationForm(request.GET)
-        business_detail_form = BusinessDetailsForm(request.GET)
-        login_details_form = LoginDetailsForm(request.GET)
-        check = lambda form_value, normal_value: form_value == normal_value and len(
+        personal_information_form = MerchantPersonalInformationForm(request.POST)
+        business_detail_form = MerchantBusinessDetailsForm(request.POST)
+        login_details_form = MerchantLoginDetailsForm(request.POST)
+        check = lambda form_value, normal_value: form_value != normal_value and len(
             form_value) != 0  # lambda function to validate the new value
 
-        if personal_information_form.is_valid():
+        if any([personal_information_form.is_valid(), business_detail_form.is_valid(), login_details_form.is_valid()]):
 
             first_name = personal_information_form.cleaned_data.get("first_name")
             merchant.first_name = first_name if check(first_name, user.first_name) else user.first_name
-
             last_name = personal_information_form.cleaned_data.get("last_name")
             merchant.last_name = last_name if check(last_name, user.last_name) else user.last_name
-
             phone_number = personal_information_form.cleaned_data.get("phone_number")
             merchant.phone_number = phone_number if check(phone_number, user.phone_number) else user.phone_number
-
             whatsapp_number = personal_information_form.cleaned_data.get("whatsapp_number")
             merchant.whatsapp_number = whatsapp_number if check(whatsapp_number,
                                                                 user.whatsapp_number) else user.whatsapp_number
-            merchant.save()
-
-        elif business_detail_form.is_valid():
 
             business_name = business_detail_form.cleaned_data.get("business_name")
             merchant.business_name = business_name if check(business_name, user.business_name) else user.business_name
-
             business_description = business_detail_form.cleaned_data.get("business_description")
             merchant.business_description = business_description if check(business_description,
                                                                           user.business_description) else user.business_description
 
-        elif login_details_form.is_valid():
-
+            email = login_details_form.cleaned_data.get("email")
+            merchant.username = email if check(email, user.email) else user.email
             username = login_details_form.cleaned_data.get("username")
             merchant.username = username if check(username, user.username) else user.username
-
             password1 = login_details_form.cleaned_data.get("password1")
             password2 = login_details_form.cleaned_data.get("password2")
-            if password1 == password2:
+            if password1 == password2 and len(password1) > 0:
                 merchant.set_password(password1)
 
         merchant.save()
+        return redirect(merchant_profile)
     else:
-        personal_info_data = dict(email=user.email, first_name=user.first_name, last_name=user.last_name,
-                                  phone_number=user.phone_number, whatsapp_number=user.whatsapp)
-
-        business_detail_data = dict(business_name=user.business_name, business_description=user.business_description)
-
-        login_details_data = dict()
-
-        # the bounded forms
-        personal_information_form = PersonalInformationForm(data=personal_info_data)
-        business_detail_form = BusinessDetailsForm(data=business_detail_data)
-        login_details_form = LoginDetailsForm(data=login_details_data)
+        personal_information_form = MerchantPersonalInformationForm(initial=merchant.__dict__)
+        business_detail_form = MerchantBusinessDetailsForm(initial=merchant.__dict__)
+        login_details_form = MerchantLoginDetailsForm(initial=merchant.__dict__)
 
     context = {"products": products,
                "school_name_for_url": school_name,
@@ -337,6 +314,10 @@ def login_register(request):
 
             password = request.POST.get("password", "")
 
+            if ".com" in username:
+                user = User.objects.get(email=username)
+                username = user.username
+
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
@@ -387,7 +368,6 @@ def search(request, school_name=None):
     """
     query = request.GET.get('q')
     results = []
-    print(query, "Ze Querrryyyyyy")
     no_school_query = Product.objects.annotate(search=SearchVector('name', 'description', )).filter(
         search=query).defer('school', 'merchant', 'description')
     school_exists_query = Product.objects.annotate(search=SearchVector('name', 'description', )).filter(
@@ -395,7 +375,6 @@ def search(request, school_name=None):
     if query:
         results_set = school_exists_query if school_name else no_school_query
         results = paginator(results_set, 5, request)
-        print(results.object_list, "RESULTS HALLELUYA")
 
     return render(request, 'campusbuy2_0/search.html', {'results': results})
 

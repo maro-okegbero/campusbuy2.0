@@ -1,7 +1,81 @@
+from datetime import datetime, date
+import inspect
+import json
+
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 from campusbuy2_0 import settings
+
+
+# class CustomJSONEncoder(json.JSONEncoder):
+#     """ JSON encoder that supports date formats """
+#
+#     def default(self, obj):
+#
+#         if isinstance(obj, datetime):
+#             return obj.isoformat()
+#         if isinstance(obj, date):
+#             return datetime.combine(date, datetime.min.time()).isoformat()
+#
+#         # Implement json decoder for ObjectId if needed
+#
+#         if isinstance(obj, bytes):
+#             return str(obj.decode("utf-8"))
+#
+#         if isinstance(obj, models.Model):
+#             return obj.to_son().to_dict()
+#
+#         return json.JSONEncoder.default(self, obj)
+#
+#
+# class AppMixin:
+#     """ App mixin will hold special methods and field parameters to map to all model classes"""
+#
+#     def convert_dict(self, data, indent=None):
+#         return json.dumps(data, indent=indent, cls=CustomJSONEncoder)
+#
+#     def to_dict(self):
+#         if isinstance(self, models.Model):
+#             return self.to_son().to_dict()
+#         return self.__dict__
+#
+#     def to_full_dict(self):
+#         """
+#         Retrieve all values of this model as a dictionary including values of methods that are
+#         wrapped with the @property decorator
+#         """
+#         data = inspect.getmembers(self)
+#         data_ = dict()
+#         for d in data:
+#             if not inspect.ismethod(d[1]) and '__' not in d[0] \
+#                     and type(d[1]) in [str, int, dict, list, float, datetime, tuple] \
+#                     or isinstance(d[1], models.Model):
+#
+#                 data_[d[0]] = d[1]
+#                 if isinstance(d[1], models.Model) and getattr(d[1], 'to_son', None):
+#                     data_[d[0]] = d[1].to_son().to_dict()
+#                 if type(d[1]) in [list, tuple] and len(d[1]) > 0:
+#                     sub = []
+#                     for i in d[1]:
+#                         if getattr(i, 'to_son', None):
+#                             sub.append(i.to_son().to_dict())
+#                     data_[d[0]] = sub
+#                     #     print (i)
+#
+#         # pprint(data_)
+#         return data_
+#
+#     def to_full_json(self):
+#         """
+#         Retrieve all values of this model as a dictionary including values of methods that are
+#         wrapped with the @property decorator
+#         """
+#         data_ = self.to_full_dict()
+#         if "_defaults" in data_:
+#             data_.pop("_defaults")
+#         data_ = self.convert_dict(data_)
+#         return data_
 
 
 class School(models.Model):
