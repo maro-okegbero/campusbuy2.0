@@ -127,3 +127,5 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'uniben.User'
 
 ADMINS = [[('Maro', 'marookegbero@gmail.com')]]
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # Testing

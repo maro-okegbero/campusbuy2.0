@@ -105,11 +105,7 @@ class MerchantLoginDetailsForm(forms.Form):
 
     password2 = forms.CharField(max_length=30, required=False,
                                 widget=forms.PasswordInput(
-<<<<<<< HEAD
+
                                     attrs={'class': "form--input eye--password", "id": "reg-current-password2"}),
                                 label="Password2")
 
-=======
-                                    attrs={'class': "form--input", "id": "reg-current-password2"}),
-                                label="Password2")
->>>>>>> egenius01/CB_2.0

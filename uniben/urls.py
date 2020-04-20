@@ -1,7 +1,11 @@
-from django.urls import path
+from django.urls import path, include
 from uniben.views import *
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+
+    path('accounts/', include('django.contrib.auth.urls')),
+
     path('', homepage, name='homepage'),
 
     path('<str:school_name>/', homepage, name='school_specific'),
