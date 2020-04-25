@@ -1,6 +1,7 @@
 {%extends 'campusbuy2_0/base.html' %}
 {% load static %}
 {%load nigerian%}
+{%load humanize%}
 {%block content %}
 
     <!-- Start Slider Area -->
@@ -86,7 +87,7 @@
                                             {% endif %}
                                         </h2>
                                         <ul class="product__price">
-                                            <li class="new__price">&#x20A6;{{ product.price}}</li>
+                                            <li class="new__price">&#x20A6;{{ product.price |intcomma}}</li>
                                         </ul>
                                     </div>
                                 </div>

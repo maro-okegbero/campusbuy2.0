@@ -420,7 +420,7 @@ def search(request, school_name=None):
     query = request.GET.get('q')
     results = []
     print(query, "Ze Querrryyyyyy")
-    no_school_query = Product.objects.annotate(search=SearchVector('name', 'description', )).filter(
+    no_school_query = Product.objects.annotate(search=SearchVector('name', 'description')).filter(
         search=query).defer('school', 'merchant', 'description')
     school_exists_query = Product.objects.annotate(search=SearchVector('name', 'description', )).filter(
         search=query).defer('school', 'merchant', 'description').filter(school__alias=school_name)

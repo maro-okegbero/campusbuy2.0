@@ -1,6 +1,22 @@
 {% extends 'campusbuy2_0/base.html' %}
-{% block content %}
-    {% load static %}
-    <h1>Opps, you're not authorised to view to this page. Sorry.</h1>
 
-{% endblock %}
+{% block content %}
+
+
+<div class="not-found-body">
+	<div id="notfound">
+		<div class="notfound">
+			<div class="notfound-404">
+				<h1>Yo!!</h1>
+			</div>
+			<h2>&#129301;{{user.business_name}}</h2>
+			<p> you're not authorised to view to this page. Sorry.</p>
+
+			<a href="{% url 'homepage'%}">Go To Homepage</a>
+
+		</div>
+	</div>
+
+</div>
+
+{%endblock%}

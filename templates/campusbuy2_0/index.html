@@ -11,7 +11,7 @@
     {% endif %}
 {% endblock %}
 {% block content%}
-
+{%load humanize%}
     <!-- Modal -->
             <div class="modal fade bd-example-modal-sm" id="chooseLocation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
@@ -74,11 +74,42 @@
 
 
                 <section class="ptb--140 htc__popular__product bg__gray">
+<!--                   check if user is authenticated and offer to view profile-->
+                    {%if user.is_authenticated%}
+                     <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="section__title section__title--2 text-center">
+                                    <h2 class="title__line">View <span class="text--theme">Your Campusbuy</span> Profile</h2>
+                                    <p>By connecting BUYERS to SELLERS, we provide you the opportunity to showcase your
+                                        products before potential
+                                        customers. You can visit our {% if school_name_for_url %}
+                                             <a href={% url 'school_specific_faq' school_name=school_name_for_url%}>FAQ</a>
+                                           {% else %}
+                                             <a href={% url 'faq' %}> FAQ </a>
+                                           {% endif %} page for more details.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Start Load More BTn -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="htc__loadmore__btn">
+                                    <a href={% url 'profile' %}>View {{user.business_name}}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Load More BTn -->
+                    </div>
+
+                    {%else%}
+
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
                                 <div class="section__title section__title--2 text-center">
-                                    <h2 class="title__line">Become A <span class="text--theme">Merchant</span> on
+                                    <h2 class="title__line">Become a <span class="text--theme">Merchant</span> on
                                         CampusBuy</h2>
                                     <p>By connecting BUYERS to SELLERS, we provide you the opportunity to showcase your
                                         products before potential
@@ -101,6 +132,7 @@
                         </div>
                         <!-- End Load More BTn -->
                     </div>
+                {%endif%}
                 </section>
 
 
@@ -193,9 +225,9 @@
 
                                             </h2>
                                             <ul class="product__price">
-                                                <li class="new__price">&#x20A6;{{ product.price }}</li>
+                                                <li class="new__price">&#x20A6;{{ product.price | intcomma}}</li>
                                             </ul>
-                                            <p class="product__price">{{product.published_date|timesince}} ago</p>
+                                            <p class="product__price">{{product.published_date|naturalday}}</p>
                                         </div>
                                     </div>
                                 </div>

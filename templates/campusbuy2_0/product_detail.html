@@ -3,6 +3,7 @@
 {% load static %}
 {#{% load cloudinary %}#}
 {%load nigerian%}
+{%load humanize%}
 <!-- Start Bradcaump area -->
             <div class="ht__bradcaump__area"
                 style="background: rgba(0, 0, 0, 0) url({% static 'images/bg/2.jpg' %}) no-repeat scroll center center / cover ;">
@@ -73,7 +74,7 @@
                                     <p>{{ product.description }}</p>
                                 </div>
                                 <ul class="pro__dtl__prize">
-                                    <li>&#x20A6;{{ product.price }}</li>
+                                    <li>&#x20A6;{{ product.price | intcomma}}</li>
                                 </ul>
                                 <div class="product-action-wrap">
                                     <div class="prodict-statas"><span>Location :</span> {{ product.merchant.address }}</div>
@@ -128,7 +129,7 @@
                                             {% endif %}
                                         </h2>
                                         <ul class="product__price">
-                                            <li class="new__price">&#x20A6;{{ product.price }}</li>
+                                            <li class="new__price">&#x20A6;{{ product.price | intcomma}}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -182,7 +183,7 @@
                                             {% endif %}
                                                 </h2>
                                                 <ul class="product__price">
-                                                    <li class="new__price">&#x20A6;{{ product.price }}</li>
+                                                    <li class="new__price">&#x20A6;{{ product.price |intcomma}}</li>
                                                 </ul>
                                             </div>
                                         </div>
