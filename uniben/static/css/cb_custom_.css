@@ -186,8 +186,8 @@ label{
   cursor: pointer;
 }
 .list-group-item.active{
-  background-color: #1a22b8;
-  border-color: #1a22b8;
+  background-color: #7D6DFF;
+  border-color: #7D6DFF;
 }
 .update--merchant__details-btn{
   margin-top: 15px;
@@ -199,7 +199,7 @@ label{
   width: 100px;
   -webkit-transition: all 0.5s ease 0s;
   transition: all 0.5s ease 0s;
-  background-color: #1a22b8;
+  background-color: #7D6DFF;
   color: #ffffff;
   text-align: center;
   line-height: 40px;
@@ -217,7 +217,7 @@ label{
   width: 100px;
   -webkit-transition: all 0.5s ease 0s;
   transition: all 0.5s ease 0s;
-  background-color: #1a22b8;
+  background-color: #7D6DFF;
   color: #ffffff;
   text-align: center;
   line-height: 40px;
@@ -385,8 +385,8 @@ form.w--50{
 }
 .notification--reminder h3 a{
   margin-left: 15px;
-  background: #1a22b8;
-  border: 1px solid #1a22b8;
+  background: #7D6DFF;
+  border: 1px solid #7D6DFF;
   color: #fff;
   display: inline-block;
   height: 40px;
@@ -498,12 +498,12 @@ form.w--50{
 }
 
 .jam {
-  background-color: #1a22b8;
+  background-color: #7D6DFF;
   color: #fff;
 }
 
 .login-out{
-  background-color: #1a22b8;
+  background-color: #7D6DFF;
   color: #fff;
   line-height: 1.5;
   margin-bottom: 1em;
@@ -520,7 +520,7 @@ form.w--50{
   transform: translateX(-365px);
 }
 .delete--product{
-  background-color: #1a22b8;
+  background-color: #7D6DFF;
   color: #fff;
   line-height: 1.5;
   margin-bottom: 1em;

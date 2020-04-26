@@ -89,11 +89,11 @@
 }
 .slider__btn a.htc__btn:hover ,
 .uniq__btn a.htc__btn:hover  {
-    color: #1a22b8;
+    color: #7D6DFF;
 }
 .slider__btn a.htc__btn:hover::before ,
 .uniq__btn a.htc__btn:hover::before {
-    background: #1a22b8 none repeat scroll 0 0;
+    background: #7D6DFF none repeat scroll 0 0;
 }
 
 /*---------------------------

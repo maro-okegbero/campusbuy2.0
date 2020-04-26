@@ -75,8 +75,8 @@
     width: 28px;
 }
 .social__icon li a:hover i {
-    background: #1a22b8 none repeat scroll 0 0;
-    border: 1px solid #1a22b8;
+    background: #7D6DFF none repeat scroll 0 0;
+    border: 1px solid #7D6DFF;
     color: #fff;
 }
 .copyright p {
@@ -179,7 +179,7 @@
   margin-left: -15px;
 }
 .footer__menu li a:hover {
-  color: #1a22b8;
+  color: #7D6DFF;
 }
 .footer--6 .ft__widget.contact__us {
   left: 204px;

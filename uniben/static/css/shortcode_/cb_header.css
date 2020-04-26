@@ -50,7 +50,7 @@
 }
 
 .main__menu > li:hover > a{
-  color: #1a22b8;
+  color: #7D6DFF;
 }
 .sidebar--content .htc__news__inner {
   margin: 0 auto;
@@ -84,7 +84,7 @@
   background: #fff;
 }
 .sidebar__menu li.active a{
-    color: #1a22b8;
+    color: #7D6DFF;
 }
 .sidebar__menu li a {
   display: block;
@@ -207,7 +207,7 @@
 }
 .main__menu li.drop ul.dropdown li:hover > a {
   background: #fafafa none repeat scroll 0 0;
-  color: #1a22b8;
+  color: #7D6DFF;
 }
 .scroll-header .main__menu li.drop ul.dropdown {
   top: 100%;
@@ -306,7 +306,7 @@
     cursor: pointer;
 }
 .menu-extra li span:hover {
-    color: #1a22b8;
+    color: #7D6DFF;
 }
 .header--5 .logo {
   text-align: center;
@@ -336,7 +336,7 @@
   margin-left: 40px;
 }
 .select__language > li:hover {
-    color: #1a22b8;
+    color: #7D6DFF;
 }
 .select__language > li + li::before {
   background: #444444 none repeat scroll 0 0;
@@ -374,7 +374,7 @@
     visibility: visible;
 }
 .select__language li.drop--lan .language__option span:hover {
-    color: #1a22b8;
+    color: #7D6DFF;
 }
 
 .sticky__header.scroll-header .select__language li {
@@ -467,7 +467,7 @@
   transition: all 0.3s ease 0s;
 }
 .offsetmenu__close__btn a:hover i{
-  color: #1a22b8;
+  color: #7D6DFF;
 }
 .offset__widget {
   display: flex;
@@ -493,7 +493,7 @@ h4.offset__title {
 }
 
 .offset__single ul li a:hover {
-    color: #1a22b8;
+    color: #7D6DFF;
 }
 .off__contact p {
   color: #303030;
@@ -550,7 +550,7 @@ h4.offset__title {
     width: 100%;
 }
 .sidebar__thumd > li a::before {
-    background: #1a22b8 none repeat scroll 0 0;
+    background: #7D6DFF none repeat scroll 0 0;
     content: "";
     height: 100%;
     opacity: 0;

@@ -128,4 +128,25 @@ AUTH_USER_MODEL = 'uniben.User'
 
 ADMINS = [[('Maro', 'marookegbero@gmail.com')]]
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # Testing
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'postmaster@mg.campusbuy.online'
+EMAIL_HOST_PASSWORD = 'ab86ddd847cfa42d4622d0c782b3ded2-f135b0f1-1421566c'
+EMAIL_USE_TLS = True
+
+DEFAULT_FROM_EMAIL = "CAMPUSBUY.ONLINE no-reply@campusbuy.online"
+
+SERVER_EMAIL = "admin@campusbuy.online"
+
+
+
+
+
+
+
+
+
+
+
+
+

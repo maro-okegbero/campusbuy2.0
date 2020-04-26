@@ -220,13 +220,13 @@ a {
 a:hover,
 a:focus,
 a:active {
-    color: #1a22b8;
+    color: #7D6DFF;
 }
 
 p a:hover,
 p a:focus,
 p a:active {
-    color: #1a22b8;
+    color: #7D6DFF;
 }
 
 h1 a,
@@ -288,7 +288,7 @@ body {
 
 .mark,
 mark {
-    background: #1a22b8 none repeat scroll 0 0;
+    background: #7D6DFF none repeat scroll 0 0;
     color: #ffffff;
 }
 
@@ -298,7 +298,7 @@ mark {
 -------------------------------------*/
 
 .bg__theme {
-    background: #1a22b8;
+    background: #7D6DFF;
 }
 
 .bg__white {
@@ -458,11 +458,11 @@ mark {
 --------------------------------*/
 
 .text--theme {
-    color: #1a22b8;
+    color: #7D6DFF;
 }
 
 .text--blue {
-    color: #1a22b8;
+    color: #7D6DFF;
 }
 
 .text--white {
@@ -656,13 +656,13 @@ select {
 
 input:focus {
     background: transparent;
-    border: 1px solid #1a22b8;
+    border: 1px solid #7D6DFF;
 }
 
 textarea {
     resize: none;
-    background: #1a22b8;
-    border: 1px solid #1a22b8;
+    background: #7D6DFF;
+    border: 1px solid #7D6DFF;
     /* padding: 10px; */
     width: 100%;
     font-size: 14px;
@@ -670,7 +670,7 @@ textarea {
 
 textarea:focus {
     background: transparent;
-    border: 1px solid #1a22b8;
+    border: 1px solid #7D6DFF;
     outline: none;
 }
 
@@ -1209,19 +1209,19 @@ p.error {
 ------------------------------------------*/
 
 *::-moz-selection {
-    background: #1a22b8;
+    background: #7D6DFF;
     color: #fff;
     text-shadow: none;
 }
 
 ::-moz-selection {
-    background: #1a22b8;
+    background: #7D6DFF;
     color: #fff;
     text-shadow: none;
 }
 
 ::selection {
-    background: #1a22b8;
+    background: #7D6DFF;
     color: #fff;
     text-shadow: none;
 }
