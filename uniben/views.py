@@ -83,7 +83,7 @@ def homepage(request, school_name=None):
         categories = Category.objects.all()  # get all the categories
         products = Product.objects.filter(school__alias=school_name).all()[
                    :5] if school_name else Product.objects.all()[:5]
-        print(products.all(), "all Products")
+        # print(products.all(), "all Products")
         if request.method == "GET":
             form = SelectschoolForm(request.GET)
             if form.is_valid():

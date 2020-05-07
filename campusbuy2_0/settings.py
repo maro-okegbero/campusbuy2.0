@@ -24,7 +24,7 @@ SECRET_KEY = 't&uajccae0n7@+_i09^+(hks$o2b#fkfo&fh($=k4w5b*v@@%o'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.4.136', '127.0.0.1']
+ALLOWED_HOSTS = ['192.168.43.103', '127.0.0.1']
 
 # Application definition
 
@@ -138,6 +138,13 @@ DEFAULT_FROM_EMAIL = "CAMPUSBUY.ONLINE no-reply@campusbuy.online"
 
 SERVER_EMAIL = "admin@campusbuy.online"
 
+# CELERY CONFIG
+BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Africa/Lagos'
 
 
 

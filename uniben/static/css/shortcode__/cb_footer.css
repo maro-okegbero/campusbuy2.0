@@ -15,7 +15,7 @@
     display: flex;
 }
 .footer__details p {
-  color: #666666;
+  color: #ffffff;
   font-size: 14px;
   line-height: 26px;
 }
@@ -23,7 +23,7 @@
     margin-bottom: 24px;
 }
 .ft__title {
-    color: #444444;
+    color: #ffffff;
     font-size: 18px;
     font-weight: 500;
     margin-bottom: 30px;
@@ -50,7 +50,7 @@
     height: 40px;
 }
 .footer__inner p {
-    color: #666666;
+    color: #ffffff;
     font-size: 14px;
     line-height: 26px;
 }

@@ -20,7 +20,7 @@
     <!-- All Plugins css -->
     <link rel="stylesheet" href={% static "css/cb_plugins.css" %}>
     <!-- Theme shortcodes/elements style -->
-    <link rel="stylesheet" href={% static "css/shortcode_/shortcodes.css" %}>
+    <link rel="stylesheet" href={% static "css/shortcode__/shortcodes.css" %}>
     <!-- Theme main style -->
     <link rel="stylesheet" href={% static "css/cb_style.css" %}>
     <!-- Responsive css -->
@@ -28,7 +28,7 @@
     <!-- User style -->
     <link rel="stylesheet" href={%static "css/cb_custom_.css" %}>
     <!--  Eroor 404  -->
-    <link rel="stylesheet" href={%static "css/shortcode_/error404.css" %}>
+    <link rel="stylesheet" href={%static "css/shortcode__/error404.css" %}>
 
 <!-- jquery latest version -->
     <script src={%static "cb_js/vendor/jquery-1.12.4.min.js" %}></script>
@@ -81,7 +81,7 @@
                         <div class="col-md-4 col-lg-6 col-6">
                             <div class="logo hd__title" style="font-family: Dosis,sans-serif;" %}>
                                 {% if school_name %}
-                                    <a href={% url 'school_specific' school_name=school_name_for_url%}>CAMPUS<span style="color: #1a22b8;">BUY</span></a>
+                                    <a href={% url 'school_specific' school_name=school_name_for_url%}>CAMPUS<span style="color: #7D6DFF;">BUY</span></a>
                                  {% else %}
                                     <a href={% url 'homepage' %}>CAMPUS<span style="color: #7D6DFF;">BUY</span> </a>
                                  {% endif %}

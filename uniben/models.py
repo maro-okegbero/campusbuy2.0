@@ -80,7 +80,7 @@ from campusbuy2_0 import settings
 
 class School(models.Model):
     name = models.CharField(null=True, blank=True, max_length=200, unique=True)
-    alias = models.CharField(null=True, blank=True, max_length=200, unique=True)
+    alias = models.CharField(null=False, blank=True, max_length=200, unique=True)
     state = models.CharField(blank=True, null=True, max_length=200)
 
     def __str__(self):
