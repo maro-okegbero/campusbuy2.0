@@ -29,6 +29,9 @@
     margin-bottom: 30px;
     text-transform: capitalize;
 }
+.faq_style {
+    color: #ffffff;
+}
 .htc__news__inner {
     position: relative;
 }

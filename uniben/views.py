@@ -215,7 +215,6 @@ def single_product(request, pk, category_name=None, school_name=None):
         return handler404(request, e)
 
 
-# def delete_product(request, pk)
 @login_required(login_url='/login&register')
 def product_edit(request, pk):
     """Handles rendering of the product-edit page"""
@@ -231,7 +230,7 @@ def product_edit(request, pk):
     context = {'form': form,
                'business_name': business_name,
                'pk': pk}
-    return render(request, 'campusbuy2_0/product_edit.html',context)
+    return render(request, 'campusbuy2_0/product_edit.html', context)
 
 
 @login_required(login_url='/login&register')
@@ -240,6 +239,7 @@ def product_delete(request, pk):
     product = Product.objects.get(pk=pk)
     form = PostAdForm(instance=product)
     if request.method == "POST":
+        # TODO: Also delete the product_image on cloudinary
         product.delete()
         return redirect(reverse(merchant_profile))
     context = {'form': form,

@@ -1159,7 +1159,7 @@ blockquote::before {
   margin-right: 40px;
 }
 .sticky__header.scroll-header {
-  position: inherit;
+  position: fixed;
 }
 .header--3 .mean-container a.meanmenu-reveal {
   margin-top: -69px;

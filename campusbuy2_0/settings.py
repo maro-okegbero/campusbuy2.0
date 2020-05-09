@@ -10,7 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+from environs import Env
 import os
+
+import dj_database_url
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,13 +25,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 't&uajccae0n7@+_i09^+(hks$o2b#fkfo&fh($=k4w5b*v@@%o'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.43.103', '127.0.0.1']
-
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com', '192.168.43.103', 'campusbuy.online', 'www.campusbuy.online']
 # Application definition
 
 INSTALLED_APPS = [
@@ -81,8 +86,8 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'campusbuy',
-        'USER': 'maro',
-        'PASSWORD': 'guido van rossum',
+        'USER': 'name',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -106,6 +111,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -128,10 +135,10 @@ AUTH_USER_MODEL = 'uniben.User'
 
 ADMINS = [[('Maro', 'marookegbero@gmail.com')]]
 
-EMAIL_HOST = 'smtp.mailgun.org'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'postmaster@mg.campusbuy.online'
-EMAIL_HOST_PASSWORD = 'ab86ddd847cfa42d4622d0c782b3ded2-f135b0f1-1421566c'
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 
 DEFAULT_FROM_EMAIL = "CAMPUSBUY.ONLINE no-reply@campusbuy.online"

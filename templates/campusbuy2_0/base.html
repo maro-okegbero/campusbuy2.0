@@ -16,19 +16,19 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">-->
 
     <!-- Bootstrap Framework Main Css -->
-    <link rel="stylesheet" href={% static "css/bootstrap.min.css" %}>
+    <link rel="stylesheet" href={% static "cb_css/bootstrap.min.css" %}>
     <!-- All Plugins css -->
-    <link rel="stylesheet" href={% static "css/cb_plugins.css" %}>
+    <link rel="stylesheet" href={% static "cb_css/cb_plugins.css" %}>
     <!-- Theme shortcodes/elements style -->
-    <link rel="stylesheet" href={% static "css/shortcode__/shortcodes.css" %}>
+    <link rel="stylesheet" href={% static "cb_css/shortcode__/shortcodes.css" %}>
     <!-- Theme main style -->
-    <link rel="stylesheet" href={% static "css/cb_style.css" %}>
+    <link rel="stylesheet" href={% static "cb_css/cb_style.css" %}>
     <!-- Responsive css -->
-    <link rel="stylesheet" href={% static "css/cb_responsive.css" %}>
+    <link rel="stylesheet" href={% static "cb_css/cb_responsive.css" %}>
     <!-- User style -->
-    <link rel="stylesheet" href={%static "css/cb_custom_.css" %}>
+    <link rel="stylesheet" href={%static "cb_css/cb_custom_.css" %}>
     <!--  Eroor 404  -->
-    <link rel="stylesheet" href={%static "css/shortcode__/error404.css" %}>
+    <link rel="stylesheet" href={%static "cb_css/shortcode__/error404.css" %}>
 
 <!-- jquery latest version -->
     <script src={%static "cb_js/vendor/jquery-1.12.4.min.js" %}></script>
@@ -182,7 +182,7 @@
                         <div class="col-md-6 col-lg-3 lg-offset-1 col-sm-12 smt-30 xmt-30">
                             <div class="ft__widget">
                                 <h2 class="ft__title">Quick Links</h2>
-                                <ul class="">
+                                <ul class="faq_style">
                                     <li>{% if school_name_for_url %}
                                              <a href={% url 'school_specific_faq' school_name=school_name_for_url%}>FAQ</a>
                                            {% else %}

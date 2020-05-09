@@ -1,0 +1,1 @@
+web: gunicorn campusbuy2_0.wsgi --log-file -
