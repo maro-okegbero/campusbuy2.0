@@ -9,7 +9,7 @@ from campusbuy2_0 import settings
 class PostAdForm(ModelForm):
     class Meta:
         model = Product
-        fields = ['category', 'name', 'price', 'image'
+        fields = ['category', 'name', 'price', 'image',
                   'description']
         labels = {
             'name': forms.TextInput(attrs={'id': 'product_name'}),
