@@ -1,4 +1,5 @@
 {% extends 'campusbuy2_0/base.html' %}
+{% load cloudinary %}
 {% block content %}
 {% load static %}
 {#{% load cloudinary %}#}
@@ -43,7 +44,7 @@
                                 <div class="product__big__images">
                                     <div class="portfolio-full-image tab-content">
                                         <div role="tabpanel" class="tab-pane active" id="img-tab-1">
-                                            <img src="images/product-details/big-img/1.png" alt="full-image">
+                                            <img src="{{ product.image.url }}" alt="full-image">
                                         </div>
                                     </div>
                                 </div>
@@ -111,11 +112,11 @@
                                         <div class="pro__thumb">
                                            {% if school_name %}
                                                 <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=category_name pk=product.pk %}>
-                                                <img alt="product images" src={%static "images/product/1.png" %} >
+                                               {% cloudinary product.image THUMBNAIL %}
                                             </a>
                                             {% else %}
                                                 <a href={% url 'product_detail'  category_name=category_name pk=product.pk %}>
-                                                <img alt="product images" src={%static "images/product/1.png" %} >
+                                               {% cloudinary product.image THUMBNAIL %}
                                             </a>
                                             {% endif %}
                                     </div>
@@ -164,11 +165,11 @@
                                                 <div class="pro__thumb">
                                                     {% if school_name %}
                                                 <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=category_name pk=product.pk %}>
-                                                <img alt="product images" src={%static "images/product/1.png" %} >
+                                                {% cloudinary product.image THUMBNAIL %}
                                             </a>
                                             {% else %}
                                                 <a href={% url 'product_detail'  category_name=category_name pk=product.pk %}>
-                                                <img alt="product images" src={%static "images/product/1.png" %} >
+                                               {% cloudinary category.image THUMBNAIL %}
                                             </a>
                                             {% endif %}
                                                 </div>

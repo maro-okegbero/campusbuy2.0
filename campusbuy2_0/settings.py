@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-
+import cloudinary
 from environs import Env
 import os
 
@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = "t&uajccae0n7@+_i09^+(hks$o2b#fkfo&fh($=k4w5b*v@@%o"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 ROOT_URLCONF = 'campusbuy2_0.urls'
@@ -130,17 +131,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'uniben/static')
 
 AUTH_USER_MODEL = 'uniben.User'
 
 ADMINS = [[('Maro', 'marookegbero@gmail.com')]]
 
-EMAIL_HOST = os.getenv("EMAIL_HOST")
-EMAIL_PORT = os.getenv("EMAIL_PORT")
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'postmaster@mg.campusbuy.online'
+EMAIL_HOST_PASSWORD = 'ab86ddd847cfa42d4622d0c782b3ded2-f135b0f1-1421566c'
 EMAIL_USE_TLS = True
-
 DEFAULT_FROM_EMAIL = "CAMPUSBUY.ONLINE no-reply@campusbuy.online"
 
 SERVER_EMAIL = "admin@campusbuy.online"
@@ -153,14 +155,9 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Africa/Lagos'
 
+cloudinary.config(
+    cloud_name="campusbuy",
+    api_key="766124729178135",
+    api_secret="Pac3Elo7dI32V-MDYyDXYI4q5Qk",
 
-
-
-
-
-
-
-
-
-
-
+)

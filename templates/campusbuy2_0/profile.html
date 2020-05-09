@@ -1,4 +1,5 @@
 {%extends 'campusbuy2_0/base.html' %}
+{% load cloudinary %}
 {% load static %}
 
 {% block content %}
@@ -162,7 +163,7 @@
                                                     <div class="product__inner">
                                                         <div class="pro__thumb">
                                                             <a href={% url 'product_stat' business_name=user.business_name pk=product.pk %}>
-                                                                <img src="images/product/1.png" alt="product images">
+                                                               {% cloudinary product.image THUMBNAIL %}
                                                             </a>
                                                         </div>
                                                     </div>

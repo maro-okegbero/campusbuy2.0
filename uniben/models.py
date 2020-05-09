@@ -1,6 +1,3 @@
-from datetime import datetime, date
-import inspect
-import json
 
 from django.db import models
 from django.utils import timezone
@@ -43,17 +40,22 @@ class Category(models.Model):
     name = models.CharField(max_length=30, null=True, blank=True, unique=True)
     details = models.CharField(max_length=100, default="Default")
 
-    # category_logo = CloudinaryField('category_logo')  # Special Cloudinary image Field
+    image = CloudinaryField('image')  # Special Cloudinary image Field
+
+    date_created = models.DateTimeField(blank=False, default=timezone.now)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ['-date_created']
 
 
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     school = models.ForeignKey(School, on_delete=models.CASCADE, null=True, blank=True)
     merchant = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
-    # image = CloudinaryField('image')  # Special Cloudinary image Field
+    image = CloudinaryField('image')  # Special Cloudinary image Field
 
     name = models.CharField(max_length=70, blank=False, null=False)  # product name
     description = models.TextField(max_length=250)
@@ -77,3 +79,4 @@ class Product(models.Model):
 
     class Meta:
         ordering = ['-published_date']
+

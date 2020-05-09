@@ -1,6 +1,7 @@
  {% extends 'campusbuy2_0/base.html' %}
 {% load static %}
  {% block content %}
+     {% load cloudinary %}
             <!-- Start Bradcaump area -->
             <div class="ht__bradcaump__area"
                 style="background: rgba(0, 0, 0, 0) url({%static 'images/bg/2.jpg' %}) no-repeat scroll center center / cover ;">
@@ -52,11 +53,11 @@
                                         <div class="pro__thumb">
                                            {% if school_name %}
                                                 <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=product.category.name pk=product.pk %}>
-                                                <img src="images/product/1.png" alt="product images">
+                                                {% cloudinary product.image THUMBNAIL %}
                                             </a>
                                             {% else %}
                                                 <a href={% url 'product_detail'  category_name=product.category.name pk=product.pk %}>
-                                                <img src="images/product/1.png" alt="product images">
+                                                 {% cloudinary product.image THUMBNAIL %}
                                             </a>
                                             {% endif %}
                                         </div>
