@@ -85,12 +85,12 @@ def homepage(request, school_name=None):
                    :5] if school_name else Product.objects.all()[:5]
         # print(products.all(), "all Products")
         if request.method == "GET":
-            form = SelectschoolForm(request.GET)
+            form = SchoolSelectForm(request.GET)
             if form.is_valid():
                 form_school_name = form.cleaned_data.get("school")
                 return redirect(reverse('school_specific', args=[form_school_name]))
         else:
-            form = SelectschoolForm()
+            form = SchoolSelectForm()
         context = {'categories': categories,
                    'school_name_for_url': school_name,
                    'products': products,
@@ -106,6 +106,31 @@ def homepage(request, school_name=None):
         return render(request, 'campusbuy2_0/no _support.html', context)
 
 
+def subcategories(request, category_name, school_name=None):
+    """
+    This view displays all the subcategories in a given category of a named school
+
+    :param request:
+    :param category_name:
+    :param school_name:
+    """
+    try:
+        category = Category.objects.get(name=category_name)
+        my_list = category.subcategory_set.filter(
+            school__alias=school_name) if school_name else category.subcategory_set.all()
+        product_list = paginator(my_list, 10, request)
+        context = {'category': category_name,
+                   'products': product_list,
+                   'school_name': school_name,
+                   'school_name_for_url': school_name,
+                   'value': datetime.now()
+                   }
+        return render(request, 'campusbuy2_0/subcategories.html', context)
+
+    except SubCategory.DoesNotExist as e:
+        return handler404(request, e)
+
+
 def view_products(request, category_name, school_name=None):
     """
     This view displays all the products in a given category of a named school
@@ -115,7 +140,7 @@ def view_products(request, category_name, school_name=None):
     :param school_name:
     """
     try:
-        category = Category.objects.get(name=category_name)
+        category = SubCategory.objects.get(name=category_name)
         my_list = category.product_set.filter(
             school__alias=school_name) if school_name else category.product_set.all()
         product_list = paginator(my_list, 4, request)

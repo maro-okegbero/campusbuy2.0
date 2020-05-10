@@ -7,4 +7,5 @@ admin.site.register(User, UserAdmin)
 admin.site.register(School)
 admin.site.register(Category)
 admin.site.register(Product)
+admin.site.register(SubCategory)
 

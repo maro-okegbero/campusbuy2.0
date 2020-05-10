@@ -20,10 +20,10 @@ from django.contrib.auth import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('uniben.urls')),
+    path('', include('app.urls')),
 ]
 
-handler404 = 'uniben.views.handler404'
+handler404 = 'app.views.handler404'
 
 
 # if settings.DEBUG:

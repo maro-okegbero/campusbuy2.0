@@ -10,26 +10,27 @@ class PostAdForm(ModelForm):
     class Meta:
         model = Product
         fields = ['category', 'name', 'price', 'image',
-                  'description']
+                  'description', 'dropoff_point']
         labels = {
             'name': forms.TextInput(attrs={'id': 'product_name'}),
             'category': forms.Select(attrs={'id': 'product_category'}),
             'price': forms.NumberInput(attrs={'id': 'product_price'}),
             'description': forms.TextInput(attrs={'id': 'product_description'}),
             'image': forms.TextInput(attrs={'id': 'product_image'}),
+            'dropoff_point': forms.TextInput(attrs={'id': 'dropoff_point'}),
         }
 
 
 class RegisterMerchantForm(UserCreationForm):
-    first_name = forms.CharField(max_length=30, required=False, label="FirstName",
+    first_name = forms.CharField(max_length=30, required=True, label="FirstName",
                                  widget=forms.TextInput(attrs={'id': 'first_name'}))
-    last_name = forms.CharField(max_length=30, required=False, label="LastName",
+    last_name = forms.CharField(max_length=30, required=True, label="LastName",
                                 widget=forms.TextInput(attrs={'id': 'last_name'}))
-    email = forms.EmailField(max_length=254, label="Email", widget=forms.EmailInput(attrs={'id': 'email'}))
+    email = forms.EmailField(max_length=254, required=True, label="Email", widget=forms.EmailInput(attrs={'id': 'email'}))
 
-    business_name = forms.CharField(max_length=30, required=False, label="BusinessName",
+    business_name = forms.CharField(max_length=30, required=True, label="BusinessName",
                                     widget=forms.TextInput(attrs={'id': 'business_name'}))
-    address = forms.CharField(max_length=30, required=False, label="Address",
+    address = forms.CharField(max_length=30, required=True, label="Address",
                               widget=forms.TextInput(attrs={'id': 'address'}))
     username = forms.CharField(max_length=30, required=True, label="Username",
                                widget=forms.TextInput(attrs={'id': 'username'}))
@@ -58,7 +59,7 @@ class LoginMerchantForm(forms.Form):
         attrs={'class': "form--input eye--password", 'id': "login-password"}), label="Password")
 
 
-class SelectschoolForm(forms.Form):
+class SchoolSelectForm(forms.Form):
     school = forms.ModelChoiceField(empty_label="Select School", queryset=School.objects.all())
 
 

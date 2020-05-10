@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'uniben',
+    'app',
     'cloudinary',
     'phonenumber_field',
 
@@ -87,8 +87,8 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'campusbuy',
-        'USER': 'name',
-        'PASSWORD': '',
+        'USER': 'maro',
+        'PASSWORD': 'guido van rossum',
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -132,9 +132,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-STATIC_ROOT = os.path.join(BASE_DIR, 'uniben/static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'app/static')
 
-AUTH_USER_MODEL = 'uniben.User'
+AUTH_USER_MODEL = 'app.User'
 
 ADMINS = [[('Maro', 'marookegbero@gmail.com')]]
 

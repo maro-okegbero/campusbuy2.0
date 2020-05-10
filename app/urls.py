@@ -1,5 +1,5 @@
 from django.urls import path, include
-from uniben.views import *
+from app.views import *
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
