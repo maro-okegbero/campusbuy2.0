@@ -116,7 +116,7 @@ def subcategories(request, category_name, school_name=None):
     :param school_name:
     """
     try:
-        category = Category.objects.get(name=category_name)
+        category = SubCategory.objects.get(name=category_name)
         my_list = category.subcategory_set.filter(
             school__alias=school_name) if school_name else category.subcategory_set.all()
         product_list = paginator(my_list, 10, request)

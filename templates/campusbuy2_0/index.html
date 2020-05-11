@@ -123,11 +123,11 @@
                                     <div class="product__inner">
                                         <div class="pro__thumb">
                                             {% if school_name_for_url %}
-                                                <a href={% url 'view_products_school_specific' category_name=category.name school_name=school_name_for_url %} >
+                                                <a href={% url 'view_product_subcat_school_specific' category_name=category.name school_name=school_name_for_url %} >
                                                  {% cloudinary category.image THUMBNAIL %}
                                                 </a>
                                             {% else %}
-                                                <a href={% url 'view_products' category_name=category.name  %}>
+                                                <a href={% url 'view_product_subcat' category_name=category.name  %}>
                                                  {% cloudinary category.image THUMBNAIL %}
                                                 </a>
                                             {% endif %}
@@ -135,9 +135,9 @@
                                     </div>
                                     <div class="product__details text-center">
                                         {% if school_name_for_url %}
-                                            <h2><a href={% url 'view_products_school_specific' category_name=category.name school_name=school_name_for_url %} >{{ category.name }}</a></h2>
+                                            <h2><a href={% url 'view_product_subcat_school_specific' category_name=category.name school_name=school_name_for_url %} >{{ category.name }}</a></h2>
                                         {% else %}
-                                            <h2><a href={% url 'view_products' category_name=category.name  %} >{{ category.name }}</a></h2>
+                                            <h2><a href={% url 'view_product_subcat' category_name=category.name  %} >{{ category.name }}</a></h2>
                                         {% endif %}
                                         <ul class="product__price">
                                             <li>{{ category.details }}.</li>
