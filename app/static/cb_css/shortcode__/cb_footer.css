@@ -11,6 +11,7 @@
     height: 60px;
     justify-content: space-between;
 }
+
 .footer__menu {
     display: flex;
 }
@@ -29,7 +30,7 @@
     margin-bottom: 30px;
     text-transform: capitalize;
 }
-.faq_style {
+.faq_style li > a{
     color: #ffffff;
 }
 .htc__news__inner {
@@ -83,11 +84,11 @@
     color: #fff;
 }
 .copyright p {
-    color: #666666;
+    color: #ffffff;
     font-size: 14px;
 }
 .footer__menu li a {
-    color: #666666;
+    color: #ffffff;
     font-size: 13px;
     text-transform: capitalize;
     transition: all 0.3s ease 0s;

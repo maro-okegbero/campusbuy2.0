@@ -3,6 +3,7 @@ Author: Maro Okegbero
 Date : 15th of February 2020
 """
 from datetime import datetime
+from pprint import pprint
 
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -197,8 +198,9 @@ def post_products(request):
             post = form.save()
             post.published_date = timezone.now()
             post.merchant = request.user
-            post.school = request.user.school
-            school = request.user.school
+            pprint(dir(post))
+            print("Hellllllllllllllllllllllllllloooooooooooooooooooooooooooooooooooooooooooooooojjjjjjjjjjjjjjjjjkkkkkkkkkkkn")
+            pprint(request.user)
             post.save()
             return redirect(reverse('view_products_school_specific', kwargs={'school_name': request.user.school.alias,
                                                                              'category_name': post.category.name}))

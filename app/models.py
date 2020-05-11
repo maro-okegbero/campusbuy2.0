@@ -7,7 +7,6 @@ from django.contrib.postgres.fields import ArrayField
 
 
 class School(models.Model):
-
     name = models.CharField(null=True, blank=True, max_length=200, unique=True)
     alias = models.CharField(null=False, blank=True, max_length=200, unique=True)
     state = models.CharField(blank=True, null=True, max_length=200)
@@ -19,7 +18,7 @@ class School(models.Model):
 
 
 class User(AbstractUser):
-    """ The User model for both merchants and regular uses"""
+    """ The User model for both merchants and regular users"""
     first_name = models.CharField(null=True, blank=True, max_length=200)
     last_name = models.CharField(null=True, blank=True, max_length=200)
     phone_number = models.CharField(max_length=12, blank=True, null=True, unique=True)
@@ -68,11 +67,48 @@ class SubCategory(models.Model):
 
 
 class Product(models.Model):
+    HALL4 = 'HALL4'
+    HALL3 = 'HALL3'
+    HALL2 = 'HALL2'
+    HALL1 = 'HALL1'
+    MAIN_GATE = 'Main Gate'
+    GREEN_PARK = 'Green Park'
+    GTBANK = 'GTBANK'
+    NAAS_GARDEN = 'NAAS Garden'
+    PHYSICAL_SCIENCE_COMPLEX = 'Physical Science Complex'
+    MEDICAL_SCIENCE_COMPLEX = 'Med Complex'
+    BASEMENT = 'Basement'
+    JUNE12 = 'JUNE12'
+    ENGINEERING = 'Engineering Park'
+
+    SCHOOL_HOT_SPOTS = [
+        ('Uniben', (
+            (HALL4, 'Hall4'),
+            (HALL3, 'Hall3'),
+            (HALL2, 'Hall2'),
+            (HALL1, 'Hall1'),
+            (MAIN_GATE, 'Main gate'),
+            (GREEN_PARK, 'Green Park'),
+            (GTBANK, 'GTBank Wifi Spot'),
+            (NAAS_GARDEN, 'Naas Garden'),
+            (PHYSICAL_SCIENCE_COMPLEX, 'Physical Science Complex'),
+            (MEDICAL_SCIENCE_COMPLEX, 'Medical Science Complex'),
+            (BASEMENT, 'Basement'),
+            (JUNE12, 'June12'),
+            (ENGINEERING, 'Engineering Park')
+        )
+         ),
+        # ('Video', (
+        #     ('vhs', 'VHS Tape'),
+        #     ('dvd', 'DVD'),
+        # )
+        #  ),
+    ]
     category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     school = models.ForeignKey(School, on_delete=models.CASCADE, null=True, blank=True)
-    merchant = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=False)
+    merchant = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     image = CloudinaryField('image')  # Special Cloudinary image Field
-    dropoff_point = models.CharField(max_length=100, null=True, blank=True)
+    dropoff_point = models.TextField(max_length=250, choices=SCHOOL_HOT_SPOTS, default=MAIN_GATE, blank=True)
     name = models.CharField(max_length=70, blank=False, null=False)  # product name
     description = models.TextField(max_length=250)
     price = models.FloatField()
@@ -95,3 +131,5 @@ class Product(models.Model):
 
     class Meta:
         ordering = ['-published_date']
+
+

@@ -7,17 +7,20 @@ from campusbuy2_0 import settings
 
 
 class PostAdForm(ModelForm):
+    school = forms.ModelChoiceField(empty_label="Select School", queryset=School.objects.all(),
+                                    widget=forms.Select(attrs={'class': 'business__location'}),)
+
     class Meta:
         model = Product
         fields = ['category', 'name', 'price', 'image',
-                  'description', 'dropoff_point']
+                  'description', 'dropoff_point', 'school']
         labels = {
             'name': forms.TextInput(attrs={'id': 'product_name'}),
             'category': forms.Select(attrs={'id': 'product_category'}),
             'price': forms.NumberInput(attrs={'id': 'product_price'}),
             'description': forms.TextInput(attrs={'id': 'product_description'}),
             'image': forms.TextInput(attrs={'id': 'product_image'}),
-            'dropoff_point': forms.TextInput(attrs={'id': 'dropoff_point'}),
+            'dropoff_point': forms.Select(attrs={'id': 'dropoff_point'}),
         }
 
 
@@ -26,7 +29,8 @@ class RegisterMerchantForm(UserCreationForm):
                                  widget=forms.TextInput(attrs={'id': 'first_name'}))
     last_name = forms.CharField(max_length=30, required=True, label="LastName",
                                 widget=forms.TextInput(attrs={'id': 'last_name'}))
-    email = forms.EmailField(max_length=254, required=True, label="Email", widget=forms.EmailInput(attrs={'id': 'email'}))
+    email = forms.EmailField(max_length=254, required=True, label="Email",
+                             widget=forms.EmailInput(attrs={'id': 'email'}))
 
     business_name = forms.CharField(max_length=30, required=True, label="BusinessName",
                                     widget=forms.TextInput(attrs={'id': 'business_name'}))
@@ -64,7 +68,6 @@ class SchoolSelectForm(forms.Form):
 
 
 class MerchantPersonalInformationForm(forms.Form):
-
     first_name = forms.CharField(max_length=30, required=False,
                                  widget=forms.TextInput(attrs={'class': "form--input", "id": "first-name"}),
                                  label="First Name")
@@ -90,7 +93,6 @@ class MerchantBusinessDetailsForm(forms.Form):
 
 
 class MerchantLoginDetailsForm(forms.Form):
-
     username = forms.CharField(max_length=30, required=False,
                                widget=forms.TextInput(attrs={'class': "form--input", "id": "login-email"}),
                                label="Username")
@@ -110,4 +112,3 @@ class MerchantLoginDetailsForm(forms.Form):
 
                                     attrs={'class': "form--input eye--password", "id": "reg-current-password2"}),
                                 label="Password2")
-
