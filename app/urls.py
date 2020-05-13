@@ -50,11 +50,13 @@ urlpatterns = [
 
     path('<school_name>/all_products', view_all_products, name='view_all_products_school_specific'),
 
-    path('<school_name>/<category_name>', subcategories, name='view_product_subcat_school_specific'),
+    path('<school_name>/<category_name>/<subcategory>', view_products, name='view_product_school_specific'),
 
-    path('<category_name>/<subcategory>', view_products, name='view_products'),
+    path('<category_name>/<subcategory>/', view_products, name='view_products'),
 
     path('<category_name>', subcategories, name='view_product_subcat'),
+
+    path('<school_name>/<category_name>', subcategories, name='view_product_subcat_school_specific'),
 
     path('<school_name>/shop/<business_name>', merchant_shop, name='shop_school_specific'),
 ]

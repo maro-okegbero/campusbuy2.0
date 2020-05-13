@@ -11,7 +11,11 @@
 			</div>
 			<h2>&#129301;404 - Page not found</h2>
 			<p>Looks like you tried to access a page that's not available. The Homepage is good place to begin again</p>
-			<a href="{% url 'homepage'%}">Go To Homepage</a>
+			 {% if school_name %}
+                 <a href={% url "school_specific" school_name=school_name_for_url%}>Homepage</a>
+             {% else %}
+                 <a href={% url "homepage" %}>Homepage</a>
+             {% endif %}
 		</div>
 	</div>
 

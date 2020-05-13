@@ -23,11 +23,12 @@
                                         {% if school_name %}
                                             <a href={% url 'view_products_school_specific' category_name=category_name school_name=school_name_for_url %} >Shop</a>
                                         {% else %}
-                                        <a href={% url 'view_products' category_name=category_name%} >Shop</a>
+                                        <a href={% url 'view_products' subcategory=category_name category_name=product.category.category.name%} >Shop</a>
                                         {% endif %}
                                         <span class="brd-separetor">/</span>
                                         <span class="breadcrumb-item active">Product Details</span>
                                     </nav>
+
                                 </div>
                             </div>
                         </div>

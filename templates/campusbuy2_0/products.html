@@ -21,7 +21,16 @@
                                     <a href={% url 'homepage' %}> Home </a>
                                  {% endif %}
                                         <span class="brd-separetor">/</span>
-                                        <span class="breadcrumb-item active">{{ category }} Ads</span>
+                                          <span class="breadcrumb-item active">
+                                               {% if school_name %}
+                                                    <a href={% url 'view_product_subcat_school_specific' school_name_for_url parent_category %} {{ parent_category }}>{{ parent_category }}</a>
+                                              {% else %}
+                                                    <a href={% url 'view_product_subcat' parent_category %}> {{ parent_category }}</a>
+                                              {% endif %}
+                                          </span>
+
+                                          <span class="brd-separetor">/</span>
+                                        <span class="breadcrumb-item active">{{ category }}</span>
                                     </nav>
                                 </div>
                             </div>

@@ -14,6 +14,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.db.models import Q
+from django.core.mail import send_mail
 from django.core.exceptions import ObjectDoesNotExist
 
 from django.http import JsonResponse
@@ -115,37 +116,39 @@ def subcategories(request, category_name, school_name=None):
     :param category_name:
     :param school_name:
     """
+    print(category_name, "==============================ghutit")
     try:
-        category = SubCategory.objects.get(name=category_name)
-        my_list = category.subcategory_set.filter(
-            school__alias=school_name) if school_name else category.subcategory_set.all()
-        product_list = paginator(my_list, 10, request)
+        category = Category.objects.get(name=category_name)
+        subcategory_list = category.subcategory_set.all()
         context = {'category': category_name,
-                   'products': product_list,
+                   'subcategories': subcategory_list,
                    'school_name': school_name,
                    'school_name_for_url': school_name,
                    'value': datetime.now()
                    }
         return render(request, 'campusbuy2_0/subcategories.html', context)
 
-    except SubCategory.DoesNotExist as e:
+    except Category.DoesNotExist as e:
         return handler404(request, e)
 
 
-def view_products(request, category_name, school_name=None):
+def view_products(request, category_name,subcategory, school_name=None):
     """
     This view displays all the products in a given category of a named school
 
     :param request:
-    :param category_name:
+    :param subcategory:
     :param school_name:
     """
+
     try:
-        category = SubCategory.objects.get(name=category_name)
+
+        category = SubCategory.objects.get(name=subcategory)
         my_list = category.product_set.filter(
             school__alias=school_name) if school_name else category.product_set.all()
         product_list = paginator(my_list, 4, request)
-        context = {'category': category_name,
+        context = {'category': subcategory,
+                   'parent_category': category_name,
                    'products': product_list,
                    'school_name': school_name,
                    'school_name_for_url': school_name,
@@ -153,7 +156,8 @@ def view_products(request, category_name, school_name=None):
                    }
         return render(request, 'campusbuy2_0/products.html', context)
 
-    except Category.DoesNotExist as e:
+    except SubCategory.DoesNotExist as e:
+        print(subcategory, "SUBCATEGORY ====================================")
         return handler404(request, e)
 
 
@@ -372,6 +376,9 @@ def login_register(request):
 
             raw_password = registration_form.cleaned_data.get('password1')
 
+            send_mail("Welcome to the CampusBuy Family",
+                      f"Hi {registration_form.cleaned_data.get('first_name')}, you've taken the first step in making your business grow exponentially. Well done",
+                      "welcome@campusbuy.online", [f'{registration_form.cleaned_data.get("email")}'])
             merchant = authenticate(username=username, password=raw_password)
 
             login(request, merchant)

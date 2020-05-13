@@ -1,10 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'campusbuy2_0/base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block content %}
+ <div class="ht__bradcaump__area"
+                style="background: rgba(0, 0, 0, 0) url({% static "images/bg/2.jpg" %}) no-repeat scroll center center / cover ;">
+                <div class="ht__bradcaump__wrap">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="bradcaump__inner text-center">
+                                    <h2 class="bradcaump-title">{{ category }}</h2>
+                                    <nav class="bradcaump-inner">
+                                        {% if school_name %}
+                                    <a href={% url 'school_specific' school_name=school_name_for_url%}>Home</a>
+                                 {% else %}
+                                    <a href={% url 'homepage' %}> Home </a>
+                                 {% endif %}
+                                        <span class="brd-separetor">/</span>
+                                        <span class="breadcrumb-item active">{{ category }} </span>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Bradcaump area -->
+
+     <section class="htc__product__area shop__page ptb--130 ptb--210 bg__white">
+                <div class="container">
+                    <div class="htc__product__container">
+                        <div class="row subcat_list">
+                            <ul>
+                            {% for subcategory in subcategories %}
+                                {% if school_name %}
+                                <li> <a href="{% url 'view_product_school_specific' school_name_for_url subcategory.category.name subcategory.name %}"> {{ subcategory.name }}</a></li>
+                                {% else %}
+                                <li> <a href="{% url 'view_products' subcategory.category.name subcategory.name %}"> {{ subcategory.name }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+     </section>
+{% endblock %}
