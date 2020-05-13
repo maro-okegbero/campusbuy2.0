@@ -132,13 +132,14 @@ def subcategories(request, category_name, school_name=None):
         return handler404(request, e)
 
 
-def view_products(request, category_name,subcategory, school_name=None):
+def view_products(request, category_name, subcategory, school_name=None):
     """
     This view displays all the products in a given category of a named school
 
     :param request:
     :param subcategory:
     :param school_name:
+    :param category_name:
     """
 
     try:
@@ -203,11 +204,12 @@ def post_products(request):
             post.published_date = timezone.now()
             post.merchant = request.user
             pprint(dir(post))
-            print("Hellllllllllllllllllllllllllloooooooooooooooooooooooooooooooooooooooooooooooojjjjjjjjjjjjjjjjjkkkkkkkkkkkn")
             pprint(request.user)
             post.save()
-            return redirect(reverse('view_products_school_specific', kwargs={'school_name': request.user.school.alias,
-                                                                             'category_name': post.category.name}))
+            arguments = {'school_name': request.user.school.alias,
+                         'category_name': post.category.category.name,
+                         'subcategory': post.category.name}
+            return redirect(reverse('view_product_school_specific', kwargs=arguments))
 
     else:
 
@@ -215,7 +217,7 @@ def post_products(request):
     return render(request, 'campusbuy2_0/new_product.html', {'form': form})
 
 
-def single_product(request, pk, category_name=None, school_name=None):
+def single_product(request, pk, category_name=None, subcategory=None, school_name=None):
     """
     This view handles the rendering of just a product
     """
@@ -224,7 +226,6 @@ def single_product(request, pk, category_name=None, school_name=None):
         product.views += 1
         product.save()
         name = product.name
-        category_name = product.category.name
         merchant = product.merchant
         business_name = product.merchant.business_name
         similar_products = Product.objects.filter(Q(category=product.category.pk)
@@ -234,6 +235,7 @@ def single_product(request, pk, category_name=None, school_name=None):
                                                                                               'description')[:5]
         context = {'product': product,
                    'category_name': category_name,
+                   'subcategory': subcategory,
                    'school_name': school_name,
                    'school_name_for_url': school_name,
                    'business_name': business_name,
@@ -243,6 +245,7 @@ def single_product(request, pk, category_name=None, school_name=None):
                    }
         return render(request, 'campusbuy2_0/product_detail.html', context)
     except Exception as e:
+        print(e, "=========EXCEPTION======")
         return handler404(request, e)
 
 
