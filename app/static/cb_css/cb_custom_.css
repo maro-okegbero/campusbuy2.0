@@ -161,6 +161,7 @@ label{
   transition: font-size 150ms ease-out, -webkit-transform 150ms ease-out;
   transition: transform 150ms ease-out, font-size 150ms ease-out;
   transition: transform 150ms ease-out, font-size 150ms ease-out, -webkit-transform 150ms ease-out;
+  font-weight: bold;
 }
 .focused .form--label {
   -webkit-transform: translateY(-80%);
