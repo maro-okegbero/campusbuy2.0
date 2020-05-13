@@ -174,11 +174,11 @@
                                         <div class="product__inner">
                                             <div class="pro__thumb">
                                                 {% if school_name %}
-                                                <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=product.category.name pk=product.pk %}>
-                                                 {% cloudinary product.image THUMBNAIL %}
+                                                <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=product.category.category.name subcategory=product.category.name pk=product.pk %}>
+                                                {% cloudinary product.image THUMBNAIL %}
                                             </a>
                                             {% else %}
-                                                <a href={% url 'product_detail'  category_name=product.category.name pk=product.pk %}>
+                                                <a href={% url 'product_detail'   category_name=product.category.category.name subcategory=product.category.name pk=product.pk %}>
                                                 {% cloudinary product.image THUMBNAIL %}
                                             </a>
                                             {% endif %}
@@ -186,10 +186,10 @@
                                         </div>
                                         <div class="product__details">
                                             <h2>
-                                                  {% if school_name %}
-                                                <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=product.category.name pk=product.pk %}>{{ product.name }}</a>
+                                                   {% if school_name %}
+                                                <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=product.category.category.name subcategory=product.category.name pk=product.pk %}>{{ product.name }}</a>
                                             {% else %}
-                                                <a href={% url 'product_detail' category_name=product.category.name pk=product.pk %}>{{ product.name }}</a>
+                                                <a href={% url 'product_detail'   category_name=product.category.category.name subcategory=product.category.name pk=product.pk %}>{{ product.name }}</a>
                                             {% endif %}
 
                                             </h2>
