@@ -64,7 +64,7 @@ class LoginMerchantForm(forms.Form):
 
 
 class SchoolSelectForm(forms.Form):
-    school = forms.ModelChoiceField(empty_label="Select School", queryset=School.objects.all())
+    school = forms.ModelChoiceField(required=False, empty_label="Select School", queryset=School.objects.all())
 
 
 class MerchantPersonalInformationForm(forms.Form):
