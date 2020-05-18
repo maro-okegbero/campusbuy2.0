@@ -1,5 +1,6 @@
 {%extends 'campusbuy2_0/base.html' %}
 {% load cloudinary %}
+{% load humanize %}
 {% load static %}
 
 {% block notification %}
@@ -22,10 +23,11 @@
                             <div class="single-checkout-box select-option mt--20">
                                   <form action="#" method="GET" enctype="multipart/form-data">
                                     {{ form.as_p }}
-{#                                <label>#}
+
+                                      {#                                <label>#}
 {#                                    <select>#}
 {#                                        <option>Select Your Location</option>#}
-{#                                        <a href={% url "school_specific" school_name="app"%}>UNIBEN</a>#}
+{#                                        <a href={% url "school_specific" school_name="Uniben"%}>UNIBEN</a>#}
 {#                                        <option href={% url "school_specific" school_name="unilag"%}>UNILAG</option>#}
 {#                                        <option href={% url "school_specific" school_name="unical"%}>UNICAL</option>#}
 {#                                        <option href={% url "school_specific" school_name="uniport"%}>UNIPORT</option>#}
@@ -79,8 +81,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="section__title section__title--2 text-center">
+                                    {%if user.is_authenticated %}
+                                    <h2 class="title__line">View Your <span class="text--theme">Profile</span></h2>
+                                    {%else%}
                                     <h2 class="title__line">Become A <span class="text--theme">Merchant</span> on
                                         CampusBuy</h2>
+                                    {%endif%}
                                     <p>By connecting BUYERS to SELLERS, we provide you the opportunity to showcase your
                                         products before potential
                                         customers. You can visit our {% if school_name_for_url %}
@@ -96,7 +102,15 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="htc__loadmore__btn">
+                                    {% if user.is_authenticated %}
+
+                                    <a href={% url 'profile' %}>View Profile</a>
+
+                                    {% else %}
+
                                     <a href={% url 'profile' %}>Become A Merchant</a>
+
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -194,7 +208,7 @@
 
                                             </h2>
                                             <ul class="product__price">
-                                                <li class="new__price">&#x20A6;{{ product.price }}</li>
+                                                <li class="new__price">&#x20A6;{{ product.price| intcomma }}</li>
                                             </ul>
                                             <p class="product__price">{{product.published_date|timesince}} ago</p>
                                         </div>

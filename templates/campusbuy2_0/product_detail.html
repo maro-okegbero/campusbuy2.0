@@ -1,5 +1,6 @@
 {% extends 'campusbuy2_0/base.html' %}
 {% load cloudinary %}
+{% load humanize %}
 {% block content %}
 {% load static %}
 {#{% load cloudinary %}#}
@@ -75,10 +76,13 @@
                                     <p>{{ product.description }}</p>
                                 </div>
                                 <ul class="pro__dtl__prize">
-                                    <li>&#x20A6;{{ product.price }}</li>
+                                    <li>&#x20A6;{{ product.price|intcomma }}</li>
                                 </ul>
                                 <div class="product-action-wrap">
                                     <div class="prodict-statas"><span>Location :</span> {{ product.merchant.address }}</div>
+                                </div>
+                                <div class="product-action-wrap">
+                                    <div class="prodict-statas"><span>Preferred Meetup Location :</span> {{ product.dropoff_point }}</div>
                                 </div>
                                 <ul class="pro__dtl__btn">
                                     <li class="buy__now__btn"><a href="tel:{{ product.merchant.phone_number }}">call now</a></li>
@@ -130,7 +134,7 @@
                                             {% endif %}
                                         </h2>
                                         <ul class="product__price">
-                                            <li class="new__price">&#x20A6;{{ product.price }}</li>
+                                            <li class="new__price">&#x20A6;{{ product.price | intcomma }}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -183,7 +187,7 @@
                                             {% endif %}
                                                 </h2>
                                                 <ul class="product__price">
-                                                    <li class="new__price">&#x20A6;{{ product.price }}</li>
+                                                    <li class="new__price">&#x20A6;{{ product.price | intcomma }}</li>
                                                 </ul>
                                             </div>
                                         </div>
