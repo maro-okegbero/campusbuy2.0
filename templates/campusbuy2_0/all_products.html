@@ -44,26 +44,33 @@
                             </div>
                         </div>
                         <!-- End Product MEnu -->
-                        {% for product in all_products %}
+
                         <div class="row product__list">
+                        {% for product in all_products %}
                             <!-- Start Single Product -->
-                            <div class="col-md-4 single__pro col-lg-3 {{ product.category }} col-sm-6">
+                            <div class="col-md-4 single__pro col-lg-3 cat--1 col-sm-6 {{ product.category.category.name }}">
                                 <div class="product foo">
                                     <div class="product__inner">
                                         <div class="pro__thumb">
-                                           {% if school_name %}
-                                                <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=product.category.name pk=product.pk %}>
+                                          {% if school_name %}
+                                                <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=product.category.category.name subcategory=product.category.name pk=product.pk %}>
                                                 {% cloudinary product.image THUMBNAIL %}
                                             </a>
                                             {% else %}
-                                                <a href={% url 'product_detail'  category_name=product.category.name pk=product.pk %}>
-                                                 {% cloudinary product.image THUMBNAIL %}
+                                                <a href={% url 'product_detail'   category_name=product.category.category.name subcategory=product.category.name pk=product.pk %}>
+                                                {% cloudinary product.image THUMBNAIL %}
                                             </a>
                                             {% endif %}
                                         </div>
                                     </div>
                                     <div class="product__details">
-                                        <h2><a href={% url "product_detail" pk=product.pk category_name=product.category.name %}> {{ product.name }}</a></h2>
+                                        <h2>
+                                            {% if school_name %}
+                                                <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=product.category.category.name subcategory=product.category.name pk=product.pk %}>{{ product.name }}</a>
+                                            {% else %}
+                                                <a href={% url 'product_detail'   category_name=product.category.category.name subcategory=product.category.name pk=product.pk %}>{{ product.name }}</a>
+                                            {% endif %}
+                                        </h2>
                                         <ul class="product__price">
 
                                             <li class="new__price">&#x20A6;{{ product.price }}</li>
@@ -72,9 +79,9 @@
                                 </div>
                             </div>
                             <!-- End Single Product -->
-
+                {% endfor %}
                         </div>
-                        {% endfor %}
+
                         <!-- Start Load More BTn 
             <div class="row mt--60">
                 <div class="col-md-12">
@@ -85,7 +92,8 @@
             </div>
           <!- End Load More BTn -->
                     </div>
-                </div>
+                    </div>
+
             </section>
             <!-- End Our Product Area -->
 
