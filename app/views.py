@@ -394,8 +394,14 @@ def login_register(request):
             password = request.POST.get("password", "")
 
             if ".com" in username:
-                user = User.objects.get(email=username)
-                username = user.username
+                try:
+                    user = User.objects.get(email=username)  # try to get the user from the email
+                    username = user.username
+                except User.DoesNotExist:
+                    context = {'error': "The email is not connected to any account",
+                               'login_form': login_form,
+                               'registration_form': registration_form}
+                    return render(request, 'campusbuy2_0/login_register.html', context)
 
             user = authenticate(request, username=username, password=password)
             if user is not None:

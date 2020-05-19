@@ -186,6 +186,11 @@ label{
   right: 0;
   cursor: pointer;
 }
+ .errorlist li{
+    padding-left: 89px;
+    color: #dc3545;
+}
+
 .list-group-item.active{
   background-color: #7D6DFF;
   border-color: #7D6DFF;
