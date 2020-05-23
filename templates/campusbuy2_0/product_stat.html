@@ -1,7 +1,7 @@
 {%extends 'campusbuy2_0/base.html' %}
 {% load static %}
 {%block content %}
-
+{% load humanize %}
 
     <div class="ht__bradcaump__area"
                     style="background: rgba(0, 0, 0, 0) url({% static 'images/bg/2.jpg' %}}) no-repeat scroll center center / cover ;">
@@ -50,7 +50,7 @@
                                         <p>{{ product.description }} </p>
                                     </div>
                                     <ul class="pro__dtl__prize">
-                                        <li>&#x20A6;{{ product.price }}</li>
+                                        <li>&#x20A6;{{ product.price | intcomma }}</li>
                                     </ul>
                                     <div class="product-action-wrap">
                                         <div class="prodict-statas"><span>Location : {{ product.merchant.address }}</span></div>

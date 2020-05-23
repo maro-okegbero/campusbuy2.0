@@ -58,42 +58,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="htc__product__container">
-                        <div class="row product__list">
 
-                            {% for product in products %}
-                            <!-- Start Single Product -->
-                            <div class="col-md-4 single__pro col-lg-3 col-sm-6">
-                                <div class="product foo">
-                                    <div class="product__inner">
-                                        <div class="pro__thumb">
-                                            {% if school_name %}
-                                                <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=product.category.category.name subcategory=product.category.name pk=product.pk %}>
-                                                {% cloudinary product.image THUMBNAIL %}
-                                            </a>
-                                            {% else %}
-                                                <a href={% url 'product_detail'   category_name=product.category.category.name subcategory=product.category.name pk=product.pk %}>
-                                                {% cloudinary product.image THUMBNAIL %}
-                                            </a>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                    <div class="product__details">
-                                        <h2>
-                                               {% if school_name %}
-                                                <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=product.category.category.name subcategory=product.category.name pk=product.pk %}>{{ product.name }}</a>
-                                            {% else %}
-                                                <a href={% url 'product_detail'   category_name=product.category.category.name subcategory=product.category.name pk=product.pk %}>{{ product.name }}</a>
-                                            {% endif %}
-                                        </h2>
-                                        <ul class="product__price">
-                                            <li class="new__price">&#x20A6;{{ product.price}}</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            {% endfor %}
+                    <div id="product-list" class="htc__product__container">
+                        <div  class="row product__list">
 
+                            {% include 'campusbuy2_0/shop_ajax.html' %}
                         <!--End no products founds-->
 
                         </div>
@@ -156,3 +125,29 @@
 
 {% endblock %}
 
+{%block domready%}
+
+var page = 1;
+
+    var block_request = false;
+
+    var empty_page = false;
+
+    $(window).scroll(function(){
+        var margin = $(document).height() - $(window).height() - 1100;
+        if ($(window).scrollTop() > margin && empty_page == false && block_request == false){
+            block_request == true;
+            page += 1;
+            $.get('?page=' + page, function(data){
+                if(data == ''){
+                    empty_page = true;
+                }
+                else{
+                    block_request  = false;
+                    $('#product-list').append(data);
+                }
+            });
+        }
+    });
+
+{%endblock%}

@@ -1,7 +1,6 @@
- {% extends 'campusbuy2_0/base.html' %}
+{% extends 'campusbuy2_0/base.html' %}
 {% load static %}
- {% block content %}
-     {% load cloudinary %}
+{% block content %}
             <!-- Start Bradcaump area -->
             <div class="ht__bradcaump__area"
                 style="background: rgba(0, 0, 0, 0) url({%static 'images/bg/2.jpg' %}) no-repeat scroll center center / cover ;">
@@ -26,7 +25,7 @@
             <!-- Start Our Product Area -->
             <section class="htc__product__area shop__page ptb--130 bg__white">
                 <div class="container">
-                    <div class="htc__product__container">
+                    <div id="product-list" class="htc__product__container">
                         <!-- Start Product MEnu -->
                         <div class="row">
                             <div class="col-md-12">
@@ -45,42 +44,7 @@
                         </div>
                         <!-- End Product MEnu -->
 
-                        <div class="row product__list">
-                        {% for product in all_products %}
-                            <!-- Start Single Product -->
-                            <div class="col-md-4 single__pro col-lg-3 cat--1 col-sm-6 {{ product.category.category.name }}">
-                                <div class="product foo">
-                                    <div class="product__inner">
-                                        <div class="pro__thumb">
-                                          {% if school_name %}
-                                                <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=product.category.category.name subcategory=product.category.name pk=product.pk %}>
-                                                {% cloudinary product.image THUMBNAIL %}
-                                            </a>
-                                            {% else %}
-                                                <a href={% url 'product_detail'   category_name=product.category.category.name subcategory=product.category.name pk=product.pk %}>
-                                                {% cloudinary product.image THUMBNAIL %}
-                                            </a>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                    <div class="product__details">
-                                        <h2>
-                                            {% if school_name %}
-                                                <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=product.category.category.name subcategory=product.category.name pk=product.pk %}>{{ product.name }}</a>
-                                            {% else %}
-                                                <a href={% url 'product_detail'   category_name=product.category.category.name subcategory=product.category.name pk=product.pk %}>{{ product.name }}</a>
-                                            {% endif %}
-                                        </h2>
-                                        <ul class="product__price">
-
-                                            <li class="new__price">&#x20A6;{{ product.price }}</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Single Product -->
-                {% endfor %}
-                        </div>
+                        {% include 'campusbuy2_0/all_products_ajax.html' %}
 
                         <!-- Start Load More BTn 
             <div class="row mt--60">
@@ -92,10 +56,33 @@
             </div>
           <!- End Load More BTn -->
                     </div>
-                    </div>
-
+                </div>
             </section>
             <!-- End Our Product Area -->
 
 
- {% endblock %}
+{% endblock %}
+{% block domready %}
+var page = 1;
+
+    var block_request = false;
+
+    var empty_page = false;
+
+    $(window).scroll(function(){
+        var margin = $(document).height() - $(window).height() - 600;
+        if ($(window).scrollTop() > margin && empty_page == false && block_request == false){
+            block_request == true;
+            page += 1;
+            $.get('?page=' + page, function(data){
+                if(data == ''){
+                    empty_page = true;
+                }
+                else{
+                    block_request  = false;
+                    $('#product-list').append(data);
+                }
+            });
+        }
+    });
+{%endblock%}

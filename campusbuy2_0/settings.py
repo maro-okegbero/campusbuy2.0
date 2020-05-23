@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import cloudinary
 from environs import Env
 import os
-
 import dj_database_url
 from dotenv import load_dotenv
 
@@ -87,8 +86,8 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'campusbuy',
-        'USER': 'maro',
-        'PASSWORD': 'guido van rossum',
+        'USER': 'baggins',
+        'PASSWORD': 'abodunshola',
         'HOST': 'localhost',
         'PORT': '',
     }
