@@ -44,7 +44,7 @@ urlpatterns = [
 
     path('shop/<business_name>', merchant_shop, name='shop'),
 
-    path('<category_name>/<subcategory>/<int:pk>', single_product, name='product_detail'),
+    path('<category_name>/3<subcategory>/<int:pk>', single_product, name='product_detail'),
 
     path('<school_name>/<category_name>/<subcategory>/<int:pk>', single_product, name='product_detail_school_specific'),
 
