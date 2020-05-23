@@ -34,7 +34,6 @@
     <script src={%static "cb_js/vendor/jquery-1.12.4.min.js" %}></script>
             <!-- Main js file that contents all jQuery plugins activation. -->
         <script src={%static "cb_js/vendor/modernizr-2.8.3.min.js" %}></script>
-
     <style>
         .subcat_list ul{
   list-style-type: circle;
@@ -80,7 +79,7 @@
                             <ul class="select__language">
                                 <li class="drop--lan">Choose Your Location
                                     <div class="language__option">
-                                        <span><a href={% url "school_specific" school_name="Uniben" %}>Uniben</a> </span>
+                                        <span><a href={% url "school_specific" school_name="app" %}>Uniben</a> </span>
                                         <span><a href={% url "school_specific" school_name="Unical" %}>Unical</a></span>
                                         <span><a href={% url "school_specific" school_name="Unillag" %}>Unilag</a></span>
                                         <span><a href={% url "school_specific" school_name="Uniport" %}>Uniport</a></span>
@@ -164,6 +163,7 @@
 
             {% endblock %}
 
+            {% block footer %}
             <!-- Start Footer Area -->
             <footer class="htc__footer__area bg__cat--3">
                 <div class="container">
@@ -243,6 +243,7 @@
                 </div>
             </footer>
             <!-- End Footer Area -->
+            {%endblock%}
         <!-- Body main wrapper end -->
         <!-- Placed js at the end of the document so the pages load faster -->
 
@@ -253,12 +254,29 @@
                  <!-- Main js file that contents all jQuery plugins activation. -->
             <script src={%static "cb_js/main.js" %}></script>
             <script src={%static "cb_js/popper.min.js" %}></script>
-            {% block javascript%}
-            {% endblock %}
+            <script src="{%static 'cb_js/ajax/jquery-3.5.1.min.js' %}"></script>
+            <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+            <script>
+                var csrftoken = Cookies.get('csrftoken')
+                function csrfSafeMethod(method) {
+                // these HTTP methods do not require CSRF protection
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+                }
+                $.ajaxSetup({
+                    beforeSend: function(xhr, settings) {
+                        if (!csrfSafeMethod(settings.type) && !this.crossDomain){
+                            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                        }
+                    }
+                });
+                $(document).ready(function(){
+                    {% block domready %}
+                    {% endblock %}
+                });
+            </script>
 
-
-
-
+                    {% block javascript%}
+                    {% endblock %}
 
     </div>
     </div>

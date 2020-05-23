@@ -12,8 +12,8 @@ class PostAdForm(ModelForm):
 
     class Meta:
         model = Product
-        fields = ['category', 'name', 'price', 'image',
-                  'description', 'dropoff_point', 'school']
+        fields = ['category', 'name', 'price',
+                  'description', 'dropoff_point','image', 'school']
         labels = {
             'name': forms.TextInput(attrs={'id': 'product_name'}),
             'category': forms.Select(attrs={'id': 'product_category'}),
