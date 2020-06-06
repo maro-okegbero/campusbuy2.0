@@ -17,7 +17,7 @@ from django.db.models import Q
 from django.core.mail import send_mail
 from django.core.exceptions import ObjectDoesNotExist
 
-from django.http import JsonResponse,HttpResponse
+from django.http import JsonResponse, HttpResponse
 
 
 def validate_username(request):
@@ -38,39 +38,15 @@ def paginator(object_set, segments, request):
     return object_list
     """
 
-    page = request.GET.get('page', 1)
-    segmentor = Paginator(object_set, segments)
-    try:
-        object_list = segmentor.page(page)
-    except PageNotAnInteger:
-        object_list = segmentor.page(1)
-    except EmptyPage:
-        object_list = segmentor.page(segmentor.num_pages)
-    return object_list
-
-
-def a_paginator(object_set, segments, request):
-    """
-    Adds Ajax pagination to a site for seamless scrolling
-
-    :param object_set:
-    :param segments:
-    :param request
-    return object_list
-    """
-
-    segmentor = Paginator(object_set, segments)
     page = request.GET.get('page')
+    segmentor = Paginator(object_set, segments)
     try:
         object_list = segmentor.page(page)
     except PageNotAnInteger:
         object_list = segmentor.page(1)
     except EmptyPage:
         if request.is_ajax():
-            # if the request is AJAX and the page is out of range
-            #return an empty page
-            return HttpResponse('')
-        #if page is out of range deliver last page of results.
+            return HttpResponse()
         object_list = segmentor.page(segmentor.num_pages)
     return object_list
 
@@ -173,16 +149,7 @@ def view_products(request, category_name, subcategory, school_name=None):
         category = SubCategory.objects.get(name=subcategory)
         my_list = category.product_set.filter(
             school__alias=school_name) if school_name else category.product_set.all()
-        paginator = Paginator(my_list, 5)
-        page = request.GET.get('page')
-        try:
-            product_list = paginator.page(page)
-        except PageNotAnInteger:
-            product_list = paginator.page(1)
-        except EmptyPage:
-            if request.is_ajax():
-                return HttpResponse('')
-            product_list = paginator.page(paginator.num_pages)
+        product_list = paginator(my_list, 5, request)
         if request.is_ajax():
             context = {'category': subcategory,
                        'parent_category': category_name,
@@ -201,7 +168,6 @@ def view_products(request, category_name, subcategory, school_name=None):
                    }
         return render(request, 'campusbuy2_0/products.html', context)
 
-
     except SubCategory.DoesNotExist as e:
         print(subcategory, "SUBCATEGORY ====================================")
         return handler404(request, e)
@@ -213,19 +179,10 @@ def view_all_products(request, school_name=None):
     all_products = Product.objects.filter(
         school__alias=school_name).defer('school', 'merchant',
                                          'description') if school_name else Product.objects.all().defer('school',
-                                                                                                        'merchant',
-                                                                                                        'description')
+                                                                                                        'description',
+                                                                                                        'merchant')
 
-    paginator = Paginator(all_products, 5)
-    page = request.GET.get('page')
-    try:
-        all_products = paginator.page(page)
-    except PageNotAnInteger:
-        all_products = paginator.page(1)
-    except EmptyPage:
-        if request.is_ajax():
-            return HttpResponse('')
-        all_products = paginator.page(paginator.num_pages)
+    all_products = paginator(all_products, 5, request)
     if request.is_ajax():
         context = {"all_products": all_products, 'school_name': school_name,
                    'school_name_for_url': school_name,
@@ -352,17 +309,7 @@ def merchant_profile(request, school_name=None):
     products_set = merchant.product_set.all().defer('school', 'merchant', 'description')
     # products = paginator(products_set, 5, request)
     # product_list = a_paginator(products_set, 5, request)
-    paginator  = Paginator(products_set, 5)
-    page = request.GET.get('page')
-    try:
-        products = paginator.page(page)
-    except PageNotAnInteger:
-        products = paginator.page(1)
-    except EmptyPage:
-        if request.is_ajax():
-            return HttpResponse('')
-        products = paginator.page(paginator.num_pages)
-
+    products = paginator(products_set, 5, request)
 
     if request.method == "POST":
         # the bounded forms
@@ -435,16 +382,7 @@ def merchant_shop(request, business_name, school_name=None):
         merchant = User.objects.get(business_name=business_name)
         products_set = merchant.product_set.defer('school', 'merchant', 'description')
         school_name = merchant.school.alias
-        page = request.GET.get('page')
-        paginate = Paginator(products_set, 5)
-        try:
-            products = paginate.page(page)
-        except PageNotAnInteger:
-            products = paginate.page(1)
-        except EmptyPage:
-            if request.is_ajax():
-                return HttpResponse('')
-            products = paginate.page(paginate.num_pages)
+        products = paginator(products_set, 5, request)
         if request.is_ajax():
             context = {'products': products, 'business_name': business_name,
                        'merchant': merchant,
@@ -563,17 +501,7 @@ def search(request, school_name=None):
         search=query).defer('school', 'merchant', 'description').filter(school__alias=school_name)
     if query:
         results_set = school_exists_query if school_name else no_school_query
-        # results = paginator(results_set, 5, request)
-        paginator = Paginator(results_set, 5)
-        page = request.GET.get('page')
-        try:
-            results = paginator.page(page)
-        except PageNotAnInteger:
-            results = paginator.page(1)
-        except EmptyPage:
-            if request.is_ajax():
-                return HttpResponse('')
-            results = paginator.page(paginator.num_pages)
+        results = paginator(results_set, 5, request)
     if request.is_ajax():
         return render(request, 'campusbuy2_0/search_ajax.html', {'results': results})
 
