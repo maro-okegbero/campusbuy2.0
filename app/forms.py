@@ -13,7 +13,7 @@ class PostAdForm(ModelForm):
     class Meta:
         model = Product
         fields = ['category', 'name', 'price',
-                  'description', 'dropoff_point','image', 'school']
+                  'description', 'dropoff_point', 'image', 'school']
         labels = {
             'name': forms.TextInput(attrs={'id': 'product_name'}),
             'category': forms.Select(attrs={'id': 'product_category'}),
@@ -64,7 +64,7 @@ class LoginMerchantForm(forms.Form):
 
 
 class SchoolSelectForm(forms.Form):
-    school = forms.ModelChoiceField( empty_label="Select School", queryset=School.objects.all())
+    school = forms.ModelChoiceField(empty_label="Select School", queryset=School.objects.all())
 
 
 class MerchantPersonalInformationForm(forms.Form):

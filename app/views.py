@@ -5,6 +5,7 @@ Date : 15th of February 2020
 from datetime import datetime
 from pprint import pprint
 
+
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import *
@@ -82,6 +83,8 @@ def homepage(request, school_name=None):
     :param school_name:
     :return:
     """
+    print("HELLO GOT HERE")
+    print(school_name, "school_name==========")
     supported_schools = ["Uniben"]
     if school_name in supported_schools or not school_name:
         categories = Category.objects.all()  # get all the categories
@@ -294,6 +297,7 @@ def product_delete(request, pk):
     form = PostAdForm(instance=product)
     if request.method == "POST":
         # TODO: Also delete the product_image on cloudinary
+        # cloudinary.uploader.destroy('sample')
         product.delete()
         return redirect(reverse(merchant_profile))
     context = {'form': form,

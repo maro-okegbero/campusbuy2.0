@@ -7,7 +7,7 @@
         <div class="product__inner">
             <div class="pro__thumb">
                  {% if school_name %}
-            <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=item.category.name pk=item.pk %}>
+            <a href={% url 'product_detail_school_specific' school_name=school_name_for_url subcategory=item.category category_name=item.category.name pk=item.pk %}>
           {% cloudinary product.image THUMBNAIL %}
         </a>
         {% else %}
@@ -19,7 +19,7 @@
         </div>
         <div class="product__details">
             {% if school_name %}
-            <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=item.category.name subcategory=item.category pk=item.pk %}>{{ product.name }}</a>
+            <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=item.category.name subcategory=item.category pk=item.pk %}>{{ item.name }}</a>
         {% else %}
             <a href={% url 'product_detail' category_name=item.category.name subcategory=item.category pk=item.pk %}>{{ item.name }}</a>
         {% endif %}

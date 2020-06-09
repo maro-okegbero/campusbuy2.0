@@ -18,24 +18,22 @@
             <div class="modal fade bd-example-modal-sm" id="chooseLocation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                     <div class="modal-content">
+                        <form action="#" method="GET" enctype="multipart/form-data">
                         <div class="modal-body">
+
                             <h3>To improve your experience on our site, please select your location.</h3>
                             <div class="single-checkout-box select-option mt--20">
-                                  <form action="#" method="GET" enctype="multipart/form-data">
-                                    {{ form.as_p }}
 
-                                      {#                                <label>#}
-{#                                    <select>#}
-{#                                        <option>Select Your Location</option>#}
-{#                                        <a href={% url "school_specific" school_name="Uniben"%}>UNIBEN</a>#}
-{#                                        <option href={% url "school_specific" school_name="unilag"%}>UNILAG</option>#}
-{#                                        <option href={% url "school_specific" school_name="unical"%}>UNICAL</option>#}
-{#                                        <option href={% url "school_specific" school_name="uniport"%}>UNIPORT</option>#}
-{#                                        <option href={% url "school_specific" school_name="uniabuja"%}>UNIABUJA</option>#}
-{#                                    </select>#}
-{#                                </label>#}
+                                    <div class="form--group">
+                                            {{ registration_form.first_name.errors }}
+
+                                                {{form.school}}
+                                    </div>
+
+
                             </div>
                         </div>
+
                         <div class="modal-footer">
                             <div class="uniq__btn">
                                 <a href="" class="htc__btn" data-dismiss="modal">close</a>
@@ -44,6 +42,7 @@
                                 <input class="htc__btn" type="submit" value="Confirm">
                             </div>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>

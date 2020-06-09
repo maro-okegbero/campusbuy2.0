@@ -23,6 +23,7 @@ urlpatterns = [
 ]
 
 handler404 = 'app.views.handler404'
+# handler500 = 'app.views.handler500'
 
 # if settings.DEBUG:
 #
