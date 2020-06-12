@@ -69,9 +69,12 @@
                                                 {{registration_form.last_name}}
                                             </div>
                                             <div class="form--group">
-                                                <label  class="form--label" for="{{ registration_form.username.id_for_label }}">Username</label>
-                                               {{ registration_form.username }}
+                                                    <label  class="form--label" for="{{ registration_form.username.id_for_label }}">Username</label>
+                                                    {{ registration_form.username }}
+                                                    <span class="zmdi zmdi-close-circle field--icon  mr-auto ml-auto" id="incorrect" style="color:red;"></span>
+                                                    <span class="zmdi zmdi-check-circle field--icon mr-auto ml-auto" id="correct" style="color:green;"></span>
                                             </div>
+                                            <p class="mr-auto ml-auto" id="incorrect-text" style="color:red;">This username is already taken</p>
 
                                             <div class="form--group">
                                                 <label  class="form--label" for="{{ registration_form.email.id_for_label }}">Email</label>
@@ -114,9 +117,11 @@
                                             </div>
                                         <div class="form--group">
                                                 <label for="{{ registration_form.password2.id_for_label }}" class="form--label">Type Password Again</label>
-                                               {{ registration_form.password2}}
-                                             <span toggle="#{{registration_form.password2.id_for_label}}" data-toggle="{{ registration_form.password2.id_for_label }}"
+                                           {{ registration_form.password2}}
+                                                <span toggle="#{{registration_form.password2.id_for_label}}" data-toggle="{{ registration_form.password2.id_for_label }}"
                                                     class="zmdi zmdi-eye field--icon toggle--password"></span>
+                                                <span class="zmdi zmdi-close-circle field--icon" id="mismatch" style="color:red;margin-right:25px;"></span>
+                                                <span class="zmdi zmdi-check-circle field--icon" id="match" style="color:green;margin-right:25px;"></span>
                                             </div>
 
                                         <div class="htc__login__btn mt--30">
@@ -155,32 +160,55 @@
 {#        </form>#}
 {##}
 
-
-
-
-
-
 {% endblock %}
 
 
-{% block javascript %}
+{%block javascript%}
+<script>
+    $('#incorrect-text').hide();
+    $('#correct').hide();
+    $('#incorrect').hide();
+    $("#username").change(function(){
+        var username = $(this).val();
 
-    <script>
-    {#$("#username").change(function () {#}
-    {#  console.log( 'username',$(this).val() );#}
-    {##}
-    {#  $.ajax({#}
-    {#    url: "{% url 'validate_username' %}",#}
-    {#    data: {#}
-    {#      'username': username#}
-    {#    },#}
-    {#    dataType: 'json',#}
-    {#    success: function (data) {#}
-    {#      if (data.username_exists) {#}
-    {#        alert("A user with this username already exists.");#}
-    {#      }#}
-    {#    }#}
-    {#  });#}
+        $.ajax({
+            url: '{% url "validate_username" %}',
+            data:{
+                'username':username
+                },
+                dataType:'json',
+                success: function (data) {
+                if (data.username_exists) {
+                //alert("A user with this username already exists.");
 
-  </script>
+                $('#correct').hide();
+                $('#incorrect').show();
+                $('#incorrect-text').show();
+
+                }else{
+
+                $('#incorrect-text').hide();
+                $('#incorrect').hide();
+                $('#correct').show();
+                }
+            }
+        });
+
+    });
+
+    $('#match').hide();
+    $('#mismatch').hide();
+    $("#password2").keyup(function(){
+        var password1 = $('#password1').val();
+        var password2 = $(this).val();
+        if (password1===password2){
+            $('#match').show();
+            $('#mismatch').hide();
+        }else{
+            $('#match').hide();
+            $('#mismatch').show();
+        }
+    });
+
+</script>
 {% endblock %}

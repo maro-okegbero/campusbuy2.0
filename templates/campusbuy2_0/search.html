@@ -45,15 +45,21 @@
                                     <div id="product-list">
                                         {% include 'campusbuy2_0/search_ajax.html' %}
                                     </div>
-                                {% else %}
+                                {% elif query is None %}
                                     <div class="search--status">
                                     <img alt="Waiting to search!" class="search--status__img" src={% static "images/bg/waiting-to-search.png"%}  >
                                     <p class="search--status__message">Waiting to search!</p>
+                                    </div>
+                                {% else %}
+                                    <div class="search--status">
+                                        <p class="search--status__message">No "{{query|title}}" Found.</p>
+                                        <img alt="No products found" class="search--status__img" src={% static "images/bg/not-found.png" %} >
                                     </div>
                                 {% endif %}
                     </div>
                 </div>
             </section>
+
 
 
 

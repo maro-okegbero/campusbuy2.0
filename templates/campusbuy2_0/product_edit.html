@@ -34,10 +34,17 @@
                                         <label for={{ product_name }} class="form--label">Product Name</label>
                                         {{ form.name }}
                                     </div>
+                                    {% if product.exchange %}
+                                    <div class="col-md-6 col-sm-12 col-lg-6 form--group">
+                                        <label for={{ form.exchange_for.id_for_label }}class="form--label">Xchange for <small><em>(Subject to negotiation with buyer.)</em></small></label>
+                                        {{ form.exchange_for }}
+                                    </div>
+                                    {% else %}
                                     <div class="col-md-6 col-sm-12 col-lg-6 form--group">
                                         <label for={{ form.price.id_for_label }}class="form--label">Price <small><em>(Subject to negotiation with buyer.)</em></small></label>
                                         {{ form.price }}
                                     </div>
+                                    {% endif %}
 {#                                    <div class="col-md-6 col-sm-12 col-lg-6 form--group">#}
 {#                                        <label for={{ form.image.id_for_label }}class="form--label">Image<small><em>(Subject to negotiation with buyer.)</em></small></label>#}
 {#                                        {{ form.image }}#}

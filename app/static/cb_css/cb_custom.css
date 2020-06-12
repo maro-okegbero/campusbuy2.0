@@ -10,13 +10,6 @@ label{
   margin-bottom: 0 !important;
   cursor: text;
 }
-/* to differentiate exchange and price */
-.exchange-list{
-    border:8px solid #e0e40b;
-}
-.price-list{
-  border-top:8px solid #e0e40b; 
-}
 .choose__container {
   justify-content: center;
   padding-top: 50px;

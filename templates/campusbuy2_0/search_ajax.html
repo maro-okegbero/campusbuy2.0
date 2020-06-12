@@ -5,7 +5,7 @@
 <div class="col-md-4 single__pro col-lg-3 cat--1 col-sm-6">
     <div class="product foo">
         <div class="product__inner">
-            <div class="pro__thumb">
+            <div {% if item.exchange %} class="pro__thumb exchange-list" {% else %} class=" pro__thumb sell-list " {% endif %}>
                  {% if school_name %}
             <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=item.category.name pk=item.pk %}>
           {% cloudinary product.image THUMBNAIL %}
@@ -23,18 +23,15 @@
         {% else %}
             <a href={% url 'product_detail' category_name=item.category.name subcategory=item.category pk=item.pk %}>{{ item.name }}</a>
         {% endif %}
-
             <ul class="product__price">
-                <li class="new__price">&#x20A6;{{ item.price| intcomma }}</li>
+                {% if item.exchange %}
+                    <li class="new__price">for {{ item.exchange_for }}</li>
+                {% else %}
+                    <li class="new__price">&#x20A6;{{ item.price| intcomma }}</li>
+                {% endif %}
             </ul>
-
-
         </div>
     </div>
 </div>
-     {% empty %}
-        <div class="search--status">
-            <img alt="No products found" class="search--status__img" src={% static "images/bg/not-found.png" %} >
-            <p class="search--status__message">No products found.</p>
-        </div>
+
 {% endfor %}

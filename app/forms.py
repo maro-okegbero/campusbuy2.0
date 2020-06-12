@@ -12,8 +12,8 @@ class PostAdForm(ModelForm):
 
     class Meta:
         model = Product
-        fields = ['category', 'name', 'price',
-                  'description', 'dropoff_point','image', 'school']
+        fields = ['category', 'name', 'price', 'description',
+                  'dropoff_point', 'school', 'exchange', 'exchange_for','image',]
         labels = {
             'name': forms.TextInput(attrs={'id': 'product_name'}),
             'category': forms.Select(attrs={'id': 'product_category'}),
@@ -21,6 +21,8 @@ class PostAdForm(ModelForm):
             'description': forms.TextInput(attrs={'id': 'product_description'}),
             'image': forms.TextInput(attrs={'id': 'product_image'}),
             'dropoff_point': forms.Select(attrs={'id': 'dropoff_point'}),
+            'exchange':forms.CheckboxInput(attrs={'id':'product_exchange'}),
+            'exchange_for':forms.TextInput(attrs={'id':'product_exchange_for'}),
         }
 
 
@@ -37,7 +39,8 @@ class RegisterMerchantForm(UserCreationForm):
     address = forms.CharField(max_length=30, required=True, label="Address",
                               widget=forms.TextInput(attrs={'id': 'address'}))
     username = forms.CharField(max_length=30, required=True, label="Username",
-                               widget=forms.TextInput(attrs={'id': 'username'}))
+                               widget=forms.TextInput(attrs={'id': 'username',
+                                                             'name':'username',}))
     school = forms.ModelChoiceField(empty_label="Select School", queryset=School.objects.all(),
                                     widget=forms.Select(attrs={'class': 'business__location'}))
     business_description = forms.CharField(max_length=300, required=True, label="Business Description",
@@ -112,3 +115,6 @@ class MerchantLoginDetailsForm(forms.Form):
 
                                     attrs={'class': "form--input eye--password", "id": "reg-current-password2"}),
                                 label="Password2")
+
+
+

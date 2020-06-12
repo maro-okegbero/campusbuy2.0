@@ -9,7 +9,7 @@ from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import *
 from .forms import *
-from django.contrib.postgres.search import SearchVector
+from django.contrib.postgres.search import SearchVector, TrigramSimilarity
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
@@ -17,7 +17,7 @@ from django.db.models import Q
 from django.core.mail import send_mail
 from django.core.exceptions import ObjectDoesNotExist
 
-from django.http import JsonResponse,HttpResponse
+from django.http import JsonResponse,HttpResponse, HttpResponseBadRequest
 
 
 def validate_username(request):
@@ -26,7 +26,6 @@ def validate_username(request):
         'username_exists': User.objects.filter(username__iexact=username).exists()
     }
     return JsonResponse(data)
-
 
 def paginator(object_set, segments, request):
     """
@@ -263,9 +262,12 @@ def post_products(request):
     if request.method == "POST":
         form = PostAdForm(request.POST, request.FILES, auto_id=True)
         if form.is_valid():
+
             post = form.save()
             post.published_date = timezone.now()
             post.merchant = request.user
+            if post.exchange_for:
+                post.exchange = True
             pprint(dir(post))
             pprint(request.user)
             post.save()
@@ -292,10 +294,10 @@ def single_product(request, pk, category_name=None, subcategory=None, school_nam
         merchant = product.merchant
         business_name = product.merchant.business_name
         similar_products = Product.objects.filter(Q(category=product.category.pk)
-                                                  & Q(name__contains=name)).defer('school', 'merchant', 'description')[
+                                                  & Q(name__contains=name)).defer('school', 'merchant', 'description').exclude(pk = product.pk)[
                            :5]  # combined queryset
         other_products_from_merchant = Product.objects.filter(merchant__id=merchant.id).defer('school', 'merchant',
-                                                                                              'description')[:5]
+                                                                                              'description').exclude(pk = product.pk)[:5]
         context = {'product': product,
                    'category_name': category_name,
                    'subcategory': subcategory,
@@ -323,10 +325,14 @@ def product_edit(request, pk):
         form = PostAdForm(request.POST, request.FILES, auto_id=True, instance=product)
         if form.is_valid():
             form.save()
-            return redirect(reverse(product_stat))
-    context = {'form': form,
-               'business_name': business_name,
-               'pk': pk}
+            arguments = {'bussiness_name':business_name,
+                         'pk':pk}
+            return redirect(reverse(product_stat, kwargs = arguments))
+    context = {
+                'product' : product,
+                'form': form,
+                'business_name': business_name,
+                'pk': pk}
     return render(request, 'campusbuy2_0/product_edit.html', context)
 
 
@@ -553,10 +559,11 @@ def search(request, school_name=None):
     results = []
     no_school_query = Product.objects.annotate(search=SearchVector('name', 'description', )).filter(
         search=query).defer('school', 'merchant', 'description')
-    school_exists_query = Product.objects.annotate(search=SearchVector('name', 'description', )).filter(
-        search=query).defer('school', 'merchant', 'description').filter(school__alias=school_name)
+    school_exists_query = Product.objects.annotate(search=SearchVector('name','merchant', 'description', )).filter(
+        Q(search=query) & Q(school__alias=school_name)).defer('school', 'merchant', 'description')
     if query:
         results_set = school_exists_query if school_name else no_school_query
+
         # results = paginator(results_set, 5, request)
         paginator = Paginator(results_set, 5)
         page = request.GET.get('page')
@@ -571,7 +578,8 @@ def search(request, school_name=None):
     if request.is_ajax():
         return render(request, 'campusbuy2_0/search_ajax.html', {'results': results})
 
-    return render(request, 'campusbuy2_0/search.html', {'results': results})
+    return render(request, 'campusbuy2_0/search.html', {'results': results,
+                                                        'query': query})
 
 
 def signout(request):
