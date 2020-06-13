@@ -86,7 +86,7 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'campusbuy',
-        'USER': 'maro',
+        'USER': 'campusbuy_admin',
         'PASSWORD': 'guido van rossum',
         'HOST': 'localhost',
         'PORT': '',
@@ -97,9 +97,7 @@ DATABASES = {
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
+
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
     },

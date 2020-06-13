@@ -29,6 +29,7 @@ class User(AbstractUser):
     address = models.CharField(null=True, blank=True, max_length=200)
     confirmed_payment = models.BooleanField(default=False, )
     school = models.ForeignKey(School, on_delete=models.CASCADE, blank=True, null=True)  # many to one relationship
+    rating = models.FloatField(default=0, null=True)
     date_created = models.DateField(blank=False, default=timezone.now)
     subscription_expired = models.BooleanField(default=False)
 
@@ -109,23 +110,23 @@ class Product(models.Model):
     category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     school = models.ForeignKey(School, on_delete=models.CASCADE, null=True, blank=True)
     merchant = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
-    # image = CloudinaryField('image')  # Special Cloudinary image Field
+    image = CloudinaryField('image')  # Special Cloudinary image Field
     dropoff_point = models.TextField(max_length=250, choices=SCHOOL_HOT_SPOTS, default=MAIN_GATE, blank=True)
     name = models.CharField(max_length=70, blank=False, null=False)  # product name
     description = models.TextField(max_length=250)
-    rating = models.IntegerField(default=0)
-    price = models.DecimalField(max_digits=10,decimal_places=2,null=True, blank=True)
+    rating = models.FloatField(default=0, null=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2,null=True, blank=True)
     exchange = models.BooleanField(default=False)
     exchange_for = models.CharField(max_length=70, blank=True, null=True)
     views = models.IntegerField(default=0)
     published_date = models.DateTimeField(blank=False, default=timezone.now)
-    #
-    # def __unsicode__(self):
-    #     try:
-    #         public_id = self.image.public_id
-    #     except AttributeError:
-    #         public_id = ''
-    #     return "Photo <%s:%s>" % (self.name, public_id)
+
+    def __unsicode__(self):
+        try:
+            public_id = self.image.public_id
+        except AttributeError:
+            public_id = ''
+        return "Photo <%s:%s>" % (self.name, public_id)
 
     def published(self):
         self.published_date = timezone.now()

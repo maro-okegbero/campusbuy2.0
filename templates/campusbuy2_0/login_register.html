@@ -77,23 +77,31 @@
 
                                                     <label  class="form--label" for="{{ registration_form.username.id_for_label }}">Username</label>
                                                     {{ registration_form.username }}
-                                                    <span class="zmdi zmdi-close-circle field--icon  mr-auto ml-auto" id="incorrect" style="color:red;"></span>
-                                                    <span class="zmdi zmdi-check-circle field--icon mr-auto ml-auto" id="correct" style="color:green;"></span>
+                                                    <span class="zmdi zmdi-close-circle field--icon  mr-auto ml-auto" id="username_incorrect" style="color:red;"></span>
+                                                    <span class="zmdi zmdi-check-circle field--icon mr-auto ml-auto" id="username_correct" style="color:green;"></span>
                                             </div>
-                                            <p class="mr-auto ml-auto" id="incorrect-text" style="color:red;">This username is already taken</p>
-
+                                            <p class="mr-auto ml-auto" id="username_incorrect-text" style="color:red;">This username is already taken</p>
+                                        <br>
 
                                             <div class="form--group">
                                                 {{ registration_form.email.errors }}
                                                 <label  class="form--label" for="{{ registration_form.email.id_for_label }}">Email</label>
                                                {{ registration_form.email }}
+                                            <span class="zmdi zmdi-close-circle field--icon  mr-auto ml-auto" id="email_incorrect" style="color:red;"></span>
+                                                    <span class="zmdi zmdi-check-circle field--icon mr-auto ml-auto" id="email_correct" style="color:green;"></span>
                                             </div>
+                                            <p class="mr-auto ml-auto" id="email_incorrect-text" style="color:red;">A user with this email already exists</p>
+
                                         <br>
                                               <div class="form--group">
                                                   {{ registration_form.business_name.errors }}
                                                 <label class="form--label" for="{{ registration_form.business_name.id_for_label }}">Business Name</label>
                                                 {{ registration_form.business_name }}
+                                            <span class="zmdi zmdi-close-circle field--icon  mr-auto ml-auto" id="business_name_incorrect" style="color:red;"></span>
+                                                    <span class="zmdi zmdi-check-circle field--icon mr-auto ml-auto" id="business_name_correct" style="color:green;"></span>
                                             </div>
+                                            <p class="mr-auto ml-auto" id="business_name_incorrect-text" style="color:red;">This business name is already taken</p>
+
                                         <br>
                                             <div class="form--group">
                                                 {{ registration_form.address.errors }}
@@ -134,7 +142,13 @@
                                                 <span toggle="#{{registration_form.password1.id_for_label}}" data-toggle="{{ registration_form.password1.id_for_label }}"
                                                     class="zmdi zmdi-eye field--icon toggle--password"></span>
 
+                                              <span class="zmdi zmdi-close-circle field--icon  mr-auto ml-auto" id="password1_incorrect" style="color:red;position: absolute;right: -17px;"></span>
+                                                    <span class="zmdi zmdi-check-circle field--icon mr-auto ml-auto" id="password1_correct" style="color: green;position: absolute;right: -17px;"></span>
                                             </div>
+                                            <p class="mr-auto ml-auto" id="password1_incorrect-text" style="color:red; font-size:10px;">This password is not strong enough</p>
+
+
+
                                         <br>
 
                                         <div class="form--group">
@@ -188,9 +202,9 @@
 
 {%block javascript%}
 <script>
-    $('#incorrect-text').hide();
-    $('#correct').hide();
-    $('#incorrect').hide();
+    $('#username_incorrect-text').hide();
+    $('#username_correct').hide();
+    $('#username_incorrect').hide();
     $("#username").change(function(){
         var username = $(this).val();
 
@@ -204,20 +218,113 @@
                 if (data.username_exists) {
                 //alert("A user with this username already exists.");
 
-                $('#correct').hide();
-                $('#incorrect').show();
-                $('#incorrect-text').show();
+                $('#username_correct').hide();
+                $('#username_incorrect').show();
+                $('#username_incorrect-text').show();
 
                 }else{
 
-                $('#incorrect-text').hide();
-                $('#incorrect').hide();
-                $('#correct').show();
+                $('#username_incorrect-text').hide();
+                $('#username_incorrect').hide();
+                $('#username_correct').show();
                 }
             }
         });
 
     });
+
+    $('#email_incorrect-text').hide();
+    $('#email_correct').hide();
+    $('#email_incorrect').hide();
+    $("#email").change(function(){
+        var email = $(this).val();
+
+        $.ajax({
+            url: '{% url "validate_email" %}',
+            data:{
+                'email':email
+                },
+                dataType:'json',
+                success: function (data) {
+                if (data.email_exists) {
+
+                $('#email_correct').hide();
+                $('#email_incorrect').show();
+                $('#email_incorrect-text').show();
+
+                }else{
+
+                $('#email_incorrect-text').hide();
+                $('#email_incorrect').hide();
+                $('#email_correct').show();
+                }
+            }
+        });
+
+    });
+
+
+     $('#business_name_incorrect-text').hide();
+    $('#business_name_correct').hide();
+    $('#business_name_incorrect').hide();
+    $("#business_name").change(function(){
+        var business_name = $(this).val();
+
+        $.ajax({
+            url: '{% url "validate_business_name" %}',
+            data:{
+                'business_name':business_name
+                },
+                dataType:'json',
+                success: function (data) {
+                if (data.business_name_exists) {
+
+                $('#business_name_correct').hide();
+                $('#business_name_incorrect').show();
+                $('#business_name_incorrect-text').show();
+
+                }else{
+
+                $('#business_name_incorrect-text').hide();
+                $('#business_name_incorrect').hide();
+                $('#business_name_correct').show();
+                }
+            }
+        });
+
+    });
+
+
+     $('#password1_incorrect-text').hide();
+    $('#password1_correct').hide();
+    $('#password1_incorrect').hide();
+    $("#password1").change(function(){
+        var password1 = $(this).val();
+
+        $.ajax({
+            url: '{% url "validate_password" %}',
+            data:{
+                'password':password1
+                },
+                dataType:'json',
+                success: function (data) {
+                if (data.correct) {
+
+                $('#password1_correct').show();
+                $('#password1_incorrect').hide();
+                $('#password1_incorrect-text').hide();
+
+                }else{
+
+                $('#password1_incorrect-text').html(data.message).show();
+                $('#password1_incorrect').show();
+                $('#password1_correct').hide();
+                }
+            }
+        });
+
+    });
+
 
     $('#match').hide();
     $('#mismatch').hide();

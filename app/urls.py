@@ -34,6 +34,12 @@ urlpatterns = [
 
     path('ajax/validate_username/', validate_username, name='validate_username'),
 
+    path('ajax/validate_business_name/', validate_business_name, name='validate_business_name'),
+
+    path('ajax/validate_email/', validate_email, name='validate_email'),
+
+    path('ajax/validate_password/', validate_password, name='validate_password'),
+
     path('<business_name>/product_stats/<pk>', product_stat, name="product_stat"),
 
     path('product_edit/<pk>', product_edit, name="product_edit"),
