@@ -5,6 +5,7 @@ Date : 15th of February 2020
 from datetime import datetime
 from pprint import pprint
 
+
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import *
@@ -18,6 +19,7 @@ from django.core.mail import send_mail
 from django.core.exceptions import ObjectDoesNotExist
 
 from django.http import JsonResponse,HttpResponse, HttpResponseBadRequest
+
 
 
 def validate_username(request):
@@ -37,39 +39,15 @@ def paginator(object_set, segments, request):
     return object_list
     """
 
-    page = request.GET.get('page', 1)
-    segmentor = Paginator(object_set, segments)
-    try:
-        object_list = segmentor.page(page)
-    except PageNotAnInteger:
-        object_list = segmentor.page(1)
-    except EmptyPage:
-        object_list = segmentor.page(segmentor.num_pages)
-    return object_list
-
-
-def a_paginator(object_set, segments, request):
-    """
-    Adds Ajax pagination to a site for seamless scrolling
-
-    :param object_set:
-    :param segments:
-    :param request
-    return object_list
-    """
-
-    segmentor = Paginator(object_set, segments)
     page = request.GET.get('page')
+    segmentor = Paginator(object_set, segments)
     try:
         object_list = segmentor.page(page)
     except PageNotAnInteger:
         object_list = segmentor.page(1)
     except EmptyPage:
         if request.is_ajax():
-            # if the request is AJAX and the page is out of range
-            #return an empty page
-            return HttpResponse('')
-        #if page is out of range deliver last page of results.
+            return HttpResponse()
         object_list = segmentor.page(segmentor.num_pages)
     return object_list
 
@@ -105,6 +83,8 @@ def homepage(request, school_name=None):
     :param school_name:
     :return:
     """
+    print("HELLO GOT HERE")
+    print(school_name, "school_name==========")
     supported_schools = ["Uniben"]
     if school_name in supported_schools or not school_name:
         categories = Category.objects.all()  # get all the categories
@@ -172,25 +152,8 @@ def view_products(request, category_name, subcategory, school_name=None):
         category = SubCategory.objects.get(name=subcategory)
         my_list = category.product_set.filter(
             school__alias=school_name) if school_name else category.product_set.all()
-        paginator = Paginator(my_list, 5)
-        page = request.GET.get('page')
-        try:
-            product_list = paginator.page(page)
-        except PageNotAnInteger:
-            product_list = paginator.page(1)
-        except EmptyPage:
-            if request.is_ajax():
-                return HttpResponse('')
-            product_list = paginator.page(paginator.num_pages)
-        if request.is_ajax():
-            context = {'category': subcategory,
-                       'parent_category': category_name,
-                       'products': product_list,
-                       'school_name': school_name,
-                       'school_name_for_url': school_name,
-                       'value': datetime.now()
-                       }
-            return render(request, 'campusbuy2_0/products_ajax.html', context)
+        product_list = paginator(my_list, 5, request)
+
         context = {'category': subcategory,
                    'parent_category': category_name,
                    'products': product_list,
@@ -198,8 +161,11 @@ def view_products(request, category_name, subcategory, school_name=None):
                    'school_name_for_url': school_name,
                    'value': datetime.now()
                    }
-        return render(request, 'campusbuy2_0/products.html', context)
 
+        if request.is_ajax():
+            return render(request, 'campusbuy2_0/products_ajax.html', context)
+
+        return render(request, 'campusbuy2_0/products.html', context)
 
     except SubCategory.DoesNotExist as e:
         print(subcategory, "SUBCATEGORY ====================================")
@@ -212,30 +178,18 @@ def view_all_products(request, school_name=None):
     all_products = Product.objects.filter(
         school__alias=school_name).defer('school', 'merchant',
                                          'description') if school_name else Product.objects.all().defer('school',
-                                                                                                        'merchant',
-                                                                                                        'description')
+                                                                                                        'description',
+                                                                                                        'merchant')
 
-    paginator = Paginator(all_products, 5)
-    page = request.GET.get('page')
-    try:
-        all_products = paginator.page(page)
-    except PageNotAnInteger:
-        all_products = paginator.page(1)
-    except EmptyPage:
-        if request.is_ajax():
-            return HttpResponse('')
-        all_products = paginator.page(paginator.num_pages)
-    if request.is_ajax():
-        context = {"all_products": all_products, 'school_name': school_name,
-                   'school_name_for_url': school_name,
-                   'value': datetime.now()
-                   } if school_name else {"all_products": all_products, 'value': datetime.now()}
-        return render(request, 'campusbuy2_0/all_products_ajax.html', context)
+    all_products = paginator(all_products, 5, request)
 
     context = {"all_products": all_products, 'school_name': school_name,
                'school_name_for_url': school_name,
                'value': datetime.now()
                } if school_name else {"all_products": all_products, 'value': datetime.now()}
+    if request.is_ajax():
+        return render(request, 'campusbuy2_0/all_products_ajax.html', context)
+
     return render(request, 'campusbuy2_0/all_products.html', context)
 
 
@@ -343,6 +297,7 @@ def product_delete(request, pk):
     form = PostAdForm(instance=product)
     if request.method == "POST":
         # TODO: Also delete the product_image on cloudinary
+        # cloudinary.uploader.destroy('sample')
         product.delete()
         return redirect(reverse(merchant_profile))
     context = {'form': form,
@@ -358,17 +313,7 @@ def merchant_profile(request, school_name=None):
     products_set = merchant.product_set.all().defer('school', 'merchant', 'description')
     # products = paginator(products_set, 5, request)
     # product_list = a_paginator(products_set, 5, request)
-    paginator  = Paginator(products_set, 5)
-    page = request.GET.get('page')
-    try:
-        products = paginator.page(page)
-    except PageNotAnInteger:
-        products = paginator.page(1)
-    except EmptyPage:
-        if request.is_ajax():
-            return HttpResponse('')
-        products = paginator.page(paginator.num_pages)
-
+    products = paginator(products_set, 5, request)
 
     if request.method == "POST":
         # the bounded forms
@@ -412,22 +357,14 @@ def merchant_profile(request, school_name=None):
         business_detail_form = MerchantBusinessDetailsForm(initial=merchant.__dict__)
         login_details_form = MerchantLoginDetailsForm(initial=merchant.__dict__)
 
-    if request.is_ajax():
-        context = {"products": products,
-                   "school_name_for_url": school_name,
-                   "personal_information_form": personal_information_form,
-                   "business_detail_form": business_detail_form,
-                   "login_details_form": login_details_form
-                   }
-
-        return render(request, 'campusbuy2_0/profile_ajax.html', context)
-
     context = {"products": products,
                "school_name_for_url": school_name,
                "personal_information_form": personal_information_form,
                "business_detail_form": business_detail_form,
                "login_details_form": login_details_form
                }
+    if request.is_ajax():
+        return render(request, 'campusbuy2_0/profile_ajax.html', context)
 
     return render(request, 'campusbuy2_0/profile.html', context)
 
@@ -441,25 +378,7 @@ def merchant_shop(request, business_name, school_name=None):
         merchant = User.objects.get(business_name=business_name)
         products_set = merchant.product_set.defer('school', 'merchant', 'description')
         school_name = merchant.school.alias
-        page = request.GET.get('page')
-        paginate = Paginator(products_set, 5)
-        try:
-            products = paginate.page(page)
-        except PageNotAnInteger:
-            products = paginate.page(1)
-        except EmptyPage:
-            if request.is_ajax():
-                return HttpResponse('')
-            products = paginate.page(paginate.num_pages)
-        if request.is_ajax():
-            context = {'products': products, 'business_name': business_name,
-                       'merchant': merchant,
-                       'school_name': school_name,
-                       'school_name_for_url': school_name,
-                       'value': datetime.now()
-                       }
-
-            return render(request, 'campusbuy2_0/shop_ajax.html', context)
+        products = paginator(products_set, 5, request)
 
         context = {'products': products, 'business_name': business_name,
                    'merchant': merchant,
@@ -467,6 +386,9 @@ def merchant_shop(request, business_name, school_name=None):
                    'school_name_for_url': school_name,
                    'value': datetime.now()
                    }
+
+        if request.is_ajax():
+            return render(request, 'campusbuy2_0/shop_ajax.html', context)
 
         return render(request, 'campusbuy2_0/shop.html', context)
 
@@ -504,8 +426,14 @@ def login_register(request):
             password = request.POST.get("password", "")
 
             if ".com" in username:
-                user = User.objects.get(email=username)
-                username = user.username
+                try:
+                    user = User.objects.get(email=username)  # try to get the user from the email
+                    username = user.username
+                except User.DoesNotExist:
+                    context = {'error': "The email is not connected to any account",
+                               'login_form': login_form,
+                               'registration_form': registration_form}
+                    return render(request, 'campusbuy2_0/login_register.html', context)
 
             user = authenticate(request, username=username, password=password)
             if user is not None:
@@ -575,6 +503,16 @@ def search(request, school_name=None):
             if request.is_ajax():
                 return HttpResponse('')
             results = paginator.page(paginator.num_pages)
+# =======
+#
+#     school_exists_query = Product.objects.annotate(search=SearchVector('name', 'description', )).filter(
+#         search=query).defer('school', 'merchant', 'description').filter(school__alias=school_name)
+#
+#     if query:
+#         results_set = school_exists_query if school_name else no_school_query
+#         results = paginator(results_set, 5, request)
+#
+# >>>>>>> master
     if request.is_ajax():
         return render(request, 'campusbuy2_0/search_ajax.html', {'results': results})
 

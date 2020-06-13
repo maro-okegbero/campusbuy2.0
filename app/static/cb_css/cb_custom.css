@@ -154,20 +154,20 @@ label{
   position: relative;
 }
 .form--label {
-  position: absolute;
-  top: 10px;
-  z-index: 10;
-  -webkit-transition: font-size 150ms ease-out, -webkit-transform 150ms ease-out;
-  transition: font-size 150ms ease-out, -webkit-transform 150ms ease-out;
-  transition: transform 150ms ease-out, font-size 150ms ease-out;
-  transition: transform 150ms ease-out, font-size 150ms ease-out, -webkit-transform 150ms ease-out;
+  /*position: absolute;*/
+  /*top: 10px;*/
+  /*z-index: 10;*/
+  /*-webkit-transition: font-size 150ms ease-out, -webkit-transform 150ms ease-out;*/
+  /*transition: font-size 150ms ease-out, -webkit-transform 150ms ease-out;*/
+  /*transition: transform 150ms ease-out, font-size 150ms ease-out;*/
+  /*transition: transform 150ms ease-out, font-size 150ms ease-out, -webkit-transform 150ms ease-out;*/
   font-weight: bold;
 }
-.focused .form--label {
-  -webkit-transform: translateY(-80%);
-          transform: translateY(-80%);
-  font-size: .75em;
-}
+/*.focused .form--label {*/
+/*  -webkit-transform: translateY(-80%);*/
+/*          transform: translateY(-80%);*/
+/*  font-size: .75em;*/
+/*}*/
 .form--input {
   position: relative;
   padding: 12px 0px 5px 0;
@@ -186,6 +186,12 @@ label{
   right: 0;
   cursor: pointer;
 }
+ .errorlist li{
+    padding-left: 89px;
+    color: #dc3545;
+    font-size: 9px;
+}
+
 .list-group-item.active{
   background-color: #7D6DFF;
   border-color: #7D6DFF;

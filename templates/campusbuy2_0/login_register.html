@@ -61,14 +61,20 @@
                                     <form class="login" action="#" method="POST" enctype="multipart/form-data">
                                         {% csrf_token %}
                                         <div class="form--group">
+                                            {{ registration_form.first_name.errors }}
+
                                                 <label for="{{ registration_form.first_name.id_for_label }}" class="form--label">First Name</label>
                                                 {{registration_form.first_name}}
                                             </div>
+                                        <br>
                                             <div class="form--group">
+                                                {{ registration_form.last_name.errors }}
                                                 <label for="{{registration_form.last_name.id_for_label}}" class="form--label">Last Name</label>
                                                 {{registration_form.last_name}}
                                             </div>
+                                        <br>
                                             <div class="form--group">
+
                                                     <label  class="form--label" for="{{ registration_form.username.id_for_label }}">Username</label>
                                                     {{ registration_form.username }}
                                                     <span class="zmdi zmdi-close-circle field--icon  mr-auto ml-auto" id="incorrect" style="color:red;"></span>
@@ -76,53 +82,70 @@
                                             </div>
                                             <p class="mr-auto ml-auto" id="incorrect-text" style="color:red;">This username is already taken</p>
 
+
                                             <div class="form--group">
+                                                {{ registration_form.email.errors }}
                                                 <label  class="form--label" for="{{ registration_form.email.id_for_label }}">Email</label>
                                                {{ registration_form.email }}
                                             </div>
-
+                                        <br>
                                               <div class="form--group">
+                                                  {{ registration_form.business_name.errors }}
                                                 <label class="form--label" for="{{ registration_form.business_name.id_for_label }}">Business Name</label>
                                                 {{ registration_form.business_name }}
                                             </div>
-
+                                        <br>
                                             <div class="form--group">
+                                                {{ registration_form.address.errors }}
                                                 <label  class="form--label" for="{{ registration_form.address.id_for_label }}">Address</label>
                                                 {{ registration_form.address }}
                                             </div>
-
+                                        <br>
                                             <div class="form--group">
-                                                <label  class="form--label" for="{{ registration_form.business_description.id_for_label }}">Business Description</label>
+                                                {{ registration_form.business_description.errors }}
+                                                <label  class="form--label"for="{{ registration_form.business_description.id_for_label }}">Business Description</label>
                                                {{ registration_form.business_description }}
                                             </div>
+                                        <br>
                                             <div class="form--group">
+                                                {{ registration_form.phone_number.errors }}
                                                 <label for="{{ registration_form.phone_number.id_for_label }}" class="form--label">Phone Number</label>
                                                 {{ registration_form.phone_number }}
                                             </div>
+                                        <br>
                                             <div class="form--group">
-                                                <label for="{{ registration_form.whatsapp_number.id_for_label }}" class="form--label">Whatsapp Number</label>
+                                                {{ registration_form.whatsapp_number.errors }}
+                                                <label for="{{ registration_form.whatsapp_number.id_for_label }}"class="form--label">Whatsapp Number</label>
                                                {{ registration_form.whatsapp_number }}
                                             </div>
+                                        <br>
 
                                         <div class="form--group">
+                                            {{ registration_form.school.errors }}
                                                 <label for="{{ registration_form.school.id_for_label }}" class="form--label">Pick the School you operate in</label>
                                                {{ registration_form.school }}
-                                            </div>
+                                        </div>
+                                        <br>
+
                                          <div class="form--group">
+                                             {{ registration_form.password1.errors }}
                                                 <label for="{{ registration_form.password1.id_for_label }}" class="form--label">Password</label>
                                                {{ registration_form.password1}}
                                                 <span toggle="#{{registration_form.password1.id_for_label}}" data-toggle="{{ registration_form.password1.id_for_label }}"
                                                     class="zmdi zmdi-eye field--icon toggle--password"></span>
 
                                             </div>
+                                        <br>
+
                                         <div class="form--group">
+
                                                 <label for="{{ registration_form.password2.id_for_label }}" class="form--label">Type Password Again</label>
                                            {{ registration_form.password2}}
-                                                <span toggle="#{{registration_form.password2.id_for_label}}" data-toggle="{{ registration_form.password2.id_for_label }}"
-                                                    class="zmdi zmdi-eye field--icon toggle--password"></span>
+                                                <span toggle="#{{registration_form.password2.id_for_label}}" data-toggle="{{ registration_form.password2.id_for_label }}" class="zmdi zmdi-eye field--icon toggle--password"></span>
                                                 <span class="zmdi zmdi-close-circle field--icon" id="mismatch" style="color:red;margin-right:25px;"></span>
                                                 <span class="zmdi zmdi-check-circle field--icon" id="match" style="color:green;margin-right:25px;"></span>
                                             </div>
+                                        <br>
 
                                         <div class="htc__login__btn mt--30">
                                             <input type="submit"  value="Register">

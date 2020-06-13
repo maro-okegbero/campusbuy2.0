@@ -34,21 +34,11 @@
     <script src={%static "cb_js/vendor/jquery-1.12.4.min.js" %}></script>
             <!-- Main js file that contents all jQuery plugins activation. -->
         <script src={%static "cb_js/vendor/modernizr-2.8.3.min.js" %}></script>
-    <style>
-        .subcat_list ul{
-  list-style-type: circle;
-  padding: 0;
 
-}
 
-.subcat_list li a{
-  padding: 5px 10px;
-  font-size: 24px;
-    display: block;
-}
-    </style>
     {% block style %}
     {% endblock %}
+
 </head>
 
 <body>
@@ -79,7 +69,7 @@
                             <ul class="select__language">
                                 <li class="drop--lan">Choose Your Location
                                     <div class="language__option">
-                                        <span><a href={% url "school_specific" school_name="app" %}>Uniben</a> </span>
+                                        <span><a href={% url "school_specific" school_name="Uniben" %}>Uniben</a> </span>
                                         <span><a href={% url "school_specific" school_name="Unical" %}>Unical</a></span>
                                         <span><a href={% url "school_specific" school_name="Unillag" %}>Unilag</a></span>
                                         <span><a href={% url "school_specific" school_name="Uniport" %}>Uniport</a></span>

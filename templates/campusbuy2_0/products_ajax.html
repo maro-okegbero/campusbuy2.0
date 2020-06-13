@@ -27,11 +27,13 @@
         {% endif %}
             </h2>
             <ul class="product__price">
+
                 {% if product.exchange %}
                     <li class="new__price">for {{ product.exchange_for }}</li>
                 {% else %}
                     <li class="new__price">&#x20A6;{{ product.price| intcomma }}</li>
                 {% endif %}
+
             </ul>
         </div>
     </div>

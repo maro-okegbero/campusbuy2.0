@@ -2,7 +2,7 @@
 {% load cloudinary %}
 
 {% for product in products %}
-<div class="col-md-4 single__pro col-lg-3 col-sm-6">
+    <div class="col-md-4 single__pro col-lg-3 cat--1 col-sm-6">
     <div class="product foo">
         <div class="product__inner">
             <div {% if product.exchange %} class="pro__thumb exchange-list" {% else %} class=" pro__thumb sell-list " {% endif %}>
