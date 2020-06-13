@@ -114,7 +114,6 @@ class Product(models.Model):
     dropoff_point = models.TextField(max_length=250, choices=SCHOOL_HOT_SPOTS, default=MAIN_GATE, blank=True)
     name = models.CharField(max_length=70, blank=False, null=False)  # product name
     description = models.TextField(max_length=250)
-    rating = models.FloatField(default=0, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2,null=True, blank=True)
     exchange = models.BooleanField(default=False)
     exchange_for = models.CharField(max_length=70, blank=True, null=True)
