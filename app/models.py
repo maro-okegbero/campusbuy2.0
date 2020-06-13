@@ -45,7 +45,7 @@ class Category(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False, unique=True)
     details = models.CharField(max_length=200, default="Default")
 
-    image = CloudinaryField('image')  # Special Cloudinary image Field
+    # image = CloudinaryField('image')  # Special Cloudinary image Field
 
     date_created = models.DateTimeField(blank=False, default=timezone.now)
 

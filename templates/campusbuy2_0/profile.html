@@ -2,7 +2,6 @@
 {% load cloudinary %}
 {% load humanize %}
 {% load static %}
-
 {% block content %}
 
      <!-- Start Bradcaump area -->
@@ -47,14 +46,14 @@
                             <p><span class="ti-user"></span> Welcome, {{ user.first_name }}</p>
                         </div>
                         <label class="col-12" for="myInput">Your Shop Link </label>
-<!--                        <div class="col-12 input-group welcome&#45;&#45;message">-->
-<!--                                <input  class="form-control" type="text" value="https://campusbuy.com/shop/{{user.business_name}}" id="myInput" disabled>-->
-<!--                            <div class="input-group-append">-->
-<!--                                <button id="copy-button" onclick="myFunction()" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="top" title="Copied!" type="button">Copy</button>-->
-<!--                            </div>-->
-<!--&lt;!&ndash;                            <input onclick="myFunction()" class="btn btn-danger" type="text" value="https://campusbuy.com/shop/{{user.business_name}}" id="myInput">&ndash;&gt;-->
-<!--&lt;!&ndash;                            <p><span class="ti-link"></span>Your Online Shop: <code><a target="_blank" href="https://campusbuy.com/shop/{{user.business_name}}">https://campusbuy.com/shop/{{user.business_name}}</a></code></p>&ndash;&gt;-->
-<!--                        </div>-->
+                        <div class="row input-group welcome--message">
+                                <input  class=" ml-4 col-sm-12 col-lg-3 col-md-3 form-control" type="text" value="https://campusbuy.com/shop/{{user.business_name}}" id="myInput">
+                            <div class="input-group-append">
+                                <button id="copy-button" onclick="myFunction()" class="col-12 btn btn-outline-secondary" type="button">Copy</button>
+                            </div>
+<!--                            <input onclick="myFunction()" class="btn btn-danger" type="text" value="https://campusbuy.com/shop/{{user.business_name}}" id="myInput">-->
+<!--                            <p><span class="ti-link"></span>Your Online Shop: <code><a target="_blank" href="https://campusbuy.com/shop/{{user.business_name}}">https://campusbuy.com/shop/{{user.business_name}}</a></code></p>-->
+                        </div>
                         <!--Welcome Message End-->
                         <div class="mb__30 col-sm-12 col-md-3 col-lg-3">
                             <div class="list-group" id="list-tab" role="tablist">
@@ -245,13 +244,14 @@
 <script>
     function myFunction() {
     var copyText = document.getElementById("myInput");
-
+    console.log(copyText.value);
     copyText.select();
     copyText.setSelectionRange(0, 99999);
 
     document.execCommand("copy");
-
-   // $('#copy-button').tooltip(options)
+    copyButton = document.getElementById("copy-button")
+    copyButton.innerHTML= "Copied!"
+    copyButton.attr
     }
 </script>
 

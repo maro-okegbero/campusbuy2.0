@@ -13,13 +13,13 @@ class PostAdForm(ModelForm):
     class Meta:
         model = Product
         fields = ['category', 'name', 'price', 'description',
-                  'dropoff_point', 'school', 'exchange', 'exchange_for','image',]
+                  'dropoff_point', 'school', 'exchange', 'exchange_for',]#'image',]
         labels = {
             'name': forms.TextInput(attrs={'id': 'product_name'}),
             'category': forms.Select(attrs={'id': 'product_category'}),
             'price': forms.NumberInput(attrs={'id': 'product_price'}),
             'description': forms.TextInput(attrs={'id': 'product_description'}),
-            'image': forms.TextInput(attrs={'id': 'product_image'}),
+            # 'image': forms.TextInput(attrs={'id': 'product_image'}),
             'dropoff_point': forms.Select(attrs={'id': 'dropoff_point'}),
             'exchange':forms.CheckboxInput(attrs={'id':'product_exchange'}),
             'exchange_for':forms.TextInput(attrs={'id':'product_exchange_for'}),
