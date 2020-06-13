@@ -104,55 +104,6 @@ button {
     position: relative;
 }
 
-.product__action {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    height: 36px;
-    -ms-flex-pack: distribute;
-    justify-content: space-around;
-    line-height: 44px;
-    margin: auto;
-    position: relative;
-    width: 106px;
-    z-index: 2;
-}
-.product__action::before {
-    background: #fff none repeat scroll 0 0;
-    content: "";
-    height: 100%;
-    left: 0;
-    opacity: 0.85;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: -1;
-}
-.product__action li a span {
-    color: #666666;
-    font-size: 20px;
-    -webkit-transition: all 0.3s ease 0s;
-    transition: all 0.3s ease 0s;
-}
-
-.product__action li:first-child::before {
-    background: #666666 none repeat scroll 0 0;
-    content: "";
-    height: 24px;
-    position: absolute;
-    right: 0;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-    width: 1px;
-}
-.product__action li {
-    position: relative;
-    width: 50%;
-}
-.product__action li a span:hover {
-    color: #7D6DFF;
-}
 .product:hover .product__hover__info {
     opacity: 1;
     top: 50%;
