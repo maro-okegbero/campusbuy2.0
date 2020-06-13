@@ -55,6 +55,8 @@ class Category(models.Model):
 
     class Meta:
         ordering = ['-date_created']
+        verbose_name = "category"
+        verbose_name_plural = "categories"
 
 
 class SubCategory(models.Model):
@@ -67,6 +69,10 @@ class SubCategory(models.Model):
 
     def __str__(self):
         return f"Category: {self.category}" + f" -  {self.name}"
+
+    class Meta:
+        verbose_name = "subcategory"
+        verbose_name_plural = "subcategories"
 
 
 class Product(models.Model):
@@ -136,5 +142,6 @@ class Product(models.Model):
 
     class Meta:
         ordering = ['-published_date']
-
+        verbose_name = "product"
+        verbose_name_plural = "products"
 
