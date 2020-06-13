@@ -1,82 +1,122 @@
+
 {%extends 'campusbuy2_0/base.html' %}
 {% load static %}
 
+{#{% load crispy_forms_tags %}#}
 
-    {% block content %}
-      <div class="ht__bradcaump__area"
-                style="background: rgba(0, 0, 0, 0) url({% static 'images/bg/2.jpg' %}) no-repeat scroll center center / cover ;">
-                <div class="ht__bradcaump__wrap">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="bradcaump__inner text-center">
-                                    <h2 class="bradcaump-title">Post Ad</h2>
-                                    <nav class="bradcaump-inner">
-                                        <a class="breadcrumb-item" href={% url 'profile' %}>Merchant Account</a>
-                                        <span class="brd-separetor">/</span>
-                                        <span class="breadcrumb-item active">Post Ad</span>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- End Bradcaump area -->
-            <section class="ptb--90">
+{% block content %}
+
+
+    <!-- Start Login Register Area -->
+            <div class="htc__login__register bg__white ptb--200"
+                style="background: rgba(0, 0, 0, 0) url({% static 'images/bg/5.jpg' %}) no-repeat scroll center center / cover ;">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 ml-auto mr-auto">
-                             <form class="login login--account" action="#" method="POST" enctype="multipart/form-data">
-                               {% csrf_token %}
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12 col-lg-6 form--group">
-                                        <label for={{ form.name.id_for_label }} class="form--label">Product Name</label>
-                                        {{ form.name }}
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 col-lg-6 form--group">
-                                        <label for={{ form.price.id_for_label }} class="form--label">Price <small><em>(Subject to negotiation with buyer.)</em></small></label>
-                                        {{ form.price }}
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 col-lg-6 form--group">
-                                        <label style="font-weight: bold;" for={{ form.image.id_for_label }}class="form--label">Image</label>
-                                       {{ form.image }}
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 col-lg-6 form--group product--select">
-                                        <label for={{ form.category.id_for_label }} class="form--label">Choose the category</label>
-                                        {{ form.category }}
-                                    </div>
-                                    <div class="col-12 form--group">
-                                        <label for={{ form.description.id_for_label }} class="form--label">Product Description</label>
-                                        {{ form.description }}
-                                    </div>
-
-                                      </div>
-
-                                    <div class="col-12 form--group">
-                                        <label style="font-weight: bold;" for={{ form.school.id_for_label }}class="form--label">School </label>
-                                        {{ form.school }}
-                                    </div>
-
-                                    <div class="col-12 form--group">
-                                        <label style="font-weight: bold;" for={{ form.dropoff_point.id_for_label }}class="form--label">Preferred MeetUp Location </label>
-                                        {{ form.dropoff_point }}
-
-                                </div>
-                                <br>
-                                 <div class="htc__login__btn">
-                                <input type="submit"  value="POST">
-                                </div>
-
-
-                            </form>
-
+                            <ul class="login__register__menu nav justify-contend-center" role="tablist">
+                                <li role="presentation" class="login active"><a class="active" href="#sell" role="tab"
+                                        data-toggle="tab">Sell</a></li>
+                                <li role="presentation" class="register"><a href="#Xchange" role="tab"
+                                        data-toggle="tab">Xchange</a></li>
+                            </ul>
                         </div>
                     </div>
+                    <!-- Start Sell Xchange Content -->
+                    <div class="row tab-content">
+                        <div class="col-md-6  ml-auto mr-auto">
+                                <!-- Start Sell  section -->
+                                <div id="sell" role="tabpanel" class="single__tabs__panel tab-pane active">
+                                    <p class="text-center">Post an ad.</p>
+                                         <form class="login login--account" action="#" method="POST" enctype="multipart/form-data">
+                                           {% csrf_token %}
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-12 col-lg-6 form--group">
+                                                    <label for={{ form.name.id_for_label }} class="form--label">Product Name</label>
+                                                    {{ form.name }}
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-lg-6 form--group">
+                                                    <label for={{ form.price.id_for_label }} class="form--label">Price <small><em>(Subject to negotiation with buyer.)</em></small></label>
+                                                    {{ form.price }}
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-lg-6 form--group">
+                                                    <label style="font-weight: bold;" for={{ form.image.id_for_label }}class="form--label">Image</label>
+                                                   {{ form.image }}
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-lg-6 form--group product--select">
+                                                    <label for={{ form.category.id_for_label }} class="form--label">Choose the category</label>
+                                                    {{ form.category }}
+                                                </div>
+                                                <div class="col-12 form--group">
+                                                    <label for={{ form.description.id_for_label }} class="form--label">Product Description</label>
+                                                    {{ form.description }}
+                                                </div>
+                                                <div class="col-12 form--group">
+                                                    <label style="font-weight: bold;" for={{ form.dropoff_point.id_for_label }}class="form--label">Preferred MeetUp Location </label>
+                                                    {{ form.dropoff_point }}
+                                                </div>
+                                                <div class="col-12 form--group">
+                                                    <label style="font-weight: bold;" for={{ form.school.id_for_label }}class="form--label">School </label>
+                                                    {{ form.school }}
+                                                </div>
+                                            </div>
+                                            <br>
+                                             <div class="htc__login__btn">
+                                            <input type="submit"  value="POST">
+                                            </div>
+
+
+                                        </form>
+
+                                </div>
+                                <!-- End Sell section -->
+
+                                <!-- Start Xchange section -->
+                                <div id="Xchange" role="tabpanel" class="single__tabs__panel tab-pane ptb--90">
+                                <p class="text-center">Post a Barter and What you Want in Return.</p>
+                                         <form class="login login--account" action="#" method="POST" enctype="multipart/form-data">
+                                               {% csrf_token %}
+                                                <div class="col-md-6 col-sm-12 col-lg-12 form--group">
+                                                    <label for={{ form.name.id_for_label }} class="form--label">Product Name</label>
+                                                    {{ form.name }}
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-lg-12 form--group">
+                                                    <label for={{ form.exchange_for.id_for_label }} class="form--label">In Return For </label>
+                                                    {{ form.exchange_for }}
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-lg-12 form--group">
+                                                    <label style="font-weight: bold;" for={{ form.image.id_for_label }}class="form--label">Image</label>
+                                                   {{ form.image }}
+                                                </div>
+                                                <div class="col-md-6 col-sm-12 col-lg-12 form--group product--select">
+                                                    <label for={{ form.category.id_for_label }} class="form--label">Choose the category</label>
+                                                    {{ form.category }}
+                                                </div>
+                                                <div class="col-12 form--group">
+                                                    <label for={{ form.description.id_for_label }} class="form--label">Product Description</label>
+                                                    {{ form.description }}
+                                                </div>
+                                                <div class="col-12 form--group">
+                                                    <label style="font-weight: bold;" for={{ form.dropoff_point.id_for_label }}class="form--label">Preferred MeetUp Location </label>
+                                                    {{ form.dropoff_point }}
+                                                </div>
+                                                <div class="col-12 form--group">
+                                                    <label style="font-weight: bold;" for={{ form.school.id_for_label }}class="form--label">School </label>
+                                                    {{ form.school }}
+                                                </div>
+                                            <br>
+                                             <div class="htc__login__btn">
+                                            <input type="submit"  value="POST">
+                                            </div>
+
+
+                                        </form>
+                                </div>
+                                <!-- End exchange Content -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End sell exchange Content -->
                 </div>
-            </section>
+            <!-- End sell exchange Area -->
 
-
-    {% endblock %}
-
-
+{% endblock %}

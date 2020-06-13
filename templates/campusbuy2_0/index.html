@@ -173,7 +173,7 @@
                             <div class="col-12">
                                 <div class="section__title section__title--2 text-center">
                                     <h2 class="title__line">Recently Added Products</h2>
-                                    <p>Swipe left or right to view newly added products.</p>
+                                    <p>Swipe to view newly added products.</p>
                                 </div>
                             </div>
                         </div>
@@ -185,7 +185,7 @@
                                 <div class="col-lg-12">
                                     <div class="product">
                                         <div class="product__inner">
-                                            <div class="pro__thumb">
+                                            <div {% if product.exchange %} class="pro__thumb exchange-list" {% else %} class=" pro__thumb sell-list " {% endif %}>
                                                 {% if school_name %}
                                                 <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=product.category.category.name subcategory=product.category.name pk=product.pk %}>
                                                 {% cloudinary product.image THUMBNAIL %}
@@ -207,7 +207,11 @@
 
                                             </h2>
                                             <ul class="product__price">
+                                                {% if product.exchange %}
+                                                <li class="new__price">for {{ product.exchange_for }}</li>
+                                                {% else %}
                                                 <li class="new__price">&#x20A6;{{ product.price| intcomma }}</li>
+                                                {% endif %}
                                             </ul>
                                             <p class="product__price">{{product.published_date|timesince}} ago</p>
                                         </div>

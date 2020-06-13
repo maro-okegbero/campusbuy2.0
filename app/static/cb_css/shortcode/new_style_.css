@@ -1,8 +1,16 @@
+/*
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-}
+}*/
 
+/* to differentiate exchange and price */
+.exchange-list{
+    border-top:8px solid #e0e40b;
+}
+.sell-list{
+  border-top:8px solid #8e8e8e;
+}
 .not-found-body {
   padding: 0;
   margin: 0;

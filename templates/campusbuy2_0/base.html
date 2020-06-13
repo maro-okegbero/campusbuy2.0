@@ -26,9 +26,9 @@
     <!-- Responsive css -->
     <link rel="stylesheet" href={% static "cb_css/cb_responsive.css" %}>
     <!-- User style -->
-    <link rel="stylesheet" href={%static "cb_css/cb_custom_.css" %}>
-    <!--  Eroor 404  -->
-    <link rel="stylesheet" href={%static "cb_css/shortcode/error404.css" %}>
+    <link rel="stylesheet" href={%static "cb_css/cb_custom.css" %}>
+    <!--  Error 404  -->
+    <link rel="stylesheet" href={%static "cb_css/shortcode/new_style_.css" %}>
 
 <!-- jquery latest version -->
     <script src={%static "cb_js/vendor/jquery-1.12.4.min.js" %}></script>
@@ -36,6 +36,8 @@
         <script src={%static "cb_js/vendor/modernizr-2.8.3.min.js" %}></script>
 
 
+    {% block style %}
+    {% endblock %}
 
 </head>
 
@@ -243,7 +245,8 @@
             <script src={%static "cb_js/main.js" %}></script>
             <script src={%static "cb_js/popper.min.js" %}></script>
             <script src="{%static 'cb_js/ajax/jquery-3.5.1.min.js' %}"></script>
-            <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+            <script src={%static "cb_js/js.cookie.min.js_2.2.1/cdnjs/js.cookie.min.js"%}></script>
+<!--            <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>-->
             <script>
                 var csrftoken = Cookies.get('csrftoken')
                 function csrfSafeMethod(method) {

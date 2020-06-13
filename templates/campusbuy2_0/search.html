@@ -42,18 +42,24 @@
 
                         <!-- Start Single Product-->
                                 {% if results %}
-                                    <div id="row product-list" class="row product__list">
+                                    <div id="product-list">
                                         {% include 'campusbuy2_0/search_ajax.html' %}
                                     </div>
-                                {% else %}
+                                {% elif query is None %}
                                     <div class="search--status">
                                     <img alt="Waiting to search!" class="search--status__img" src={% static "images/bg/waiting-to-search.png"%}  >
                                     <p class="search--status__message">Waiting to search!</p>
+                                    </div>
+                                {% else %}
+                                    <div class="search--status">
+                                        <p class="search--status__message">Your Search "{{query|title}}" did not match any product.</p>
+                                        <img alt="No products found" class="search--status__img" src={% static "images/bg/not-found.png" %} >
                                     </div>
                                 {% endif %}
                     </div>
                 </div>
             </section>
+
 
 
 
@@ -88,5 +94,97 @@ $(window).scroll(function(){
     }
 
 });
+
+{#{%extends 'campusbuy2_0/base.html' %}#}
+{#{% load static%}#}
+{#{% load nigerian %}#}
+{#    {% block content%}#}
+{#    {% load cloudinary %}#}
+{#        <div class="ht__bradcaump__area"#}
+{#                style="background: rgba(0, 0, 0, 0) url({% static "images/bg/2.jpg" %}) no-repeat scroll center center / cover ;">#}
+{#                <div class="ht__bradcaump__wrap">#}
+{#                    <div class="container">#}
+{#                        <div class="row">#}
+{#                            <div class="col-12">#}
+{#                                <div class="bradcaump__inner text-center">#}
+{#                                    <h2 class="bradcaump-title">Search</h2>#}
+{#                                    <nav class="bradcaump-inner">#}
+{#                                      {% if school_name %}#}
+{#                                    <a href={% url 'school_specific' school_name=school_name_for_url%}>Home</a>#}
+{#                                 {% else %}#}
+{#                                    <a href={% url 'homepage' %}> Home </a>#}
+{#                                 {% endif %}#}
+{#                                        <span class="brd-separetor">/</span>#}
+{#                                        <span class="breadcrumb-item active">Search</span>#}
+{#                                    </nav>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#        <!-- End Bradcaump area -->#}
+{##}
+{#            <!-- Search Area Start -->#}
+{#            <section class="search--area ptb--90 text-center">#}
+{#                <div class="container">#}
+{#                    <div class="search__keyword">#}
+{#                        <p>Type keywords relative to your needs to find the products you need.</p>#}
+{#                    </div>#}
+{#                    <div class="search__bar">#}
+{#                         <form method="get" >#}
+{#                            <input type="search" name="q" placeholder="Type Here" aria-placeholder="Type here"  class="fa fa-search search--bar">#}
+{#                        </form>#}
+{##}
+{#                        <!-- Start Single Product-->#}
+{#                                {% if results %}#}
+{#                                    <div id="row product-list" class="row product__list">#}
+{#                                        {% include 'campusbuy2_0/search_ajax.html' %}#}
+{#                                    </div>#}
+{#                                {% else %}#}
+{#                                    <div class="search--status">#}
+{#                                    <img alt="Waiting to search!" class="search--status__img" src={% static "images/bg/waiting-to-search.png"%}  >#}
+{#                                    <p class="search--status__message">Waiting to search!</p>#}
+{#                                    </div>#}
+{#                                {% endif %}#}
+{#                    </div>#}
+{#                </div>#}
+{#            </section>#}
+{##}
+{##}
+{##}
+{##}
+{#    {% endblock %}#}
+{##}
+{#{%block domready%}#}
+{##}
+{#var page = 1#}
+{#var empty_page = false;#}
+{#var block_request = false;#}
+{##}
+{#$(window).scroll(function(){#}
+{#    var margin = $(document).height - $(window).height - 600;#}
+{##}
+{#    if ($(window).scrollTop > margin && empty_page == false && block_request == false){#}
+{##}
+{#        block_request = true;#}
+{#        page += 1;#}
+{#        $.get('?page=' + page, function(data){#}
+{##}
+{#            if (data == ''){#}
+{#                empty_page = true;#}
+{#            }#}
+{#            else{#}
+{#                block_request = false;#}
+{#                $('#product-list').append(data)#}
+{#            }#}
+{##}
+{#        });#}
+{##}
+{#    }#}
+{##}
+{#});#}
+
 
 {% endblock %}

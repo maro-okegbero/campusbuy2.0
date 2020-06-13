@@ -1,5 +1,6 @@
 {% extends 'campusbuy2_0/base.html' %}
 {% load static %}
+{% load cloudinary %}
 
 {% block content %}
  <div class="ht__bradcaump__area"
@@ -28,20 +29,39 @@
             <!-- End Bradcaump area -->
 
      <section class="htc__product__area shop__page ptb--130 ptb--210 bg__white">
-                <div class="container">
+         <div class="container view--add">
                     <div class="htc__product__container">
-                        <div class="row subcat_list">
-                            <ul>
-                            {% for subcategory in subcategories %}
-                                {% if school_name %}
-                                <li> <a href="{% url 'view_product_school_specific' school_name_for_url subcategory.category.name subcategory.name %}"> {{ subcategory.name }}</a></li>
-                                {% else %}
-                                <li> <a href="{% url 'view_products' subcategory.category.name subcategory.name %}"> {{ subcategory.name }}</a></li>
-                                {% endif %}
+                        <div class="row product__list">
+                            <!-- All products in a loop -->
+                    {% for subcategory in subcategories %}
+                            <div class="col-md-4 single__pro col-lg-4 col-sm-6">
+                                <div class="product foo">
+                                    <div class="product__inner">
+                                        <div class="pro__thumb">
+                                            {% if school_name_for_url %}
+                                                <a href={% url 'view_product_school_specific' school_name_for_url subcategory.category.name subcategory.name %} >
+                                                 {% cloudinary subcategory.image THUMBNAIL %}
+                                                </a>
+                                            {% else %}
+                                                <a href={% url 'view_products' subcategory.category.name subcategory.name  %}>
+                                                 {% cloudinary subcategory.image THUMBNAIL %}
+                                                </a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="product__details text-center subcat_list">
+                                        <ul>
+                                            {% if school_name %}
+                                            <li> <a href="{% url 'view_product_school_specific' school_name_for_url subcategory.category.name subcategory.name %}"> {{ subcategory.name }}</a></li>
+                                            {% else %}
+                                            <li> <a href="{% url 'view_products' subcategory.category.name subcategory.name %}"> {{ subcategory.name }}</a></li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                             {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+
+
      </section>
 {% endblock %}

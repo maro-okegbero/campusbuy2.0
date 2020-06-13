@@ -24,7 +24,7 @@
                                         {% if school_name %}
                                             <a href={% url 'view_product_school_specific' subcategory=subcategory school_name=school_name_for_url category_name=category_name  %} >Shop</a>
                                         {% else %}
-                                        <a href={% url 'view_products' subcategory=category_name category_name=category_name%} >Shop</a>
+                                        <a href={% url 'view_products' subcategory=category_name %} >Shop</a>
                                         {% endif %}
                                         <span class="brd-separetor">/</span>
                                         <span class="breadcrumb-item active">Product Details</span>
@@ -71,12 +71,16 @@
 {#                                        <li><span class="ti-star"></span></li>#}
 {#                                    </ul>#}
 {#                                    <span class="rat__qun">(Based on 0 Ratings)</span>#}
-                                </div>
+                                {#</div>#}
                                 <div class="pro__details">
                                     <p>{{ product.description }}</p>
                                 </div>
                                 <ul class="pro__dtl__prize">
-                                    <li>&#x20A6;{{ product.price|intcomma }}</li>
+                                    {% if product.exchange %}
+                                        <li class="new__price">for {{ product.exchange_for }}</li>
+                                    {% else %}
+                                        <li class="new__price">&#x20A6;{{ product.price| intcomma }}</li>
+                                    {% endif %}
                                 </ul>
                                 <div class="product-action-wrap">
                                     <div class="prodict-statas"><span>Location :</span> {{ product.merchant.address }}</div>
@@ -114,7 +118,7 @@
                             <div class="col-lg-12">
                                 <div class="product">
                                     <div class="product__inner">
-                                        <div class="pro__thumb">
+                                        <div {% if product.exchange %} class="pro__thumb exchange-list" {% else %} class=" pro__thumb sell-list " {% endif %}>
                                             {% if school_name %}
                                                 <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=product.category.category.name subcategory=product.category pk=product.pk %}>
                                                 {% cloudinary product.image THUMBNAIL %}
@@ -134,7 +138,11 @@
                                             {% endif %}
                                         </h2>
                                         <ul class="product__price">
-                                            <li class="new__price">&#x20A6;{{ product.price | intcomma }}</li>
+                                            {% if product.exchange %}
+                                                <li class="new__price">for {{ product.exchange_for }}</li>
+                                            {% else %}
+                                                <li class="new__price">&#x20A6;{{ product.price| intcomma }}</li>
+                                            {% endif %}
                                         </ul>
                                     </div>
                                 </div>
@@ -167,7 +175,7 @@
                                     <div class="col-md-4 single__pro col-lg-3 col-sm-6">
                                         <div class="product foo">
                                             <div class="product__inner">
-                                                <div class="pro__thumb">
+                                                <div {% if product.exchange %} class="pro__thumb exchange-list" {% else %} class=" pro__thumb sell-list " {% endif %}>
                                                  {% if school_name %}
                                                 <a href={% url 'product_detail_school_specific' school_name=school_name_for_url category_name=product.category.category.name subcategory=product.category pk=product.pk %}>
                                                 {% cloudinary product.image THUMBNAIL %}
@@ -187,7 +195,11 @@
                                             {% endif %}
                                                 </h2>
                                                 <ul class="product__price">
-                                                    <li class="new__price">&#x20A6;{{ product.price | intcomma }}</li>
+                                                    {% if product.exchange %}
+                                                        <li class="new__price">for {{ product.exchange_for }}</li>
+                                                    {% else %}
+                                                        <li class="new__price">&#x20A6;{{ product.price| intcomma }}</li>
+                                                    {% endif %}
                                                 </ul>
                                             </div>
                                         </div>
