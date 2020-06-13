@@ -153,15 +153,7 @@ def view_products(request, category_name, subcategory, school_name=None):
         my_list = category.product_set.filter(
             school__alias=school_name) if school_name else category.product_set.all()
         product_list = paginator(my_list, 5, request)
-        if request.is_ajax():
-            context = {'category': subcategory,
-                       'parent_category': category_name,
-                       'products': product_list,
-                       'school_name': school_name,
-                       'school_name_for_url': school_name,
-                       'value': datetime.now()
-                       }
-            return render(request, 'campusbuy2_0/products_ajax.html', context)
+
         context = {'category': subcategory,
                    'parent_category': category_name,
                    'products': product_list,
@@ -169,6 +161,10 @@ def view_products(request, category_name, subcategory, school_name=None):
                    'school_name_for_url': school_name,
                    'value': datetime.now()
                    }
+
+        if request.is_ajax():
+            return render(request, 'campusbuy2_0/products_ajax.html', context)
+
         return render(request, 'campusbuy2_0/products.html', context)
 
     except SubCategory.DoesNotExist as e:
@@ -186,17 +182,14 @@ def view_all_products(request, school_name=None):
                                                                                                         'merchant')
 
     all_products = paginator(all_products, 5, request)
-    if request.is_ajax():
-        context = {"all_products": all_products, 'school_name': school_name,
-                   'school_name_for_url': school_name,
-                   'value': datetime.now()
-                   } if school_name else {"all_products": all_products, 'value': datetime.now()}
-        return render(request, 'campusbuy2_0/all_products_ajax.html', context)
 
     context = {"all_products": all_products, 'school_name': school_name,
                'school_name_for_url': school_name,
                'value': datetime.now()
                } if school_name else {"all_products": all_products, 'value': datetime.now()}
+    if request.is_ajax():
+        return render(request, 'campusbuy2_0/all_products_ajax.html', context)
+
     return render(request, 'campusbuy2_0/all_products.html', context)
 
 
@@ -357,22 +350,14 @@ def merchant_profile(request, school_name=None):
         business_detail_form = MerchantBusinessDetailsForm(initial=merchant.__dict__)
         login_details_form = MerchantLoginDetailsForm(initial=merchant.__dict__)
 
-    if request.is_ajax():
-        context = {"products": products,
-                   "school_name_for_url": school_name,
-                   "personal_information_form": personal_information_form,
-                   "business_detail_form": business_detail_form,
-                   "login_details_form": login_details_form
-                   }
-
-        return render(request, 'campusbuy2_0/profile_ajax.html', context)
-
     context = {"products": products,
                "school_name_for_url": school_name,
                "personal_information_form": personal_information_form,
                "business_detail_form": business_detail_form,
                "login_details_form": login_details_form
                }
+    if request.is_ajax():
+        return render(request, 'campusbuy2_0/profile_ajax.html', context)
 
     return render(request, 'campusbuy2_0/profile.html', context)
 
@@ -387,15 +372,6 @@ def merchant_shop(request, business_name, school_name=None):
         products_set = merchant.product_set.defer('school', 'merchant', 'description')
         school_name = merchant.school.alias
         products = paginator(products_set, 5, request)
-        if request.is_ajax():
-            context = {'products': products, 'business_name': business_name,
-                       'merchant': merchant,
-                       'school_name': school_name,
-                       'school_name_for_url': school_name,
-                       'value': datetime.now()
-                       }
-
-            return render(request, 'campusbuy2_0/shop_ajax.html', context)
 
         context = {'products': products, 'business_name': business_name,
                    'merchant': merchant,
@@ -403,6 +379,9 @@ def merchant_shop(request, business_name, school_name=None):
                    'school_name_for_url': school_name,
                    'value': datetime.now()
                    }
+
+        if request.is_ajax():
+            return render(request, 'campusbuy2_0/shop_ajax.html', context)
 
         return render(request, 'campusbuy2_0/shop.html', context)
 
@@ -501,11 +480,14 @@ def search(request, school_name=None):
     results = []
     no_school_query = Product.objects.annotate(search=SearchVector('name', 'description', )).filter(
         search=query).defer('school', 'merchant', 'description')
+
     school_exists_query = Product.objects.annotate(search=SearchVector('name', 'description', )).filter(
         search=query).defer('school', 'merchant', 'description').filter(school__alias=school_name)
+
     if query:
         results_set = school_exists_query if school_name else no_school_query
         results = paginator(results_set, 5, request)
+
     if request.is_ajax():
         return render(request, 'campusbuy2_0/search_ajax.html', {'results': results})
 
