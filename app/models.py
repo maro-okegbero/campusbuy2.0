@@ -126,12 +126,12 @@ class Product(models.Model):
     views = models.IntegerField(default=0)
     published_date = models.DateTimeField(blank=False, default=timezone.now)
 
-    def __unsicode__(self):
+    def __unicode__(self):
         try:
             public_id = self.image.public_id
         except AttributeError:
             public_id = ''
-        return "Photo <%s:%s>" % (self.name, public_id)
+        return f"Photo {self.name}:{public_id}"
 
     def published(self):
         self.published_date = timezone.now()

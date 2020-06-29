@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "t&uajccae0n7@+_i09^+(hks$o2b#fkfo&fh($=k4w5b*v@@%o"
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -87,7 +87,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'campusbuy',
         'USER': 'campusbuy_admin',
-        'PASSWORD': 'guido van rossum',
+        'PASSWORD': os.getenv("DATABASE_PASWORD"),
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -135,11 +135,11 @@ AUTH_USER_MODEL = 'app.User'
 
 ADMINS = [[('Maro', 'marookegbero@gmail.com')]]
 
-EMAIL_HOST = 'smtp.mailgun.org'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'postmaster@mg.campusbuy.online'
-EMAIL_HOST_PASSWORD = 'ab86ddd847cfa42d4622d0c782b3ded2-f135b0f1-1421566c'
-EMAIL_USE_TLS = True
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
 DEFAULT_FROM_EMAIL = "CAMPUSBUY.ONLINE no-reply@campusbuy.online"
 
 SERVER_EMAIL = "admin@campusbuy.online"
@@ -153,8 +153,8 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Africa/Lagos'
 
 cloudinary.config(
-    cloud_name="campusbuy",
-    api_key="766124729178135",
-    api_secret="Pac3Elo7dI32V-MDYyDXYI4q5Qk",
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
 
 )
