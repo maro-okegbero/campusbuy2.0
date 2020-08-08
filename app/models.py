@@ -59,6 +59,8 @@ class SubCategory(models.Model):
 class User(AbstractUser):
     """ The User model for both merchants and regular users"""
     fullname = models.CharField(null=True, blank=True, max_length=200)
+    first_name = models.CharField(null=True, blank=True, max_length=200)
+    last_name = models.CharField(null=True, blank=True, max_length=200)
     phone_number = models.CharField(max_length=12, blank=True, null=True, unique=True)
     whatsapp_number = models.CharField(max_length=12, blank=True, null=True, unique=True)
     is_merchant = models.BooleanField(default=False)
