@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'app',
+    'campusbuy_api',
     'cloudinary',
     'phonenumber_field',
 
@@ -87,7 +89,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'campusbuy',
         'USER': 'campusbuy_admin',
-        'PASSWORD': os.getenv("DATABASE_PASWORD"),
+        'PASSWORD': os.getenv("DATABASE_PASSWORD"),
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -158,3 +160,18 @@ cloudinary.config(
     api_secret=os.getenv("CLOUDINARY_API_SECRET"),
 
 )
+
+REST_FRAMEWORK = {
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'campusbuy_api.backends.JWTAuthentication',
+    ],
+
+    'DEFAULT_PARSER_CLASSES': ['rest_framework.parsers.JSONParser'],
+
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated',
+    #     # 'rest_framework.permissions.IsAdminUser',
+    # ]
+
+}

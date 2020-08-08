@@ -19,7 +19,9 @@ from django.contrib.auth import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/', include('campusbuy_api.urls')),
     path('', include('app.urls')),
+
 ]
 
 handler404 = 'app.views.handler404'

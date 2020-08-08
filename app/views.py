@@ -14,7 +14,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.db.models import Q
-from django.core.mail import send_mail
+from campusbuy2_0.celery import send_welcome_mail
 from django.contrib.auth.password_validation import validate_password as vd
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 
@@ -351,7 +351,7 @@ def product_delete(request, pk):
         return redirect(reverse(merchant_profile))
     context = {'form': form,
                'product': product,
-               'value': datetime.now(),}
+               'value': datetime.now()}
     return render(request, 'campusbuy2_0/product_stat.html', context)
 
 
@@ -465,9 +465,11 @@ def login_register(request):
 
             raw_password = registration_form.cleaned_data.get('password1')
 
-            send_mail("Welcome to the CampusBuy Family",
-                      f"Hi {registration_form.cleaned_data.get('first_name')}, you've taken the first step in making your business grow exponentially. Well done",
-                      "welcome@campusbuy.online", [f'{registration_form.cleaned_data.get("email")}'])
+            mail_parameters = dict(name=registration_form.cleaned_data.get('first_name'),
+                                   email=registration_form.cleaned_data.get("email"))
+
+            send_welcome_mail(**mail_parameters)
+
             merchant = authenticate(username=username, password=raw_password)
 
             login(request, merchant)
