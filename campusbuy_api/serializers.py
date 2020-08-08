@@ -108,9 +108,9 @@ class UserSerializer(serializers.ModelSerializer):
         return data
 
     def create(self, validated_data):
-        business_name = validated_data.pop("business_name")
-        description = validated_data.pop("description")
-        address = validated_data.pop("address")
+        business_name = validated_data.pop("business_name") if validated_data.get("business_name") else None
+        description = validated_data.pop("description") if validated_data.get("description") else None
+        address = validated_data.pop("address") if validated_data.get("address") else None
         print(validated_data.get("phone_number"), "phonenumber====")
         user = User.objects.create_user(**validated_data)
 
