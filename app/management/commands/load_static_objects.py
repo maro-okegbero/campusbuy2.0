@@ -7,8 +7,8 @@ from abc import ABC
 import sys
 from django.core.management.base import BaseCommand, CommandError
 from munch import munchify
-from bookchamp.management import commands
-from bookchamp.utils import populate_obj
+from app.management import commands
+from app.utils import populate_obj
 
 thismodule = sys.modules[__name__]
 print(thismodule)
