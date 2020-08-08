@@ -6,14 +6,14 @@ from django.db.models import ObjectDoesNotExist
 
 
 class UserSerializer(serializers.ModelSerializer):
-    phone_number = serializers.CharField(required=False)
+    phone_number = serializers.CharField(required=False, allow_null=True)
     fullname = serializers.CharField(required=True)
-    whatsapp_number = serializers.CharField(required=False)
-    business_name = serializers.CharField(required=False, max_length=500)
-    address = serializers.CharField(required=False, max_length=1000)
-    description = serializers.CharField(required=False, max_length=1000)
+    whatsapp_number = serializers.CharField(required=False, allow_null=True)
+    business_name = serializers.CharField(required=False, max_length=500, allow_null=True)
+    address = serializers.CharField(required=False, max_length=1000, allow_null=True)
+    description = serializers.CharField(required=False, max_length=1000, allow_null=True)
     email = serializers.EmailField(required=True)
-    is_merchant = serializers.BooleanField(required=False, default=False)
+    is_merchant = serializers.BooleanField(required=False, default=False, allow_null=True)
 
     username = serializers.CharField(required=True, max_length=32)
     password = serializers.CharField(required=True, min_length=8, write_only=True)
