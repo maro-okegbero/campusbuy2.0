@@ -61,16 +61,10 @@
                                     <form class="login" action="#" method="POST" enctype="multipart/form-data">
                                         {% csrf_token %}
                                         <div class="form--group">
-                                            {{ registration_form.first_name.errors }}
+                                            {{ registration_form.full_name.errors }}
 
-                                                <label for="{{ registration_form.first_name.id_for_label }}" class="form--label">First Name</label>
-                                                {{registration_form.first_name}}
-                                            </div>
-                                        <br>
-                                            <div class="form--group">
-                                                {{ registration_form.last_name.errors }}
-                                                <label for="{{registration_form.last_name.id_for_label}}" class="form--label">Last Name</label>
-                                                {{registration_form.last_name}}
+                                                <label for="{{ registration_form.full_name.id_for_label }}" class="form--label">Fullname</label>
+                                                {{registration_form.full_name}}
                                             </div>
                                         <br>
                                             <div class="form--group">
@@ -93,39 +87,13 @@
                                             <p class="mr-auto ml-auto" id="email_incorrect-text" style="color:red;">A user with this email already exists</p>
 
                                         <br>
-                                              <div class="form--group">
-                                                  {{ registration_form.business_name.errors }}
-                                                <label class="form--label" for="{{ registration_form.business_name.id_for_label }}">Business Name</label>
-                                                {{ registration_form.business_name }}
-                                            <span class="zmdi zmdi-close-circle field--icon  mr-auto ml-auto" id="business_name_incorrect" style="color:red;"></span>
-                                                    <span class="zmdi zmdi-check-circle field--icon mr-auto ml-auto" id="business_name_correct" style="color:green;"></span>
-                                            </div>
-                                            <p class="mr-auto ml-auto" id="business_name_incorrect-text" style="color:red;">This business name is already taken</p>
 
-                                        <br>
-                                            <div class="form--group">
-                                                {{ registration_form.address.errors }}
-                                                <label  class="form--label" for="{{ registration_form.address.id_for_label }}">Address</label>
-                                                {{ registration_form.address }}
-                                            </div>
-                                        <br>
-                                            <div class="form--group">
-                                                {{ registration_form.business_description.errors }}
-                                                <label  class="form--label"for="{{ registration_form.business_description.id_for_label }}">Business Description</label>
-                                               {{ registration_form.business_description }}
-                                            </div>
-                                        <br>
                                             <div class="form--group">
                                                 {{ registration_form.phone_number.errors }}
                                                 <label for="{{ registration_form.phone_number.id_for_label }}" class="form--label">Phone Number</label>
                                                 {{ registration_form.phone_number }}
                                             </div>
-                                        <br>
-                                            <div class="form--group">
-                                                {{ registration_form.whatsapp_number.errors }}
-                                                <label for="{{ registration_form.whatsapp_number.id_for_label }}"class="form--label">Whatsapp Number</label>
-                                               {{ registration_form.whatsapp_number }}
-                                            </div>
+
                                         <br>
 
                                         <div class="form--group">

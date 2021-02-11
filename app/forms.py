@@ -28,10 +28,9 @@ class PostAdForm(ModelForm):
 
 
 class RegisterMerchantForm(UserCreationForm):
-    first_name = forms.CharField(max_length=30, required=True, label="FirstName",
+    full_name = forms.CharField(max_length=30, required=True, label="Fullname",
                                  widget=forms.TextInput(attrs={'id': 'first_name'}))
-    last_name = forms.CharField(max_length=30, required=True, label="LastName",
-                                widget=forms.TextInput(attrs={'id': 'last_name'}))
+
     email = forms.EmailField(max_length=254, required=True, label="Email",
                              widget=forms.EmailInput(attrs={'id': 'email'}))
 
@@ -56,6 +55,30 @@ class RegisterMerchantForm(UserCreationForm):
         model = User
         fields = ['username', 'first_name', 'last_name', 'business_name', 'address', 'business_description',
                   'phone_number', 'whatsapp_number', 'email', 'school',
+                  'password1', 'password2']
+
+
+class RegisterUserForm(UserCreationForm):
+    full_name = forms.CharField(max_length=30, required=True, label="Fullname",
+                                 widget=forms.TextInput(attrs={'id': 'first_name'}))
+
+    email = forms.EmailField(max_length=254, required=True, label="Email",
+                             widget=forms.EmailInput(attrs={'id': 'email'}))
+
+    username = forms.CharField(max_length=30, required=True, label="Username",
+                               widget=forms.TextInput(attrs={'id': 'username',
+                                                             'name': 'username', }))
+    school = forms.ModelChoiceField(empty_label="Select School", queryset=School.objects.all(),
+                                    widget=forms.Select(attrs={'class': 'business__location'}))
+
+    phone_number = forms.CharField(max_length=16, required=True, label="Phone Number",
+                                   widget=forms.TextInput(attrs={'id': 'phone_number'}))
+
+    class Meta:
+        User = get_user_model()
+        model = User
+        fields = ['username',
+                  'phone_number', 'full_name', 'email', 'school',
                   'password1', 'password2']
 
 

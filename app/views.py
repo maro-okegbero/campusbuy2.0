@@ -171,6 +171,7 @@ def subcategories(request, category_name, school_name=None):
         category = Category.objects.get(name=category_name)
         subcategory_list = category.subcategory_set.all()
         context = {'category': category_name,
+                   'description': category.description,
                    'subcategories': subcategory_list,
                    'school_name': school_name,
                    'school_name_for_url': school_name,
@@ -356,10 +357,16 @@ def product_delete(request, pk):
 
 
 @login_required(login_url='/login&register')
+def user_profile(request, school_name):
+    """
+    the view handling the profile dashboard of normal users
+    """
+
+
+@login_required(login_url='/login&register')
 def merchant_profile(request, school_name=None):
     user = request.user
-    merchant = User.objects.get(first_name=user.first_name)
-    print(merchant.business_name)
+    merchant = User.objects.get(username=user.username)
     products_set = merchant.product_set.all().defer('school', 'merchant', 'description')
     # products = paginator(products_set, 5, request)
     # product_list = a_paginator(products_set, 5, request)
@@ -454,7 +461,7 @@ def login_register(request):
     if request.user.is_authenticated:
         return redirect(merchant_profile)
     if request.method == "POST":
-        registration_form = RegisterMerchantForm(request.POST, request.FILES, auto_id=True)
+        registration_form = RegisterUserForm(request.POST, request.FILES, auto_id=True)
         login_form = LoginMerchantForm(request.POST, auto_id=True)
 
         if registration_form.is_valid():

@@ -25,7 +25,7 @@ class School(models.Model):
 class Category(models.Model):
     """Product category model class"""
     name = models.CharField(max_length=500, null=False, blank=False, unique=True)
-    details = models.CharField(max_length=500, default="Default")
+    description = models.CharField(max_length=500, default="Default")
 
     image = CloudinaryField('image', null=True, blank=True)  # Special Cloudinary image Field
 
@@ -58,17 +58,18 @@ class SubCategory(models.Model):
 
 class User(AbstractUser):
     """ The User model for both merchants and regular users"""
-    fullname = models.CharField(null=True, blank=True, max_length=200)
     first_name = models.CharField(null=True, blank=True, max_length=200)
     last_name = models.CharField(null=True, blank=True, max_length=200)
     phone_number = models.CharField(max_length=12, blank=True, null=True, unique=True)
+    email_authenticated = models.BooleanField(default=False)
     whatsapp_number = models.CharField(max_length=12, blank=True, null=True, unique=True)
     is_merchant = models.BooleanField(default=False)
-    confirmed_payment = models.BooleanField(default=False)
+    # confirmed_payment = models.BooleanField(default=False)
     school = models.ForeignKey(School, on_delete=models.CASCADE, blank=True, null=True)  # many to one relationship
     date_created = models.DateField(blank=False, default=timezone.now)
-    subscription_expired = models.BooleanField(default=False)
+    # subscription_expired = models.BooleanField(default=False)
 
+    @property
     def get_full_name(self):
         """
         This method is required by Django for things like handling emails.

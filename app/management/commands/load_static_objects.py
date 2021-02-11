@@ -36,6 +36,7 @@ class Command(BaseCommand, ABC):
             print(module, f"this module is included=====")
             if module:
                 model = module.obj.get("model")
+                model.objects.all().delete()
                 data = module.obj.get("data")
                 for d in data:
                     b = munchify(d)
