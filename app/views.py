@@ -568,16 +568,7 @@ def search(request, school_name=None):
             if request.is_ajax():
                 return HttpResponse('')
             results = paginator.page(paginator.num_pages)
-    # =======
-    #
-    #     school_exists_query = Product.objects.annotate(search=SearchVector('name', 'description', )).filter(
-    #         search=query).defer('school', 'merchant', 'description').filter(school__alias=school_name)
-    #
-    #     if query:
-    #         results_set = school_exists_query if school_name else no_school_query
-    #         results = paginator(results_set, 5, request)
-    #
-    # >>>>>>> master
+
     if request.is_ajax():
         return render(request, 'campusbuy2_0/search_ajax.html', {'results': results})
 
