@@ -6,7 +6,7 @@ celery==4.4.2
 certifi==2018.11.29
 cloudinary==1.20.0
 dj-database-url==0.5.0
-Django==3.0.3
+Django==3.0.12
 django-elasticsearch-dsl==0.5.1
 django-phonenumber-field==2.3.1
 elasticsearch==6.3.1
