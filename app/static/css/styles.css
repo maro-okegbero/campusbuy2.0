@@ -1,0 +1,218 @@
+h1,h2,h3,h4,h5,h6{
+    margin: 0;
+}
+
+p{
+    padding: 0 5%;
+    font-size: 1.8rem;
+    line-height: 147.7%;
+    color: #64647d;
+    margin: 0 0 3rem
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+body, button{
+    font-family:  "Avenir Next", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.color{
+    color:  #2a2a4b;
+}
+
+section{
+    margin: 6rem 0 3rem;
+}
+
+header{
+    padding: 70px 5% 0;
+    text-align: center;
+}
+
+footer{
+    background: #f6f6f8;
+    padding: 1.25rem;
+    width: 100%;
+}
+.outline{
+    outline: none !important;
+}
+.top-section{
+    width: 100%;
+    max-width: 618px;
+    text-align: center;
+    margin: 64px auto 115px;
+}
+.top-section button{
+    background: #6767df;
+    color: #fff;
+    min-height: 2.5rem;
+    padding: 1rem 3rem;
+}
+.header-text{
+    margin: 3rem 0;
+}
+
+.header-text h5{
+    font-weight: 600;
+    color: #f7c973;
+    margin-bottom: 9%;
+}
+
+.header-text h1{
+    font-weight: 700;
+}
+
+nav{
+    position: relative;
+    display: flex;
+    height: 70px;
+    background: white;
+    width: 100%;
+    opacity: 0.9;
+    z-index: 1;
+}
+
+.navigation{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-bottom:  solid 1px #f2f2f8;
+}
+
+.brand-name{
+    margin-left: 5%;
+}
+
+.request{
+    margin-right: 5%;
+    z-index: 2;
+}
+
+.bottom-section{
+    display: grid;
+    grid-template-areas: "bottom-head bottom-head social"
+    "copyright copyright copyright";
+    margin-bottom: 0.5rem;
+    grid-gap: 10px;
+    padding: 0 2%;
+}
+
+.bottom-head{
+    grid-area: bottom-head;
+}
+.bottom-head h2{
+    font-size: 2rem;
+    font-weight: 700;
+}
+.bottom-head p{
+    font-size: 1.5rem;
+    padding: 0.8rem 0 0;
+}
+
+.social{
+    grid-area: social;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.middle{
+    max-width: 824px;
+    margin: auto;
+}
+
+.copyright{
+    text-align: center;
+    grid-area: copyright;
+}
+
+.right-bg-svg{
+    right: 0;
+    top: -10%;    
+    width: 100px;
+    position: fixed;
+}
+
+.left-bg-svg{
+    width: 100px;
+    position: fixed;
+    left: -50px;
+    bottom: -15%;
+}
+.brand-name h4 a{
+    font-family: 'Dosis', sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+}
+.brand-name h4 a:hover, .brand-name h4 a span{
+    color: #7D6DFF;
+}
+
+.top-section button:hover{
+    background: inherit;
+    border: 1px solid #6767df;
+    color: #6767df;    
+}
+
+.top-image{
+    display: flex;
+    justify-content: center;
+    margin: 4rem 0 0;
+}
+
+
+/*************************MEDIA QUERIES*****************************/
+
+@media (min-width: 768px) {
+    .right-bg-svg{
+        top: -7%;
+        width: 450px;
+    }
+    .left-bg-svg{
+        width: 405px;
+        bottom: -10%;
+    }
+    .header-text{
+        padding: 17% 17% 10%;
+    }
+    p{
+        font-size: 2rem;
+    }
+    .copyright p{
+        font-size: 1.5rem;
+    }
+
+}
+
+@media (min-width: 1024px) {
+    
+    .header-text{
+        padding: 17% 0;
+        max-width: 500px;
+        margin: auto;
+    }
+    p{
+        font-size: 2.5rem;
+    }
+    .top-section h1{
+        font-size: 4rem;
+    }
+
+    .top-section button{
+        padding: 2rem 4rem;
+        font-size: large;
+    }
+    .copyright p{
+        font-size: 1.5rem;
+    }
+    .bottom-section{
+        grid-template-areas: "bottom-head copyright social";
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); 
+    }
+    
+
+}
+

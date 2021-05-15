@@ -57,9 +57,10 @@ class SubCategory(models.Model):
 
 
 class User(AbstractUser):
-    """ The User model for both merchants and regular users"""
+    """ The general User model """
     first_name = models.CharField(null=True, blank=True, max_length=200)
     last_name = models.CharField(null=True, blank=True, max_length=200)
+    fullname = models.CharField(null=True, blank=True, max_length=200)
     phone_number = models.CharField(max_length=12, blank=True, null=True, unique=True)
     email_authenticated = models.BooleanField(default=False)
     whatsapp_number = models.CharField(max_length=12, blank=True, null=True, unique=True)
@@ -68,14 +69,14 @@ class User(AbstractUser):
     school = models.ForeignKey(School, on_delete=models.CASCADE, blank=True, null=True)  # many to one relationship
     date_created = models.DateField(blank=False, default=timezone.now)
     # subscription_expired = models.BooleanField(default=False)
-
-    @property
-    def get_full_name(self):
-        """
-        This method is required by Django for things like handling emails.
-        Typically this would be the user's first and last name. We're returning the user's fullname
-        """
-        return f'{self.first_name} {self.last_name}'
+    #
+    # @property
+    # def get_full_name(self):
+    #     """
+    #     This method is required by Django for things like handling emails.
+    #     Typically this would be the user's first and last name. We're returning the user's fullname
+    #     """
+    #     return f'{self.first_name} {self.last_name}'
 
     def _generate_jwt_token(self):
         """
@@ -107,15 +108,16 @@ class OnlineStore(models.Model):
     """
     Model class for online store of merchants
     """
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     business_name = models.CharField(null=True, blank=True, max_length=500)
     description = models.CharField(null=True, blank=True, max_length=1000)
     address = models.CharField(null=True, blank=True, max_length=1000)
     logo = CloudinaryField('image', null=True, blank=True)  # Special Cloudinary image Field
     ratings = models.FloatField(default=0, null=True, blank=True, max_length=5)
+    published_date = models.DateTimeField(blank=False, default=timezone.now)
 
     def __str__(self):
-        return f"{self.business_name} {self.owner.first_name}'s"
+        return f"{self.business_name} {self.owner.fullname}'s"
 
 
 class Product(models.Model):
@@ -151,7 +153,7 @@ class Product(models.Model):
         )
          )
     ]
-    category = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     school = models.ForeignKey(School, on_delete=models.CASCADE, null=True, blank=True)
     merchant = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     online_store = models.ForeignKey(OnlineStore, on_delete=models.SET_NULL, null=True)
@@ -183,3 +185,15 @@ class Product(models.Model):
         ordering = ['-published_date']
         verbose_name = "product"
         verbose_name_plural = "products"
+
+
+class Purchase(models.Model):
+    """
+    The purchase model for every transaction
+    """
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    completed = models.BooleanField(default=False)
+    cancelled = models.BooleanField(default=False)
+    date_created = models.DateTimeField(blank=False, default=timezone.now)
+    last_updated = models.DateTimeField(blank=False, default=timezone.now)

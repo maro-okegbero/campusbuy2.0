@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com', '192.168.43.103', 'campusbuy.online', 'www.campusbuy.online']
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com', '192.168.43.82', 'campusbuy.online', 'www.campusbuy.online']
 # Application definition
 
 INSTALLED_APPS = [

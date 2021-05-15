@@ -119,6 +119,11 @@ def contact_us(request):
     return render(request, 'campusbuy2_0/contact.html')
 
 
+def invite(request):
+    """Invite Page"""
+    return render(request, 'campusbuy2_0/invite.html')
+
+
 def homepage(request, school_name=None):
     """
     This view is responsible for rendering the categories on the homepage

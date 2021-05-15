@@ -42,198 +42,212 @@
                 <div class="container">
                     <div class="row">
                         <!--Welcome Message Start-->
-                        <div class="col-12 welcome--message">
-                            <p><span class="ti-user"></span> Welcome, {{ user.first_name }}</p>
+                        <div class="col-sm-12 col-md-6 col-lg-6 welcome--message">
+                            <h1><span class="ti-dashboard"></span> Welcome, {{ user.first_name }}</h1>
                         </div>
-                        <label class="col-12" for="myInput">Your Shop Link </label>
-                        <div class="row input-group welcome--message">
-                                <input  class=" ml-4 col-sm-12 col-lg-3 col-md-3 form-control" type="text" value="https://campusbuy.com/shop/{{user.business_name}}" id="myInput">
+                        <div class="col-sm-6 col-md-3 col-lg-4 welcome--message">
+                            <label  for="myInput">Your Shop Link </label>
+                            <div class="row input-group welcome--message">
+                                <input  class=" ml-4 col-sm-12 col-lg-3 col-md-3 form-control" type="text"  value="https://campusbuy.com/shop/{{user.business_name}}" id="myInput">
                             <div class="input-group-append">
                                 <button id="copy-button" onclick="myFunction()" class="col-12 btn btn-outline-secondary" type="button">Copy</button>
                             </div>
 <!--                            <input onclick="myFunction()" class="btn btn-danger" type="text" value="https://campusbuy.com/shop/{{user.business_name}}" id="myInput">-->
 <!--                            <p><span class="ti-link"></span>Your Online Shop: <code><a target="_blank" href="https://campusbuy.com/shop/{{user.business_name}}">https://campusbuy.com/shop/{{user.business_name}}</a></code></p>-->
                         </div>
+
+                        </div>
+                        <div class="col-sm-6 col-md-3 col-lg-2 goof-section" style="padding-bottom: 45px;" >
+                            <a href="{% url 'shop' business_name="maro" %}" class="shop__btn"> Orders</a>
+                        </div>
+
+                        <div class="col-12 col-lg-12, col-md-12 col-sm-12 welcome--message">
+                            <h3><span class="ti-user"></span> Personal Details</h3>
+                        </div>
+                        <
+
+
+
                         <!--Welcome Message End-->
-                        <div class="mb__30 col-sm-12 col-md-3 col-lg-3">
-                            <div class="list-group" id="list-tab" role="tablist">
-                                <a class="list-group-item list-group-item-action active" id="list-details-list" data-toggle="list" href="#list-details" role="tab" aria-controls="Merchant Details">Merchant Information</a>
-                                <a class="list-group-item list-group-item-action" id="list-business-list" data-toggle="list" href="#list-business" role="tab" aria-controls="Business Details">Business Information</a>
-                                <a class="list-group-item list-group-item-action" id="list-account-list" data-toggle="list" href="#list-account" role="tab" aria-controls="Account Details">Account Details</a>
-                                <a class="list-group-item list-group-item-action show--logout"  role="tab" aria-controls="Logout" href={% url 'logout' %} >Logout</a>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-9 col-lg-9">
-                            <div class="tab-content" id="nav-tabContent">
-                                <div class="tab-pane fade show active infomation" id="list-details" role="tabpanel" aria-labelledby="list-details-list">
-                                    <h1>My Details</h1>
-                                    <div class="merchant__information personal--information">
-                                        <h2 class="merchant--details__head">Personal Information</h2>
-                                        <div class="row merchant--details--profile">
-                                            <div class="col-sm-12 col-md-4 col-lg-4">
-                                                <p>Update your personal details.</p>
-                                                <div class="update__message">
-                                                    <div class="hide alert alert-success alert-dismissible fade show" role="alert" id="change--effected__account">
-                                                        <p>Your changes have been saved!</p>
-                                                    </div>
-                                                    <!--Error message
-                                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                                        <p>Something went wrong. <strong>Please try again.</strong></p>
-                                                    </div>-->
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-8 col-lg-8">
-                                                <form class="row login login--account" action="#" method="POST" enctype="multipart/form-data">
-                                                    {% csrf_token %}
-
-                                                    <div class="col-sm-12 col-md-6 col-lg-6 form--group">
-                                                        <label for={{ personal_information_form.first_name.id_for_label }} >First Name</label>
-                                                        {{ personal_information_form.first_name }}
-                                                    </div>
-
-                                                    <div class="col-sm-12 col-md-6 col-lg-6 form--group">
-                                                        <label for={{ personal_information_form.last_name.id_for_label }} >Last Name</label>
-                                                       {{ personal_information_form.last_name }}
-                                                    </div>
-                                                    <div class="col-sm-12 col-md-6 col-lg-6 form--group">
-                                                        <label  for={{ personal_information_form.phone_number.id_for_label }} >Phone Number</label>
-                                                        {{ personal_information_form.phone_number }}
-                                                    </div>
-                                                    <div class="col-sm-12 col-md-6 col-lg-6 form--group">
-                                                        <label for={{ personal_information_form.whatsapp_number.id_for_label }} >WhatsApp Number</label>
-                                                        {{ personal_information_form.whatsapp_number }}
-                                                    </div>
-
-                                                     <div class="update--merchant__details-btn">
-                                                    <input  type="Submit" value="Update" class="commit--changes__personal" data-toggle="change--effected" toggle="#change--effected__account">
-                                                </div>
-                                                </form>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="merchant__information business--information">
-                                        <h2 class="merchant--details__head">Business Details</h2>
-                                        <div class="row merchant--details--profile">
-                                            <div class="col-sm-12 col-md-4 col-lg-4">
-                                                <p>Update your business details.</p>
-                                                <div class="update__message">
-                                                    <div class="hide alert alert-success alert-dismissible fade show" role="alert" id="change--effected__business">
-                                                        <p>Your changes have been saved!</p>
-                                                    </div>
-                                                    <!--Error message
-                                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                                        <p>Something went wrong. <strong>Please try again.</strong></p>
-                                                    </div>-->
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-8 col-lg-8">
-
-                                                <form class="row login login--account" action="#" method="POST" enctype="multipart/form-data">
-                                                    {% csrf_token %}
-                                                    <div class="form--group">
-                                                         <label for={{ business_detail_form.business_name.id_for_label }} >Business Name</label>
-                                                        {{ business_detail_form.business_name }}
-                                                    </div>
-                                                    <div class="form--group">
-                                                        <label for={{ business_detail_form.business_description.id_for_label }} >Business Description</label>
-                                                        {{ business_detail_form.business_description }}
-
-                                                    </div>
-                                                    <div class="update--merchant__details-btn">
-                                                    <input  type="Submit" value="Update" class="commit--changes__personal" data-toggle="change--effected" toggle="#change--effected__account">
-                                                </div>
-                                                </form>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade infomation" id="list-business" role="tabpanel" aria-labelledby="list-business-list">
-                                    <h1>Business Information</h1>
-                                    <div class="merchant__information">
-                                    <div class="update--merchant__details-btn">
-                                        <div class="goof-section" style="padding-bottom: 45px;">
-                                            <a href={% url 'post_products' %}>Post Ad</a>
-
+{#                        <div class="mb__30 col-sm-12 col-md-3 col-lg-3">#}
+{#                            <div class="list-group" id="list-tab" role="tablist">#}
+{#                                <a class="list-group-item list-group-item-action active" id="list-details-list" data-toggle="list" href="#list-details" role="tab" aria-controls="Merchant Details">Merchant Information</a>#}
+{#                                <a class="list-group-item list-group-item-action" id="list-business-list" data-toggle="list" href="#list-business" role="tab" aria-controls="Business Details">Business Information</a>#}
+{#                                <a class="list-group-item list-group-item-action" id="list-account-list" data-toggle="list" href="#list-account" role="tab" aria-controls="Account Details">Account Details</a>#}
+{#                                <a class="list-group-item list-group-item-action show--logout"  role="tab" aria-controls="Logout" href={% url 'logout' %} >Logout</a>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="col-sm-12 col-md-9 col-lg-9">#}
+{#                            <div class="tab-content" id="nav-tabContent">#}
+{#                                <div class="tab-pane fade show active infomation" id="list-details" role="tabpanel" aria-labelledby="list-details-list">#}
+{#                                    <h1>My Details</h1>#}
+{#                                    <div class="merchant__information personal--information">#}
+{#                                        <h2 class="merchant--details__head">Personal Information</h2>#}
+{#                                        <div class="row merchant--details--profile">#}
+{#                                            <div class="col-sm-12 col-md-4 col-lg-4">#}
+{#                                                <p>Update your personal details.</p>#}
+{#                                                <div class="update__message">#}
+{#                                                    <div class="hide alert alert-success alert-dismissible fade show" role="alert" id="change--effected__account">#}
+{#                                                        <p>Your changes have been saved!</p>#}
+{#                                                    </div>#}
+{#                                                    <!--Error message#}
+{#                                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">#}
+{#                                                        <p>Something went wrong. <strong>Please try again.</strong></p>#}
+{#                                                    </div>-->#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="col-sm-12 col-md-8 col-lg-8">#}
+{#                                                <form class="row login login--account" action="#" method="POST" enctype="multipart/form-data">#}
+{#                                                    {% csrf_token %}#}
+{##}
+{#                                                    <div class="col-sm-12 col-md-6 col-lg-6 form--group">#}
+{#                                                        <label for={{ personal_information_form.first_name.id_for_label }} >First Name</label>#}
+{#                                                        {{ personal_information_form.first_name }}#}
+{#                                                    </div>#}
+{##}
+{#                                                    <div class="col-sm-12 col-md-6 col-lg-6 form--group">#}
+{#                                                        <label for={{ personal_information_form.last_name.id_for_label }} >Last Name</label>#}
+{#                                                       {{ personal_information_form.last_name }}#}
+{#                                                    </div>#}
+{#                                                    <div class="col-sm-12 col-md-6 col-lg-6 form--group">#}
+{#                                                        <label  for={{ personal_information_form.phone_number.id_for_label }} >Phone Number</label>#}
+{#                                                        {{ personal_information_form.phone_number }}#}
+{#                                                    </div>#}
+{#                                                    <div class="col-sm-12 col-md-6 col-lg-6 form--group">#}
+{#                                                        <label for={{ personal_information_form.whatsapp_number.id_for_label }} >WhatsApp Number</label>#}
+{#                                                        {{ personal_information_form.whatsapp_number }}#}
+{#                                                    </div>#}
+{##}
+{#                                                     <div class="update--merchant__details-btn">#}
+{#                                                    <input  type="Submit" value="Update" class="commit--changes__personal" data-toggle="change--effected" toggle="#change--effected__account">#}
+{#                                                </div>#}
+{#                                                </form>#}
+{##}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="merchant__information business--information">#}
+{#                                        <h2 class="merchant--details__head">Business Details</h2>#}
+{#                                        <div class="row merchant--details--profile">#}
+{#                                            <div class="col-sm-12 col-md-4 col-lg-4">#}
+{#                                                <p>Update your business details.</p>#}
+{#                                                <div class="update__message">#}
+{#                                                    <div class="hide alert alert-success alert-dismissible fade show" role="alert" id="change--effected__business">#}
+{#                                                        <p>Your changes have been saved!</p>#}
+{#                                                    </div>#}
+{#                                                    <!--Error message#}
+{#                                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">#}
+{#                                                        <p>Something went wrong. <strong>Please try again.</strong></p>#}
+{#                                                    </div>-->#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="col-sm-12 col-md-8 col-lg-8">#}
+{##}
+{#                                                <form class="row login login--account" action="#" method="POST" enctype="multipart/form-data">#}
+{#                                                    {% csrf_token %}#}
+{#                                                    <div class="form--group">#}
+{#                                                         <label for={{ business_detail_form.business_name.id_for_label }} >Business Name</label>#}
+{#                                                        {{ business_detail_form.business_name }}#}
+{#                                                    </div>#}
+{#                                                    <div class="form--group">#}
+{#                                                        <label for={{ business_detail_form.business_description.id_for_label }} >Business Description</label>#}
+{#                                                        {{ business_detail_form.business_description }}#}
+{##}
+{#                                                    </div>#}
+{#                                                    <div class="update--merchant__details-btn">#}
+{#                                                    <input  type="Submit" value="Update" class="commit--changes__personal" data-toggle="change--effected" toggle="#change--effected__account">#}
+{#                                                </div>#}
+{#                                                </form>#}
+{##}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="tab-pane fade infomation" id="list-business" role="tabpanel" aria-labelledby="list-business-list">#}
+{#                                    <h1>Business Information</h1>#}
+{#                                    <div class="merchant__information">#}
+{#                                    <div class="update--merchant__details-btn">#}
+{#                                        <div class="goof-section" style="padding-bottom: 45px;">#}
+{#                                            <a href={% url 'post_products' %}>Post Ad</a>#}
+{##}
 {#                                            <a class="merchant-_business" href={% url 'shop' user.business_name %} >View Business Page</a>#}
-                                            <a class="merchant-_business" href="#" >View Business Page</a>
-                                        </div>
-                                        </div>
-                                        <h2 class="merchant--details__head">Your Ads</h2>
-
-                                        {% if products %}
-                                        <p>Select any ad to see how it's doing.</p>
-                                        {% endif %}
-                                        <div id="row product-list" class="row product__list">
-                                            {% if products %}
-                                                {% include 'campusbuy2_0/profile_ajax.html' %}
-                                        {% else %}
-                                            <!--No products found-->
-                                        <div class="text-center search--status">
-                                            <img alt="No products found" class="search--status__img" src={% static "images/bg/not-found.png"%} >
-                                            <p class="search--status__message">You haven't uploaded any product yet. Click <a style="color: blue;" href={% url 'post_products' %} >here</a> to start selling.</p>
-                                        </div>
-                                        {% endif %}
-                                        <!--End no products founds-->
-                                        </div>
-                                        </div>
-                                    </div>
-
-
-                                 <div class="tab-pane fade infomation" id="list-account" role="tabpanel" aria-labelledby="list-account-list">
-                                    <h1>Account Details</h1>
-                                    <div class="merchant__information login--details">
-                                        <h2 class="merchant--details__head">Login Details</h2>
-                                        <div class="row merchant--details--profile">
-                                            <div class="col-sm-12 col-md-4 col-lg-4">
-                                                <p>Update your login details.</p>
-                                                <div class="update__message">
-                                                    <div class="hide alert alert-success alert-dismissible fade show" role="alert" id="change--effected__login">
-                                                        <p>Your changes have been saved!</p>
-                                                    </div>
-                                                    <!--Error message
-                                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                                        <p>Something went wrong. <strong>Please try again.</strong></p>
-                                                    </div>-->
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-8 col-lg-8">
-                                                <form class="login login--account w--50" method="POST">
-                                                    {% csrf_token %}
-                                                    <div class="form--group">
-                                                         <label for={{ login_details_form.email.id_for_label }} >Email</label>
-                                                        {{ login_details_form.email }}
-                                                    </div>
-
-                                                    <div class="form--group">
-                                                         <label for={{ login_details_form.username.id_for_label }} >Username</label>
-                                                        {{ login_details_form.username }}
-                                                    </div>
-
-                                                    <div class="form--group">
-                                                        <label for={{ login_details_form.password1.id_for_label }} >New Password</label>
-                                                        {{ login_details_form.password1 }}
-                                                        <span toggle="#{{ login_details_form.password1.id_for_label }}" data-toggle="current-password" class="zmdi zmdi-eye field--icon toggle--password"></span>
-                                                    </div>
-                                                    <div class="form--group">
-                                                         <label for={{ login_details_form.password2.id_for_label }} >Type Password Again</label>
-                                                        {{ login_details_form.password2 }}
-                                                        <span toggle="#{{ login_details_form.password2.id_for_label }}" data-toggle="new-password" class="zmdi zmdi-eye field--icon toggle--password"></span>
-                                                    </div>
-
-                                                    <div class="update--merchant__details-btn">
-                                                    <input  type="Submit" value="Update" class="commit--changes__personal" data-toggle="change--effected" toggle="#change--effected__account">
-                                                    </div>
-                                                </form>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                        </div>
-                    </div>
+{#                                            <a class="merchant-_business" href="#" >View Business Page</a>#}
+{#                                        </div>#}
+{#                                        </div>#}
+{#                                        <h2 class="merchant--details__head">Your Ads</h2>#}
+{##}
+{#                                        {% if products %}#}
+{#                                        <p>Select any ad to see how it's doing.</p>#}
+{#                                        {% endif %}#}
+{#                                        <div id="row product-list" class="row product__list">#}
+{#                                            {% if products %}#}
+{#                                                {% include 'campusbuy2_0/profile_ajax.html' %}#}
+{#                                        {% else %}#}
+{#                                            <!--No products found-->#}
+{#                                        <div class="text-center search--status">#}
+{#                                            <img alt="No products found" class="search--status__img" src={% static "images/bg/not-found.png"%} >#}
+{#                                            <p class="search--status__message">You haven't uploaded any product yet. Click <a style="color: blue;" href={% url 'post_products' %} >here</a> to start selling.</p>#}
+{#                                        </div>#}
+{#                                        {% endif %}#}
+{#                                        <!--End no products founds-->#}
+{#                                        </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{##}
+{##}
+{#                                 <div class="tab-pane fade infomation" id="list-account" role="tabpanel" aria-labelledby="list-account-list">#}
+{#                                    <h1>Account Details</h1>#}
+{#                                    <div class="merchant__information login--details">#}
+{#                                        <h2 class="merchant--details__head">Login Details</h2>#}
+{#                                        <div class="row merchant--details--profile">#}
+{#                                            <div class="col-sm-12 col-md-4 col-lg-4">#}
+{#                                                <p>Update your login details.</p>#}
+{#                                                <div class="update__message">#}
+{#                                                    <div class="hide alert alert-success alert-dismissible fade show" role="alert" id="change--effected__login">#}
+{#                                                        <p>Your changes have been saved!</p>#}
+{#                                                    </div>#}
+{#                                                    <!--Error message#}
+{#                                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">#}
+{#                                                        <p>Something went wrong. <strong>Please try again.</strong></p>#}
+{#                                                    </div>-->#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="col-sm-12 col-md-8 col-lg-8">#}
+{#                                                <form class="login login--account w--50" method="POST">#}
+{#                                                    {% csrf_token %}#}
+{#                                                    <div class="form--group">#}
+{#                                                         <label for={{ login_details_form.email.id_for_label }} >Email</label>#}
+{#                                                        {{ login_details_form.email }}#}
+{#                                                    </div>#}
+{##}
+{#                                                    <div class="form--group">#}
+{#                                                         <label for={{ login_details_form.username.id_for_label }} >Username</label>#}
+{#                                                        {{ login_details_form.username }}#}
+{#                                                    </div>#}
+{##}
+{#                                                    <div class="form--group">#}
+{#                                                        <label for={{ login_details_form.password1.id_for_label }} >New Password</label>#}
+{#                                                        {{ login_details_form.password1 }}#}
+{#                                                        <span toggle="#{{ login_details_form.password1.id_for_label }}" data-toggle="current-password" class="zmdi zmdi-eye field--icon toggle--password"></span>#}
+{#                                                    </div>#}
+{#                                                    <div class="form--group">#}
+{#                                                         <label for={{ login_details_form.password2.id_for_label }} >Type Password Again</label>#}
+{#                                                        {{ login_details_form.password2 }}#}
+{#                                                        <span toggle="#{{ login_details_form.password2.id_for_label }}" data-toggle="new-password" class="zmdi zmdi-eye field--icon toggle--password"></span>#}
+{#                                                    </div>#}
+{##}
+{#                                                    <div class="update--merchant__details-btn">#}
+{#                                                    <input  type="Submit" value="Update" class="commit--changes__personal" data-toggle="change--effected" toggle="#change--effected__account">#}
+{#                                                    </div>#}
+{#                                                </form>#}
+{##}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{##}
+{#                                </div>#}
+{#                        </div>#}
+{#                    </div>#}
                 </div>
                 </div>
             </section>

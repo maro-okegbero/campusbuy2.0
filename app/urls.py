@@ -6,7 +6,9 @@ urlpatterns = [
 
     path('accounts/', include('django.contrib.auth.urls')),
 
-    path('', homepage, name='homepage'),
+    path('', invite, name='invite'),
+
+    path('syu', homepage, name='homepage'),
 
     path('<str:school_name>/', homepage, name='school_specific'),
 
